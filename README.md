@@ -13,30 +13,48 @@ Merinos için özel olarak geliştirilmiş **Fine-Tuned Qwen 2.5 7B QLoRA yapay 
 
 ## 📌 İçindekiler
 
-- [🎯 Projenin Öne Çıkan Özellikleri](#-projenin-öne-çıkan-özellikleri)
-- [🏗️ Sistem Mimarisi ve Veri Akışı](#️-sistem-mimarisi-ve-veri-akışı)
-- [📁 Klasör Yapısı](#-klasör-yapısı)
-- [⚡ Kurulum ve Çalıştırma](#-kurulum-ve-çalıştırma)
-- [🛠️ Sürekli Öğrenme & Distilasyon Komutları](#️-sürekli-öğrenme--distilasyon-komutları)
-- [🌐 Online Öğretmen AI & DPO Mimarisi](#-online-öğretmen-ai--dpo-mimarisi)
-- [🔒 KVKK Gizlilik & Maskeleme Motoru (`privacy_masker.py`)](#-kvkk-gizlilik--maskeleme-motoru-privacy_maskerpy)
-- [📊 Gölge Değerlendirme Motoru (`shadow_eval.py`)](#-gölge-değerlendirme-motoru-shadow_evalpy)
-- [📑 API Uç Noktaları (Support Core - Port 8787)](#-api-uç-noktaları-support-core---port-8787)
-- [💻 Admin Yönetim Paneli](#-admin-yönetim-paneli)
-- [📜 Lisans](#-lisans)
+1. [🎯 Projenin Öne Çıkan Özellikleri](#-projenin-öne-çıkan-özellikleri)
+2. [🏗️ Sistem Mimarisi ve Veri Akışı](#️-sistem-mimarisi-ve-veri-akışı)
+3. [📁 Klasör Yapısı](#-klasör-yapısı)
+4. [⚡ Kurulum ve Çalıştırma](#-kurulum-ve-çalıştırma)
+5. [🛠️ Sürekli Öğrenme & Distilasyon Komutları](#️-sürekli-öğrenme--distilasyon-komutları)
+6. [🌐 Online Öğretmen AI & DPO Mimarisi](#-online-öğretmen-ai--dpo-mimarisi)
+7. [🔒 KVKK Gizlilik & Maskeleme Motoru (`privacy_masker.py`)](#-kvkk-gizlilik--maskeleme-motoru-privacy_maskerpy)
+8. [📊 Gölge Değerlendirme Motoru (`shadow_eval.py`)](#-gölge-değerlendirme-motoru-shadow_evalpy)
+9. [📑 API Uç Noktaları (Support Core - Port 8787)](#-api-uç-noktaları-support-core---port-8787)
+10. [💻 Admin Yönetim Paneli](#-admin-yönetim-paneli)
+11. [📜 Lisans](#-lisans)
 
 ---
 
 ## 🎯 Projenin Öne Çıkan Özellikleri
 
-- **🧠 Fine-Tuned Meri LLM (Qwen 2.5 7B QLoRA):** Merinos'un kurum dili, leke temizlik rehberleri, garanti prosedürleri ve ürün gamına göre Unsloth QLoRA 4-bit NF4 ile eğitilmiş özel Türkçe model.
-- **🔄 Sıcak Adaptör Değişimi (Hot-Swap):** Model sunucusu (`inference_server.py`) yeniden başlatılmadan `POST /reload_adapter` ile yeni eğitilen LoRA ağırlıklarını anında yükler.
-- **🌐 Canlı Web Distilasyonu (Web-to-QLoRA):** `merinos.com.tr` resmi sitesinden kazınan bilgiler ve canlı internet erişimine sahip **Öğretmen AI (Gemini 1.5 / GPT-4o / DeepSeek / Web Search)** ile otomatik altın diyaloglar üretir.
-- **⚡ DPO (Direct Preference Optimization):** Müşteri geri bildirimlerinden (👍 / 👎) ve öğretmen modellerden `{prompt, chosen, rejected}` tercih çiftleri üreterek modele doğrudan ne yapacağını ve ne yapmaması gerektiğini öğretir.
-- **🔒 KVKK Gizlilik Maskeleme Motoru (`privacy_masker.py`):** TC Kimlik Numarası (Luhn doğrulama), 10+ Türk cep/sabit hat formatı, E-posta, IBAN (TR/Int), Kredi Kartı (Luhn), Ad-Soyad (NER) ve Adres bilgilerini eğitim verisine ve loglara girmeden otomatik maskeler.
-- **📊 Gölge Değerlendirme (Shadow Evaluation):** Yeni eğitilen modeller canlıya alınmadan önce ROUGE-1, ROUGE-L, BLEU ve kural kontrolleri ile otomatik test edilerek `PROMOTE`, `HOLD` veya `REJECT` kararı verilir.
-- **🛡️ 4-Göz İlkesi (Four-Eyes Approval):** Yüksek riskli işlemler için iki farklı yöneticinin onayını zorunlu kılan kurumsal onay mekanizması.
-- **💻 Bütünleşik Admin Yönetim Paneli:** Sürekli öğrenme metriklerini, onay bekleyen diyalogları, online öğretmen ayarlarını ve inference sunucu durumunu canlı izleme ekranı.
+### 1. Fine-Tuned Meri LLM (Qwen 2.5 7B QLoRA)
+- Merinos'un marka dili, müşteri ilişkileri yaklaşımı, leke temizliği ve garanti prosedürlerine tam uyumlu.
+- **Unsloth QLoRA 4-bit NF4 Quantization:** NVIDIA RTX 4070 (8GB/12GB VRAM) gibi tüketici seviyesi GPU'larda ultra hızlı bellek optimize eğitim ve çıkarım (inference).
+- **ChatML Formatı:** `<|im_start|>system`, `<|im_start|>user`, `<|im_start|>assistant` özel yapılandırılmış diyalog formatı.
+
+### 2. Sıcak Adaptör Değişimi (Hot-Swap Reload)
+- `scripts/inference_server.py` sunucusu ve Python süreci yeniden başlatılmadan `POST /reload_adapter` çağrısı ile yeni eğitilen LoRA adaptörleri belleğe dinamik yüklenir.
+- `model_lock` (threading kilidi) sayesinde canlı müşteri sohbetlerinde kesinti ve bellek çakışması yaşanmaz.
+
+### 3. İnternet Erişimli Öğretmen AI Distilasyonu (Teacher-Student)
+- Canlı internet erişimine sahip **Öğretmen AI** (Google Gemini 1.5 Flash, Groq Cloud Llama 3.3 70B, OpenAI GPT-4o, DeepSeek AI) entegrasyonu.
+- `merinos.com.tr` resmi web sitesinden ürün, leke rehberi, garanti ve bayi verilerini kazıyarak altın diyaloglar üretir.
+
+### 4. DPO (Direct Preference Optimization) Tercih Çiftleri
+- Geri bildirimlerden ve öğretmen modellerden `{prompt, chosen, rejected}` tercih verileri üretilir.
+- Model sadece doğru cevabı değil, müşteriyi yanlış yönlendiren hatalı ifadeleri (`rejected`) reddetmeyi öğrenir.
+
+### 5. KVKK / GDPR Gizlilik Maskeleme Motoru
+- TC Kimlik No (Luhn doğrulamalı), Türk Telefon Numaraları (10+ format), E-posta, IBAN (TR ve uluslararası), Kredi Kartı (Luhn doğrulamalı), Ad-Soyad (NER) ve Adres bilgilerini eğitim verisine girmeden maskeler (`[TC_GIZLI]`, `[TEL_GIZLI]` vb.).
+
+### 6. Otomatik Gölge Değerlendirme (Shadow Evaluation)
+- Eğitilen yeni LoRA modelleri canlıya alınmadan önce ROUGE-1, ROUGE-L, BLEU metrikleri ve politika kuralları ile otomatik kıyaslanır.
+- Skor `%80+` ise `PROMOTE` (canlıya geç), `%65-%79` ise `HOLD` (incele), `<%65` ise `REJECT` (reddet) kararı verilir.
+
+### 7. 4-Göz İlkesi (Four-Eyes Principle Approval)
+- İade, yüksek maliyetli garanti değişimi ve kurumsal bilet işlemlerinde tek yöneticinin onayı yetmez; iki farklı yetkilinin onayı zorunludur.
 
 ---
 
@@ -70,6 +88,13 @@ Merinos için özel olarak geliştirilmiş **Fine-Tuned Qwen 2.5 7B QLoRA yapay 
                                                            │ (ROUGE / BLEU)    │ │ (/reload_adapter) │
                                                            └───────────────────┘ └───────────────────┘
 ```
+
+### Veri Akış Aşamaları:
+1. **Veri Toplama:** Müşteri sohbetleri veya site kazıma bilgileri `collect_training_data.ts` tarafından toplanır.
+2. **KVKK Filtresi:** `privacy_masker.py` kişisel verileri maskeler ve `pending_review.jsonl` dosyasına yazar.
+3. **Yönetici Onayı:** Admin Panelinden ([http://localhost:8080](http://localhost:8080)) incelenen veriler onaylanır (`approved.jsonl`).
+4. **Otomatik Yeniden Eğitim:** Onaylı kayıt sayısı 100'e ulaştığında `auto_retrain.py` Unsloth QLoRA eğitimi başlatır.
+5. **Gölge Test & Sıcak Değişim:** `shadow_eval.py` model kalitesini onaylarsa `/reload_adapter` ile canlı model güncellenir.
 
 ---
 
@@ -177,8 +202,22 @@ npm run scheduler
 
 İnternete bağlı dev Öğretmen AI modelleri (Gemini 1.5 Pro, GPT-4o, Groq Llama 3.3 70B, DeepSeek) kullanarak yerel Meri modelimizin kalitesini sürekli artıran `Teacher-Student Distillation` ve `DPO Preference Alignment` mimarisi.
 
-- **Otomatik Canlı Araması:** DuckDuckGo / Merinos Web Engine ile güncel bilgi doğrulaması.
-- **DPO Çiftleri:** `{ prompt, chosen, rejected }` yapısıyla yerel modelin zayıf yanıtları elenir.
+- **Sağlayıcı Seçenekleri:**
+  - 🌐 **Canlı Web Araması:** API Key gerektirmeden DuckDuckGo / Merinos Web Engine üzerinden güncel arama yapar.
+  - ⚡ **Google Gemini 1.5 Flash:** Google AI Studio üzerinden 15 RPM ücretsiz Kota.
+  - ⚡ **Groq Llama 3.3 70B:** Groq Console üzerinden 30 RPM ücretsiz yüksek hızlı çıkarım.
+  - 🟢 **OpenAI GPT-4o & DeepSeek AI.**
+
+- **DPO Tercih Çiftleri Yapısı:**
+```json
+{
+  "id": "dpo_17854751_001",
+  "prompt": "Merinos akrilik halımdaki mürekkep lekesini çamaşır suyu ile silebilir miyim?",
+  "chosen": "Çamaşır suyu halının renk ve ip dokusuna zarar verir. Lekeyi yaymadan kolonyalı pamuk veya nötr sabunlu nemli bezle tampon yapınız.",
+  "rejected": "Çamaşır suyu dökebilirsiniz fark etmez.",
+  "source": "online_teacher_gemini"
+}
+```
 
 ---
 
@@ -186,11 +225,15 @@ npm run scheduler
 
 Platform, Türkiye Kişisel Verilerin Korunması Kanunu (KVKK) gereği kişisel verilerin model eğitimine ve loglara girmesini engeller:
 
-- **TC Kimlik Numarası:** 11 hane + 10. ve 11. basamak algoritmik doğrulaması (`_validate_tc`).
-- **Telefon Numaraları:** `05XX`, `+90 5XX`, `(05XX)` dahil 10+ Türk telefon biçimi.
-- **Kredi Kartı:** Luhn algoritması ile doğrulanan kart numaraları (`[KART_GIZLI]`).
-- **E-posta & IBAN:** TR ve uluslararası IBAN formatları.
-- **Ad-Soyad & Adres:** Türkçe unvan, hitap ve adres ekleri kalıpları.
+- **TC Kimlik Numarası (`_validate_tc`):** 11 hane kontrolünün yanında basamak algoritması doğrulaması:
+  $$\text{Basamak}_{10} = ((1,3,5,7,9.\text{toplamı} \times 7) - (2,4,6,8.\text{toplamı})) \bmod 10$$
+  $$\text{Basamak}_{11} = (1..10.\text{basamakların toplamı}) \bmod 10$$
+- **Telefon Numaraları:** `05XX`, `+90 5XX`, `(05XX)` dahil 10+ Türk cep ve sabit hat biçimi (`[TEL_GIZLI]`).
+- **Kredi Kartı (`_luhn_check`):** Luhn algoritması ile doğrulanan kart numaraları (`[KART_GIZLI]`).
+- **E-posta & IBAN:** TR ve uluslararası IBAN formatları (`[IBAN_GIZLI]`, `[EPOSTA_GIZLI]`).
+- **Ad-Soyad & Adres:** Türkçe unvan, hitap ve adres ekleri kalıpları (`[ISIM_GIZLI]`, `[ADRES_GIZLI]`).
+
+Birim test sonuçları: **12 / 12 Test %100 Geçti ✅**
 
 ---
 
@@ -201,7 +244,10 @@ Yeni eğitilen aday LoRA adaptörlerini canlıya almadan önce kıyaslayan ve ka
 - **ROUGE-1 / ROUGE-L:** Cümle ve N-Gram örtüşme oranları.
 - **BLEU Skoru:** N-gram kesinlik F1 hesaplayıcısı.
 - **Kural & Politika Uyumu:** Halı leke temizliği ve garanti koşullarına %100 uyum kontrolü.
-- **Karar Mekanizması:** `%80+` → `PROMOTE`, `%65-%79` → `HOLD`, `<%65` → `REJECT`.
+- **Karar Mekanizması:**
+  - `%80+` → `PROMOTE` (Canlıya Geç)
+  - `%65-%79` → `HOLD` (Yönetici İncelemesine Al)
+  - `<%65` → `REJECT` (Reddet)
 
 ---
 
@@ -229,6 +275,7 @@ Yeni eğitilen aday LoRA adaptörlerini canlıya almadan önce kıyaslayan ve ka
 - **🧠 Sürekli Öğrenme:** Bekleyen/Onaylı diyalogları onaylama, düzenleme modalı ve istatistik kartları.
 - **🌐 Online Öğretmen AI Kartı:** Gemini, Groq, GPT-4o ve WebSearch sağlayıcı seçimi ve aktif/pasif anahtarı.
 - **🛡️ Denetim Kaydı (Audit Log):** KVKK maskeli sistem eylem geçmişi.
+- **🧪 RAG Testi:** RAG kalite kapısı senaryolarını canlı koşturma arayüzü.
 
 ---
 
