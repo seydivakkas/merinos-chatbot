@@ -1,4 +1,4 @@
-[![Tüm Hakları Saklıdır](https://img.shields.io/badge/license-All%20Rights%20Reserved-red?style=flat-square)](#lisans)
+[![Tüm Hakları Saklıdır](https://img.shields.io/badge/license-All%20Rights%20Reserved-red?style=flat-square)](#-lisans)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow?style=flat-square&logo=python)](https://www.python.org/)
 [![Qwen2.5-7B](https://img.shields.io/badge/Model-Qwen2.5--7B--Instruct-purple?style=flat-square)](https://huggingface.co/Qwen/Qwen2.5-7B-Instruct)
@@ -8,6 +8,22 @@
 # 🧶 Merinos AI Chatbot & Sürekli Öğrenme Platformu
 
 Merinos için özel olarak geliştirilmiş **Fine-Tuned Qwen 2.5 7B QLoRA yapay zeka modeli**, **İnternet Erişimli Öğretmen AI Distilasyon Boru Hattı (Teacher-Student & DPO)**, **KVKK Gizlilik Maskeleme Motoru**, **Gölge Değerlendirme (Shadow Evaluation)** ve **Yönetim Paneli (Admin Panel)** içeren kurumsal müşteri destek ve sürekli öğrenme platformu.
+
+---
+
+## 📌 İçindekiler
+
+- [🎯 Projenin Öne Çıkan Özellikleri](#-projenin-öne-çıkan-özellikleri)
+- [🏗️ Sistem Mimarisi ve Veri Akışı](#️-sistem-mimarisi-ve-veri-akışı)
+- [📁 Klasör Yapısı](#-klasör-yapısı)
+- [⚡ Kurulum ve Çalıştırma](#-kurulum-ve-çalıştırma)
+- [🛠️ Sürekli Öğrenme & Distilasyon Komutları](#️-sürekli-öğrenme--distilasyon-komutları)
+- [🌐 Online Öğretmen AI & DPO Mimarisi](#-online-öğretmen-ai--dpo-mimarisi)
+- [🔒 KVKK Gizlilik & Maskeleme Motoru (`privacy_masker.py`)](#-kvkk-gizlilik--maskeleme-motoru-privacy_maskerpy)
+- [📊 Gölge Değerlendirme Motoru (`shadow_eval.py`)](#-gölge-değerlendirme-motoru-shadow_evalpy)
+- [📑 API Uç Noktaları (Support Core - Port 8787)](#-api-uç-noktaları-support-core---port-8787)
+- [💻 Admin Yönetim Paneli](#-admin-yönetim-paneli)
+- [📜 Lisans](#-lisans)
 
 ---
 
@@ -24,7 +40,7 @@ Merinos için özel olarak geliştirilmiş **Fine-Tuned Qwen 2.5 7B QLoRA yapay 
 
 ---
 
-## 🏗️ Sistem Mimarisi
+## 🏗️ Sistem Mimarisi ve Veri Akışı
 
 ```
 [ Müşteri Sohbeti (Widget / Web) ]
@@ -157,6 +173,15 @@ npm run scheduler
 
 ---
 
+## 🌐 Online Öğretmen AI & DPO Mimarisi
+
+İnternete bağlı dev Öğretmen AI modelleri (Gemini 1.5 Pro, GPT-4o, Groq Llama 3.3 70B, DeepSeek) kullanarak yerel Meri modelimizin kalitesini sürekli artıran `Teacher-Student Distillation` ve `DPO Preference Alignment` mimarisi.
+
+- **Otomatik Canlı Araması:** DuckDuckGo / Merinos Web Engine ile güncel bilgi doğrulaması.
+- **DPO Çiftleri:** `{ prompt, chosen, rejected }` yapısıyla yerel modelin zayıf yanıtları elenir.
+
+---
+
 ## 🔒 KVKK Gizlilik & Maskeleme Motoru (`privacy_masker.py`)
 
 Platform, Türkiye Kişisel Verilerin Korunması Kanunu (KVKK) gereği kişisel verilerin model eğitimine ve loglara girmesini engeller:
@@ -166,6 +191,17 @@ Platform, Türkiye Kişisel Verilerin Korunması Kanunu (KVKK) gereği kişisel 
 - **Kredi Kartı:** Luhn algoritması ile doğrulanan kart numaraları (`[KART_GIZLI]`).
 - **E-posta & IBAN:** TR ve uluslararası IBAN formatları.
 - **Ad-Soyad & Adres:** Türkçe unvan, hitap ve adres ekleri kalıpları.
+
+---
+
+## 📊 Gölge Değerlendirme Motoru (`shadow_eval.py`)
+
+Yeni eğitilen aday LoRA adaptörlerini canlıya almadan önce kıyaslayan ve karar veren değerlendirme sistemi:
+
+- **ROUGE-1 / ROUGE-L:** Cümle ve N-Gram örtüşme oranları.
+- **BLEU Skoru:** N-gram kesinlik F1 hesaplayıcısı.
+- **Kural & Politika Uyumu:** Halı leke temizliği ve garanti koşullarına %100 uyum kontrolü.
+- **Karar Mekanizması:** `%80+` → `PROMOTE`, `%65-%79` → `HOLD`, `<%65` → `REJECT`.
 
 ---
 
@@ -183,6 +219,16 @@ Platform, Türkiye Kişisel Verilerin Korunması Kanunu (KVKK) gereği kişisel 
 | POST | `/v1/training/online-teacher/config` | Öğretmen AI modunu ve API Key'ini günceller |
 | POST | `/v1/training/online-teacher/distill` | Online öğretmen distilasyonunu çalıştırır |
 | GET | `/v1/snapshot` | Admin paneli için tüm sistem verisini döner |
+
+---
+
+## 💻 Admin Yönetim Paneli
+
+[http://localhost:8080](http://localhost:8080) adresinde çalışan build'siz statik yönetim arayüzü:
+
+- **🧠 Sürekli Öğrenme:** Bekleyen/Onaylı diyalogları onaylama, düzenleme modalı ve istatistik kartları.
+- **🌐 Online Öğretmen AI Kartı:** Gemini, Groq, GPT-4o ve WebSearch sağlayıcı seçimi ve aktif/pasif anahtarı.
+- **🛡️ Denetim Kaydı (Audit Log):** KVKK maskeli sistem eylem geçmişi.
 
 ---
 
