@@ -8,6 +8,11 @@
 ## 📌 İçindekiler
 
 - [Giriş ve Mimari Vizyon](#giriş-ve-mimari-vizyon)
+- [1. Örnek Merinos Web Mağazasını Nasıl Tasarladım?](#1-örnek-merinos-web-mağazasını-nasıl-tasarladım)
+- [2. Chatbot Kutusunu (Widget) Nasıl Tasarladım ve Ayarladım?](#2-chatbot-kutusunu-widget-nasıl-tasarladım-ve-ayarladım)
+- [3. Admin Paneli Arayüzünü ve Bileşenlerini Nasıl Tasarladım?](#3-admin-paneli-arayüzünü-ve-bileşenlerini-nasıl-tasarladım)
+- [4. Farklı Sistemleri Birbirine Nasıl Bağladım ve Orkestre Ettim?](#4-farklı-sistemleri-birbirine-nasıl-bağladım-ve-orkestre-ettim)
+- [5. Yapay Zeka Eğitimi (Fine-Tuning) İçin Ne Tür Özelleştirmeler Yaptım?](#5-yapay-zeka-eğitimi-fine-tuning-için-ne-tür-özelleştirmeler-yaptım)
 - [Faz 1: Problemi Tanımlama & Sistem Mimarisi](#faz-1-problemi-tanımlama--sistem-mimarisi)
 - [Faz 2: Support Core REST API ve İş Kuralları Katmanı](#faz-2-support-core-rest-api-ve-iş-kuralları-katmanı)
 - [Faz 3: Türkçe Morfolojiye Uyumlu Hibrit RAG Motoru](#faz-3-türkçe-morfolojiye-uyumlu-hibrit-rag-motoru)
@@ -29,6 +34,87 @@ Bu projeyi kodlarken temel amacım; klasik, kural tabanlı veya sadece OpenAI AP
 Amacım; Merinos markasının kurumsal dilini %100 benimsemiş, leke temizlik rehberlerinden garanti süreçlerine kadar tüm alanlarda uzmanlaşmış, **kendi sunucumuz üzerinde (on-premise) çalışan**, kişisel verileri KVKK standartlarında koruyan ve **canlı müşteri etkileşimlerinden öğrenerek kendi kendini sürekli geliştiren** uçtan uca bir yapay zeka platformu inşa etmekti.
 
 Bu dokümanda, projeyi ilk satır kodundan itibaren adım adım nasıl inşa ettiğimi birinci dilden anlatıyorum.
+
+---
+
+## 1. Örnek Merinos Web Mağazasını Nasıl Tasarladım?
+
+Müşterilerin Merinos halı ürünlerini inceleyebileceği ve canlı yapay zeka asistanı ile etkileşime girebileceği örnek bir e-ticaret web mağazası geliştirdim:
+
+- **Tasarım Dili (Vanilla CSS & Glassmorphism):** Dış CSS kütüphanelerine (Tailwind/Bootstrap) bağımlı kalmadan, modern cam efektleri (glassmorphism), yumuşak renk geçişleri ve Merinos'un kurumsal renk paletiyle Vanilla CSS kullandım.
+- **Dinamik Ürün Koleksiyonları:** Salon halıları (4m², 6m²), yıkanabilir pratik seriler ve akrilik premium halı koleksiyonlarını listeleyen responsive ürün kartları tasarladım.
+- **Sipariş ve Kargo Takip Ekranı:** Müşterinin `MRN-XXXXX` sipariş numarası ve telefon numarası ile canlı kargo durumunu sorgulayabileceği sipariş modülünü entegre ettim.
+
+---
+
+## 2. Chatbot Kutusunu (Widget) Nasıl Tasarladım ve Ayarladım?
+
+Web mağazasının sağ alt köşesinde çalışan ve müşteri deneyimini en üst seviyeye çıkaran sohbet balonunu (`widget/merinos-widget.js` & `merinos-widget.css`) geliştirdim:
+
+- **Arayüz Tasarımı & Animasyonlar:** Yumuşak açılış animasyonu, canlı yazıyor... (typing indicator) efekti ve mobil uyumlu katlanabilir sohbet penceresi tasarladım.
+- **Hızlı Önerilen Sorular (Quick Suggestions):** Müşterinin tek tıkla sorabileceği *"Çay lekesi nasıl çıkar?"*, *"Garantim var mı?"*, *"Siparişimi takip et"* gibi hazır butonlar yerleştirdim.
+- **Temsilciye Bağlanma ve Çıkış Mantığı:**
+  - Müşteri temsilciye bağlanmak istediğinde sistem kullanıcıyı Kıdemli Müşteri Temsilcisi **Meri**'ye bağlar.
+  - Sohbet esnasında müşteri *"menü"*, *"ana menü"*, *"menüye dön"* veya *"çıkış"* dediğinde sistem sohbeti sonlandırarak otomatik ana menüye döner.
+- **Otomatik Veri Kaydı:** Her mesaj gönderildiğinde background olarak `POST /v1/chat/message` ve `POST /v1/training/interaction` API çağrıları yapılarak konuşma verileri sürekli öğrenme deposuna aktarılır.
+
+---
+
+## 3. Admin Paneli Arayüzünü ve Bileşenlerini Nasıl Tasarladım?
+
+Sistemi yöneten yetkililer için karmaşık build araçlarına (Vite/Webpack) ihtiyaç duymayan, tarayıcıda doğrudan çalışan **statik Admin Paneli** (`admin-panel/index.html` & `app.js`) kodladım:
+
+- **Aydınlık / Karanlık Tema Desteği:** Tek tıkla gece ve gündüz modları arasında geçiş sağlayan CSS değişken yapısı kurdum.
+- **🧠 Sürekli Öğrenme Sekmesi:** 
+  - İstatistik kartları (Bekleyen Kayıt, Onaylı Kayıt, Eğitime Hazır, GPU Durumu).
+  - Bekleyen kayıtlar tablosu (Kalite puanı badge'i, kullanıcı sorusu, Meri yanıtı).
+  - **✏️ Yanıt Düzenleme Modalı:** Yöneticinin Meri'nin cevabını düzenleyip onaylamasını sağlayan pop-up ekranı.
+  - **✅ Tümünü Onayla** hızlı butonu.
+- **🌐 Online Öğretmen AI Kartı:** Gemini 1.5, Groq, GPT-4o ve WebSearch modları arasında geçiş yapma, API Key girme ve tek tıkla distilasyon yapma kartı.
+- **🛡️ Denetim Kaydı (Audit Log) Tablosu:** Sistemdeki tüm onay ve güvenlik hareketlerini listeleyen tablo.
+
+---
+
+## 4. Farklı Sistemleri Birbirine Nasıl Bağladım ve Orkestre Ettim?
+
+Sistemi oluşturan farklı mikro servislerin uyum içinde çalışması için Orkestrasyon katmanını kurdum:
+
+```
+[ Frontend Widget (Port 3000) ]
+              │ (HTTP REST API)
+              ▼
+[ Support Core API (Port 8787 - Node.js/TypeScript) ]
+              │ (Internal Proxy & Policy Engine)
+              ▼
+[ Python QLoRA Inference Server (Port 8000 - PyTorch/CUDA) ]
+```
+
+- **`scripts/serve-all.ts` Orkestratörü:** `npm run ui` komutu verildiğinde tek bir terminal penceresinden Support Core API (8787), Admin Panel (8080) ve Web Mağazasını (3000) eşzamanlı olarak başlatır.
+- **Olay Yayın Motoru (`eventBus.ts`):** Uygulama içi (in-process) asenkron olay yayını yaparak bilet oluşturma, onay süreçleri ve SLA ihlallerini anında ilgili servislere iletir.
+
+---
+
+## 5. Yapay Zeka Eğitimi (Fine-Tuning) İçin Ne Tür Özelleştirmeler Yaptım?
+
+Model eğitimi için **Unsloth QLoRA 4-bit NF4** mimarisi üzerinde şu özel hiperparametreleri ve veri formatını yapılandırdım:
+
+- **Hiperparametre Seçimleri (`train_meri_qlora.py`):**
+  - **LoRA Rank ($r$):** `16` (Model parametrelerinin hafif fakat etkili güncellenmesi).
+  - **LoRA Alpha ($\alpha$):** `16` (Adaptör ölçeklendirme sabiti).
+  - **Learning Rate:** `2e-4` (Cosine Annealing scheduler ile kararlı kayıp düşüşü).
+  - **Batch Size & Gradient Accumulation:** `micro_batch=2`, `grad_accum=4` (RTX 4070 VRAM sığdırma).
+  - **Max Sequence Length:** `2048` token.
+
+- **Merinos Markasına Özel System Prompt Özelleştirmesi:**
+  ```text
+  Sen Merinos'un Kıdemli Müşteri Hizmetleri Uzmanısın. İsmin Meri. Türkçe konuşuyorsun.
+  Merinos halı, ev tekstili, leke temizliği, sipariş takibi, bayi ve garanti süreçlerinde
+  uzmanlaşmış nazik, empati kuran ve çözüm odaklı profesyonel bir destek temsilcisisin.
+  ```
+
+- **DPO (Direct Preference Optimization) Özelleştirmesi:**
+  - `chosen`: Merinos kurallarına tam uyan, nazik ve çözüm sunan Öğretmen AI yanıtı.
+  - `rejected`: Robotik, kısa, aksine yönlendiren veya çamaşır suyu öneren hatalı yanıtlar.
 
 ---
 
