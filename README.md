@@ -41,6 +41,9 @@ Merinos halı müşterilerine 7/24 kişiselleştirilmiş destek sağlamak amacı
 
 ## 🎯 Projenin Amacı & Diğer Çözümlerden Farkı
 
+![Merinos Web Mağazası ve Meri Chatbot Widget](docs/screenshots/02_web_store.png)
+*Merinos halı mağazasının ana sayfası ve sağ alt köşedeki Meri AI sohbet widget'ı*
+
 ### Neden Bu Proje?
 
 Çoğu kurumsal chatbot ya kural tabanlı ("müşteri 'leke' derse şu cevabı ver") ya da bulut tabanlı API sarmalayıcısı (OpenAI API'ye yönlendirme) şeklinde çalışır. Bu yaklaşımların her ikisi de kritik sorunlar taşır: Kural tabanlı sistemler dil ve bağlam anlayışından yoksundur; API sarmalayıcıları ise marka sesini yansıtamaz, müşteri verilerini dışarı sızdırır ve her sorgu için maliyet üretir.
@@ -89,6 +92,9 @@ ML Tabanlı (Bu Sistem):
 ---
 
 ## 🏗️ Sistem Mimarisi (Uçtan Uca Diyagram)
+
+![Sistem Mimarisi — Widget → Support Core → Inference](docs/screenshots/01_architecture.png)
+*Uçtan uca sistem mimarisi: Müşteri widget'ından GPU inference sunucusuna kadar tüm bileşenler ve veri akışları*
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
@@ -290,6 +296,9 @@ merinos-chatbot/
 
 ## 🛠️ Ön Koşullar & Adım Adım Kurulum
 
+![QLoRA Eğitim Metrikleri ve GPU Durumu](docs/screenshots/04_qlora_training.png)
+*RTX 4070 GPU üzerinde Qwen 2.5 7B QLoRA eğitimi — VRAM kullanımı 5.3/8.0 GB, ~10 sn/adım*
+
 ### Sistem Gereksinimleri
 
 | Bileşen | Minimum | Önerilen |
@@ -441,6 +450,9 @@ python scripts/train_meri_qlora.py \
 
 ## 🧠 QLoRA Fine-Tuning Kılavuzu
 
+![QLoRA Eğitim Süreci ve Metrikler](docs/screenshots/04_qlora_training.png)
+*Unsloth QLoRA eğitiminin terminal çıktısı: Her adım 10 saniye, toplam ~4.500 adım, RTX 4070 VRAM kullanımı*
+
 ### Model Seçimi ve Gerekçesi
 
 **Temel Model:** `unsloth/Qwen2.5-7B-Instruct-bnb-4bit`
@@ -576,6 +588,9 @@ python scripts/train_meri_qlora.py \
 
 ## 🔄 Sürekli Öğrenme Pipeline'ı
 
+![Sürekli Öğrenme Kapalı Döngüsü](docs/screenshots/05_learning_pipeline.png)
+*7 adımlı sürekli öğrenme döngüsü: Müşteri sohbetinden KVKK maskelemeye, admin onayından GPU yeniden eğitimine, hot-swap'a kadar*
+
 Sistemin zamanla kendi kendini iyileştirmesini sağlayan kapalı döngü (closed-loop) öğrenme hattı aşağıdaki gibi çalışır:
 
 ```
@@ -668,6 +683,9 @@ cron.schedule("0 2 * * *", async () => {
 
 ## 🌐 Web Distilasyonu & Teacher AI Mimarisi
 
+![Teacher-Student AI Distilasyon Mimarisi](docs/screenshots/06_teacher_ai.png)
+*Gemini 1.5 Flash, Groq Llama 3.3 70B ve GPT-4o'dan DPO tercih çiftleri üretilerek yerel Meri modelinin bilgi transferi*
+
 Web distilasyonu, sistemin internetten ve büyük modellerden bilgi çekerek yerel modeli sürekli güncel tutmasını sağlar. Bu yaklaşım **Teacher-Student (Öğretmen-Öğrenci)** paradigmasına dayanır.
 
 ### Pipeline Adımları
@@ -727,6 +745,9 @@ DPO, modele yalnızca "doğru cevabı" değil "yanlış cevabı reddetmeyi" de �
 ---
 
 ## 🔒 KVKK Gizlilik & Maskeleme Motoru
+
+![KVKK Gizlilik Maskeleme Çıktısı — 12/12 Test Başarılı](docs/screenshots/07_kvkk_masker.png)
+*privacy_masker.py çıktısı: Ham kişisel veriler sol panelde, KVKK maskeli güvenli veriler sağ panelde. 12/12 test %100 başarı*
 
 Türkiye'nin KVKK (Kişisel Verilerin Korunması Kanunu) kapsamında kişisel verilerin model eğitimine ve log kayıtlarına girmesi yasaktır. `privacy_masker.py`, bu verilen eğitim pipeline'ına girmeden **otomatik ve geri dönüşümsüz** olarak maskelenmesini sağlar.
 
@@ -799,6 +820,9 @@ Sonuç: 12/12 test geçti — %100 başarı ✅
 
 ## 📊 Gölge Değerlendirme & A/B Testi
 
+![Gölge Değerlendirme Raporu — ROUGE ve BLEU Metrikleri](docs/screenshots/08_shadow_eval.png)
+*Aday model v8'in ROUGE-1: 0.847, ROUGE-L: 0.821, BLEU: 0.763 skorlarıyla PROMOTE kararı aldığı shadow evaluation raporu*
+
 ### Neden Gölge Değerlendirme?
 
 Yeni eğitilen bir modeli doğrudan canlıya almak risklidir. Eğitim verisi kalitesi düşükse veya hiperparametreler yanlışsa model regresyon yaşayabilir. Gölge Değerlendirme, bu riski tamamen ortadan kaldırır.
@@ -868,6 +892,9 @@ curl -X POST http://localhost:8000/config/ab_test \
 ---
 
 ## 📑 API Uç Noktaları Referansı
+
+![REST API Uç Noktaları — Support Core ve Inference Server](docs/screenshots/09_api_endpoints.png)
+*Support Core (Port 8787) ve Python FastAPI Inference Server (Port 8000) tüm endpoint'leri ile örnek istek/yanıt formatları*
 
 ### Support Core REST API (Port 8787)
 
@@ -954,6 +981,9 @@ curl http://localhost:8000/status
 ---
 
 ## 💻 Admin Panel Kullanım Kılavuzu
+
+![Admin Yönetim Paneli — 8 Sekmeli Canlı İzleme Arayüzü](docs/screenshots/03_admin_panel.png)
+*Admin Panel (Port 8080): Sürekli Öğrenme sekmesinde bekleyen kayıt tablosu, GPU durumu kartları ve Online Öğretmen AI kontrol kartı*
 
 **URL:** [http://localhost:8080](http://localhost:8080)  
 **Kimlik Doğrulama:** Bearer Token + TOTP 2FA (zorunlu)  
