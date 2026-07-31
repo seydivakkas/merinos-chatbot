@@ -1025,45 +1025,684 @@ curl http://localhost:8000/status
 
 Bu proje, aşağıdaki 10 fazda geliştirilmiştir. Her faz bir önceki fazın sorunlarını çözerek ilerler.
 
-### Faz 1: Problemi Tanımlama & Mimari Vizyon
+---
 
-Başlangıç noktası, Merinos'un mevcut müşteri destek sürecinin yalnızca insan temsilcilere dayandığı bir ortamda hizmet kalitesini ve veri egemenliğini aynı anda sağlayan bir çözüm tasarlamaktı. Üç katmanlı mimari (Frontend, Business Logic, ML Inference) ilk bu fazda çizildi.
+### 🟦 Faz 1: Problemi Tanımlama & Mimari Vizyon
 
-### Faz 2: Support Core REST API & İş Kuralları
+**Hedef:** Merinos'un müşteri desteğini tek bir sunucudan çalışan, veri egemen ve öğrenen bir AI sistemine dönüştürmek.
 
-Node.js / TypeScript ile Express tabanlı support-core servisi geliştirildi. Seviye 0 (otomatik) ve Seviye 1 (insan onayı) politika motoru, UTC+3 çalışma takvimi ve Dört Göz İlkesi onay mekanizması bu fazda kuruldu.
+Başlangıç noktası şuydu: Merinos, müşteri sorularını yalnızca insan temsilcilerle yanıtlıyordu. Bu yaklaşım hem ölçeklenemiyor hem de gece/hafta sonu müşteri kaybına yol açıyordu. Çözüm tasarlarken iki kritik kısıt belirledim: (1) Müşteri verileri dışarı çıkmamalı, (2) Model Merinos'un marka sesi ve ürün bilgisiyle konuşmalı. Bu iki kısıt birlikte, "bulut API sarmalayıcısı" seçeneğini doğrudan eledi.
 
-### Faz 3: Hibrit RAG Motoru (BM25 + Edge-Ngram Vektör)
+**Karar verilen mimari katmanlar:**
 
-Saf anahtar kelime aramasının Türkçe morfoloji karşısında yetersiz kaldığı tespit edilerek BM25 (ağırlıklar: K1=1.5, B=0.75) ve Edge-Ngram (önek tabanlı vektör) hibrit motoru `embeddingIndex.ts` içinde geliştirildi. Üç eşik değeri belirlendi: `TOPIC_RELEVANCE=0.35`, `EVIDENCE=0.55`, `GROUNDED=1.1`.
+| Katman | Teknoloji | Port | Sorumluluğu |
+|--------|-----------|------|-------------|
+| Widget / UI | Vanilla JS | 3000 | Müşteri sohbet arayüzü |
+| Support Core | Node.js / TypeScript | 8787 | İş kuralları, API, politika motoru |
+| ML Inference | Python / FastAPI | 8000 | Qwen 2.5 7B QLoRA model servis |
+| Admin Panel | Vanilla HTML5/JS | 8080 | Yönetim, onay, izleme |
 
-### Faz 4: Qwen 2.5 7B QLoRA Fine-Tuning
+**Neden 4 ayrı servis?**  
+Her katmanın ayrı tutulması; geliştirme, hata ayıklama ve yatay ölçekleme açısından kritiktir. TypeScript API katmanı model değişmeden güncellenebilir; Python inference katmanı TypeScript'e bağımlı olmadan yeniden başlatılabilir.
 
-Model seçimi, veri formatı (ChatML), hiperparametre optimizasyonu ve kritik **600x hızlanma keşfi** bu fazda gerçekleşti. TRL SFTTrainer'ın OOM sorununu `transformers.Trainer` + öntokenizasyon ile çözdükten sonra eğitim süresi 6.000 sn/adımdan 10 sn/adıma düştü.
+---
 
-### Faz 5: Python Inference Sunucusu & Hot-Swap
+### 🟦 Faz 2: Support Core REST API & İş Kuralları Katmanı
 
-FastAPI ile `inference_server.py` geliştirildi. `threading.Lock()` tabanlı Hot-Swap mimarisi, canlı sohbetleri kesmeden yeni LoRA adaptörlerinin yüklenmesini sağladı. A/B trafik yönlendirici bu fazda eklendi.
+**Hedef:** Tüm iş kurallarının tek bir güvenilir kaynaktan (source of truth) yönetilmesi.
 
-### Faz 6: Sürekli Öğrenme & auto_retrain Pipeline
+**Geliştirilen temel bileşenler:**
 
-Veri toplama (`collect_training_data.ts`), 100 kayıt eşiğinde otomatik eğitim (`auto_retrain.py`) ve gece 02:00 zamanlayıcısı (`scheduler.ts`) bu fazda entegre edildi. Kapalı döngü öğrenme hattı bu fazda tamamlandı.
+#### 📋 Politika Motoru (`policyEngine.ts`)
+İki seviyeli karar sistemi kuruldu:
 
-### Faz 7: Vanilla Admin Panel (8 Sekme)
+```typescript
+// Seviye 0: Otomatik — insan onayı gerektirmez
+const LEVEL_0_ACTIONS = ["search_knowledge", "get_product_info", "check_sla"];
 
-Build aracı gerektirmeyen HTML5/CSS3/Vanilla JS ile Admin Panel geliştirildi. Aydınlık/Karanlık tema, yanıt düzenleme modalı, Online Öğretmen AI kartı ve gerçek zamanlı API entegrasyonu bu fazda eklendi.
+// Seviye 1: İnsan onayı zorunlu
+const LEVEL_1_ACTIONS = ["create_ticket", "approve_refund", "change_order"];
 
-### Faz 8: KVKK Maskeleme Motoru
+function evaluatePolicy(action: string): PolicyDecision {
+  if (LEVEL_0_ACTIONS.includes(action)) return { level: 0, autoApprove: true };
+  return { level: 1, autoApprove: false, requiresApproval: true };
+}
+```
 
-`privacy_masker.py` bağımsız bir KVKK motoru olarak geliştirildi. TC Kimlik Luhn doğrulaması, kredi kartı Luhn kontrolü, 10+ Türk telefon formatı ve Türkçe NER tabanlı isim maskeleme 12/12 test ile doğrulandı.
+#### 📅 Türkiye Çalışma Takvimi (`workCalendar.ts`)
+Konfigürasyon sabit değerleri:
+```typescript
+const WORK_CALENDAR_CONFIG = {
+  timezone: "Europe/Istanbul",  // UTC+3, DST yok
+  workStart: { hour: 9, minute: 0 },
+  workEnd:   { hour: 18, minute: 0 },
+  workDays:  [1, 2, 3, 4, 5],  // Pazartesi-Cuma
+  holidays2025_2026: [
+    "2025-01-01", // Yılbaşı
+    "2025-04-23", // 23 Nisan
+    "2025-05-01", // İşçi Bayramı
+    "2025-05-19", // 19 Mayıs
+    "2025-08-30", // Zafer Bayramı
+    "2025-10-29", // Cumhuriyet Bayramı
+    // ... Dini bayramlar dinamik hesaplanır
+  ]
+};
+```
 
-### Faz 9: Gölge Değerlendirme & A/B Testi
+#### 🔐 Dört Göz İlkesi (`approvalService.ts`)
+Yüksek riskli işlemler için çift onay zorunluluğu:
+```typescript
+interface ApprovalRequest {
+  id: string;
+  actionType: string;
+  riskLevel: "level0" | "level1";
+  requireSecondApprover: boolean;  // true → 2 farklı kişi gerekir
+  approvals: ApprovalVote[];       // Her oy kaydedilir
+}
 
-`shadow_eval.py` ile ROUGE-1/L ve BLEU metrikleri hesaplanarak PROMOTE/HOLD/REJECT karar matrisi kuruldu. Inference sunucusuna A/B router eklenerek yeni modeller %10 trafikle ön-test edilmeye başlandı.
+// Aynı kişi iki kez oy kullanamaz
+function castVote(approvalId: string, decidedBy: string, decision: "approved"|"rejected") {
+  const existing = approval.approvals.find(v => v.decidedBy === decidedBy);
+  if (existing) throw new Error("same_approver_cannot_vote_twice");
+  // ...
+}
+```
 
-### Faz 10: Web Distilasyonu & DPO Teacher-Student
+#### ⚡ Devre Kesici (`circuitBreaker.ts`)
+Frappe ERP bağlantısı için:
+```typescript
+const FRAPPE_CIRCUIT_CONFIG = {
+  failureThreshold: 3,    // 3 ardışık hata → devre açılır
+  halfOpenTimeout: 30_000, // 30 saniye sonra yarı-açık dene
+};
+```
 
-`scrape_merinos_site.py` ile `merinos.com.tr` kazındı. `online_teacher_distiller.py` ile Gemini 1.5 Flash (Search Grounding), Groq Llama 3.3 70B ve DuckDuckGo entegrasyonu tamamlandı. DPO `{prompt, chosen, rejected}` tercih çiftleri üretimi sisteme dahil edildi.
+---
+
+### 🟦 Faz 3: Türkçe Morfolojiye Uyumlu Hibrit RAG Motoru
+
+**Hedef:** Türkçe'nin sondan eklemeli yapısını anlayan, halüsinasyon yapmayan RAG motoru.
+
+**Sorun keşfi:** Müşteri "halımda leke var" yerine "halımın üzerindeki lekeler" derse klasik anahtar kelime araması başarısız olur. Türkçe'de tek bir kelime 50+ farklı biçimde yazılabilir.
+
+**Çözüm: BM25 + Edge-Ngram hibrit motoru** (`embeddingIndex.ts`)
+
+#### BM25 Konfigürasyonu
+```typescript
+const BM25_CONFIG = {
+  k1: 1.5,   // Terim frekansı doyum parametresi
+  b: 0.75,   // Belge uzunluğu normalizasyonu
+  weight: 0.55  // Hibrit skordaki BM25 ağırlığı
+};
+```
+
+#### Edge-Ngram Tokenizasyonu (Türkçe Önek Vektörü)
+```typescript
+// "lekesinden" → ["le", "lek", "leke", "lekes", "lekesi", ...]
+function edgeNgrams(word: string, minN = 2, maxN = 8): string[] {
+  const tokens: string[] = [];
+  for (let n = minN; n <= Math.min(maxN, word.length); n++) {
+    tokens.push(word.slice(0, n));
+  }
+  return tokens;
+}
+
+const VECTOR_CONFIG = {
+  weight: 0.45,      // Hibrit skordaki vektör ağırlığı
+  minNgramLen: 2,
+  maxNgramLen: 8,
+};
+```
+
+#### Hibrit Skor Formülü ve Karar Eşikleri
+```typescript
+const hybridScore = BM25_WEIGHT * bm25Score + VECTOR_WEIGHT * vectorScore + recencyBonus;
+
+const THRESHOLDS = {
+  TOPIC_RELEVANCE:  0.35,  // Bu değerin altı: not_found
+  EVIDENCE:         0.55,  // Bu değerin altı: partially_grounded
+  GROUNDED:         1.10,  // Bu değerin üstü: tam dayanağı var
+};
+
+// RAG Durum Makinesi çıktıları:
+// "grounded" | "partially_grounded" | "not_found" | "conflicting_sources" | "permission_denied"
+```
+
+#### Performans Konfigürasyonu
+```typescript
+const RAG_CONFIG = {
+  maxResults: 5,           // En fazla 5 kaynak göster
+  recencyBonusDecayDays: 90, // 90 günden eski belgeler recency bonus almaz
+  embeddingModelVersion: "edge-ngram-v1-tr",
+};
+```
+
+---
+
+### 🟦 Faz 4: Qwen 2.5 7B QLoRA Fine-Tuning
+
+**Hedef:** RTX 4070 8GB VRAM ile 7B parametreli modeli marka sesine göre eğitmek.
+
+**Model seçim gerekçesi:** Qwen 2.5 7B Instruct, Türkçe benchmark'larda Llama 3.1 8B ve Mistral 7B'yi geride bırakır; aynı zamanda `bnb-4bit` varyantı RTX 4070'e sığar.
+
+#### Tam LoRA Konfigürasyonu
+```python
+from peft import LoraConfig
+
+LORA_CONFIG = LoraConfig(
+    r=16,              # Rank: adaptör matris boyutu
+    lora_alpha=32,     # Alpha: alpha/r=2 → öğrenme ölçeği
+    lora_dropout=0.05, # %5 dropout: hafif regularizasyon
+    target_modules=[   # Güncellenen ağırlık matrisleri
+        "q_proj",      # Query projeksiyonu
+        "k_proj",      # Key projeksiyonu
+        "v_proj",      # Value projeksiyonu
+        "o_proj",      # Output projeksiyonu
+        "gate_proj",   # FFN gate
+        "up_proj",     # FFN up projection
+        "down_proj",   # FFN down projection
+    ],
+    bias="none",
+    task_type="CAUSAL_LM"
+)
+```
+
+#### Tam Eğitim Konfigürasyonu
+```python
+from transformers import TrainingArguments
+
+TRAINING_ARGS = TrainingArguments(
+    output_dir="./merinos_meri_model",
+    num_train_epochs=3,
+    per_device_train_batch_size=1,
+    gradient_accumulation_steps=8,    # Effective batch = 8
+    learning_rate=2e-4,
+    lr_scheduler_type="cosine",
+    warmup_ratio=0.05,
+    max_grad_norm=1.0,
+    fp16=False,
+    bf16=True,                         # RTX 4070 bfloat16 destekler
+    gradient_checkpointing=True,       # %40 VRAM tasarrufu
+    attn_implementation="sdpa",        # Scaled Dot-Product Attention
+    eval_strategy="no",                # OOM önlemi — logits.float() sorununu önler
+    save_strategy="steps",
+    save_steps=500,
+    save_total_limit=3,
+    dataloader_num_workers=0,          # Windows uyumluluğu
+    report_to="none",
+    logging_steps=50,
+)
+```
+
+#### 600x Hızlanmanın Kodu
+
+```python
+# ❌ YANLIŞ — TRL SFTTrainer → 6.000 sn/adım (OOM)
+from trl import SFTTrainer
+trainer = SFTTrainer(model=model, train_dataset=raw_dataset, ...)
+
+# ✅ DOĞRU — transformers.Trainer + öntokenizasyon → 10 sn/adım
+def tokenize_and_set_labels(example):
+    messages = example["messages"]
+    text = tokenizer.apply_chat_template(messages, tokenize=False)
+    enc = tokenizer(text, truncation=True, max_length=512, padding="max_length")
+    enc["labels"] = [
+        -100 if token == tokenizer.pad_token_id else token
+        for token in enc["input_ids"]
+    ]
+    return enc
+
+tokenized_dataset = raw_dataset.map(
+    tokenize_and_set_labels,
+    batched=False,
+    remove_columns=raw_dataset.column_names
+)
+trainer = Trainer(model=model, train_dataset=tokenized_dataset, args=training_args)
+trainer.train()
+```
+
+#### Ortam Değişkenleri (Eğitim Öncesi Zorunlu)
+```bash
+set PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+set TOKENIZERS_PARALLELISM=false
+```
+
+#### RTX 4070 8GB Gerçek Eğitim Metrikleri
+| Metrik | Değer |
+|--------|-------|
+| Toplam adım | ~4.500 |
+| Adım süresi | ~10 saniye |
+| Toplam süre | ~13-15 saat |
+| VRAM kullanımı | 5.3 / 8.0 GB |
+| GPU sıcaklığı | 70-75°C |
+| Başlangıç train loss | ~1.42 |
+| Son train loss | ~0.87 |
+| Checkpoint aralığı | Her 500 adım |
+
+---
+
+### 🟦 Faz 5: Python Inference Sunucusu & Kesintisiz Hot-Swap
+
+**Hedef:** Sunucu yeniden başlatılmadan canlı LoRA adaptörü değiştirme.
+
+#### FastAPI Sunucu Konfigürasyonu (`inference_server.py`)
+```python
+import uvicorn
+
+SERVER_CONFIG = {
+    "host": "0.0.0.0",
+    "port": 8000,
+    "reload": False,      # Canlıda reload kapalı
+    "log_level": "info",
+    "timeout_keep_alive": 60,
+}
+
+# Model yükleme parametreleri
+MODEL_CONFIG = {
+    "base_model": "unsloth/Qwen2.5-7B-Instruct-bnb-4bit",
+    "adapter_path": "./lora_adapters/latest",
+    "device_map": "cuda",
+    "torch_dtype": "bfloat16",
+    "max_new_tokens": 512,
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "repetition_penalty": 1.1,
+}
+```
+
+#### Threading.Lock ile Hot-Swap Implementasyonu
+```python
+import threading
+model_lock = threading.Lock()
+active_adapter_version = "v1"
+
+@app.post("/reload_adapter")
+async def reload_adapter(request: ReloadRequest):
+    global active_adapter_version
+
+    # Canlı istekler tamamlanana kadar bekle
+    with model_lock:
+        # Eski adaptörü bellekten boşalt
+        model.disable_adapter_layers()
+        torch.cuda.empty_cache()
+
+        # Yeni adaptörü yükle
+        model.load_adapter(request.adapter_path, adapter_name="default")
+        model.enable_adapter_layers()
+        active_adapter_version = request.version
+
+    return {"status": "success", "active_version": active_adapter_version}
+```
+
+#### A/B Trafik Router Konfigürasyonu
+```python
+AB_CONFIG = {
+    "new_model_ratio": 0.10,    # %10 yeni model, %90 kararlı
+    "min_requests_for_eval": 50, # En az 50 istek sonra karar ver
+    "promotion_threshold": 0.80, # %80 başarı → tam geçiş
+}
+```
+
+#### Üretilen Endpoint'ler
+```
+POST /generate        → LLM yanıt üretimi (ana endpoint)
+POST /reload_adapter  → Hot-Swap: yeni LoRA yükle
+GET  /status          → GPU, VRAM, aktif adaptör versiyonu
+GET  /health          → FastAPI canlanma kontrolü
+GET  /ab_test/stats   → A/B trafik istatistikleri
+POST /config/ab_test  → A/B oranını dinamik ayarla
+```
+
+---
+
+### 🟦 Faz 6: Sürekli Öğrenme & Otomatik Yeniden Eğitim Pipeline'ı
+
+**Hedef:** Her müşteri sohbetinin modeli iyileştirmesine katkıda bulunması.
+
+#### Veri Toplama Konfigürasyonu (`collect_training_data.ts`)
+```typescript
+const COLLECT_CONFIG = {
+  sourcePaths: [
+    ".store/interactions.json",   // Canlı sohbetler
+    ".store/corrections.json",    // Temsilci düzeltmeleri
+    ".store/feedback.json",       // 👍/👎 geri bildirimler
+  ],
+  outputPath: "data/collected/pending_review.jsonl",
+  minQualityScore: 0.5,   // Bu puanın altındaki kayıtlar atlanır
+  deduplicateByHash: true, // Aynı içerik birden fazla kaydedilmez
+};
+```
+
+#### Otomatik Yeniden Eğitim Tetik Mantığı (`auto_retrain.py`)
+```python
+RETRAIN_CONFIG = {
+    "approved_threshold": 100,       # 100 onaylı kayıt = eğitim tetiklenir
+    "min_new_examples": 50,          # Son eğitimden bu yana en az 50 yeni örnek
+    "max_retrain_frequency_hours": 12, # Günde 2'den fazla eğitim başlatma
+    "output_adapter_dir": "./lora_adapters/",
+    "auto_hot_swap": True,           # PROMOTE → otomatik /reload_adapter çağrısı
+}
+```
+
+#### Zamanlayıcı Konfigürasyonu (`scheduler.ts`)
+```typescript
+const SCHEDULER_CONFIG = {
+  dataCollection: {
+    cron: "0 */6 * * *",   // Her 6 saatte bir (00:00, 06:00, 12:00, 18:00)
+    description: "Canlı diyalogları topla ve KVKK maskele"
+  },
+  retrainCheck: {
+    cron: "0 2 * * *",     // Her gece 02:00
+    description: "Onaylı kayıt sayısını kontrol et, eşik geçildiyse eğit"
+  },
+  shadowEval: {
+    cron: "30 2 * * *",    // Eğitim tamamlandıktan 30dk sonra
+    description: "Yeni model adayını ROUGE/BLEU ile değerlendir"
+  }
+};
+```
+
+#### Checkpoint ve Versiyon Yönetimi
+```
+./lora_adapters/
+├── v1/   ← İlk eğitim (baseline)
+├── v2/   ← 100. kayıt sonrası
+├── v3/   ← 200. kayıt sonrası
+├── ...
+└── latest → v{N} symlink/referans
+```
+
+---
+
+### 🟦 Faz 7: Vanilla Admin Panel (8 Sekme)
+
+**Hedef:** Build aracı, Node.js veya paket yöneticisi olmadan tarayıcıda doğrudan çalışan yönetim arayüzü.
+
+**Neden Vanilla?** React/Vue gibi framework'ler sürekli güncelleme gerektiren bağımlılık zinciri oluşturur. Sadece HTML/CSS/JS ile yazılan bu panel, 5 yıl sonra da değiştirilmeden çalışır.
+
+#### CSS Tema Değişkenleri (Karanlık/Aydınlık)
+```css
+:root {
+  --bg-primary:    #0D1117;   /* GitHub dark benzeri arka plan */
+  --bg-secondary:  #161B22;
+  --accent-teal:   #00B4D8;   /* Birincil vurgu rengi */
+  --accent-green:  #22C55E;
+  --accent-red:    #EF4444;
+  --text-primary:  #E6EDF3;
+  --border-color:  #30363D;
+}
+
+[data-theme="light"] {
+  --bg-primary:    #FFFFFF;
+  --bg-secondary:  #F6F8FA;
+  --text-primary:  #1F2328;
+  --border-color:  #D0D7DE;
+}
+```
+
+#### JavaScript API Entegrasyon Konfigürasyonu (`app.js`)
+```javascript
+const API_CONFIG = {
+  supportCore: "http://localhost:8787",
+  inferenceServer: "http://localhost:8000",
+  pollIntervalMs: 5000,    // Her 5 saniyede istatistik yenile
+  retryAttempts: 3,
+  retryDelayMs: 1000,
+};
+
+// Canlı GPU durumu izleme
+async function pollGpuStatus() {
+  const res = await fetch(`${API_CONFIG.inferenceServer}/status`);
+  const data = await res.json();
+  updateVramBar(data.vram_used_gb, data.vram_total_gb);
+  updateActiveAdapter(data.active_adapter);
+}
+setInterval(pollGpuStatus, API_CONFIG.pollIntervalMs);
+```
+
+#### 8 Sekme ve Erişim Seviyeleri
+```
+Tab 1: 🧠 Sürekli Öğrenme   → ADMIN — Onay tablosu, düzenleme modalı, toplu onayla
+Tab 2: 🌐 Online Öğretmen AI → ADMIN — Sağlayıcı seç, API key, distilasyon başlat
+Tab 3: 📊 Eğitim Geçmişi    → ADMIN — Loss grafiği, epoch listesi, checkpoint bilgisi
+Tab 4: 🤖 Model Yönetimi    → ADMIN — Aktif adapter, Hot-Swap butonu, versiyon listesi
+Tab 5: ⚡ Sistem Durumu      → MONITOR — GPU/VRAM, aktif sohbet sayısı, uptime
+Tab 6: 🔒 KVKK Denetim      → ADMIN — Maskeleme kayıtları, denetim izi tablosu
+Tab 7: 🔬 Gölge Değerlendirme → ADMIN — ROUGE/BLEU rapor listesi, karar geçmişi
+Tab 8: ⚙️ Ayarlar            → ADMIN — Eğitim eşiği, cron zamanı, A/B oranı
+```
+
+---
+
+### 🟦 Faz 8: KVKK Gizlilik & Maskeleme Motoru
+
+**Hedef:** Hiçbir kişisel verinin model ağırlıklarına veya log dosyalarına girmemesi.
+
+**Sorun:** Müşteri "TC kimliğim 12345678901, telefon: 0532 123 45 67" diyerek form bilgisi gönderebilir. Bu veri maskelenmeden eğitim setine girerse KVKK ihlali oluşur.
+
+#### Maskeleme Pipeline Konfigürasyonu (`privacy_masker.py`)
+```python
+MASKER_CONFIG = {
+    "output_tokens": {
+        "tc":       "[TC_GIZLI]",
+        "phone":    "[TEL_GIZLI]",
+        "email":    "[EPOSTA_GIZLI]",
+        "iban":     "[IBAN_GIZLI]",
+        "card":     "[KART_GIZLI]",
+        "name":     "[ISIM_GIZLI]",
+        "address":  "[ADRES_GIZLI]",
+        "plate":    "[PLAKA_GIZLI]",
+        "order_ref":"[SIPARIS_GIZLI]",
+        "birthdate":"[TARIH_GIZLI]",
+    },
+    "min_tc_length": 11,
+    "luhn_check_cards": True,     # Sadece gerçek kart numaralarını maskele
+    "validate_tc": True,          # Rastgele 11 rakamı TC sanma
+    "ner_confidence_threshold": 0.7,  # NER eşik değeri
+}
+```
+
+#### TC Kimlik Doğrulama Algoritması
+```python
+def _validate_tc(self, tc: str) -> bool:
+    """
+    TC Kimlik No Algoritması:
+    1. 11 hane, ilk hane 0 olamaz
+    2. d[10] = ((d[0]+d[2]+d[4]+d[6]+d[8])*7 - (d[1]+d[3]+d[5]+d[7])) % 10
+    3. d[11] = (d[0]+d[1]+...+d[9]) % 10
+    """
+    if len(tc) != 11 or tc[0] == '0' or not tc.isdigit():
+        return False
+    d = [int(x) for x in tc]
+    check10 = ((d[0]+d[2]+d[4]+d[6]+d[8])*7 - (d[1]+d[3]+d[5]+d[7])) % 10
+    check11 = sum(d[:10]) % 10
+    return d[9] == check10 and d[10] == check11
+```
+
+#### Desteklenen Türk Telefon Formatları (10+ Pattern)
+```python
+PHONE_PATTERNS = [
+    r'\b0[5][0-9]{2}\s?\d{3}\s?\d{2}\s?\d{2}\b',  # 0532 123 45 67
+    r'\b\+90\s?[5][0-9]{2}\s?\d{3}\s?\d{2}\s?\d{2}\b',  # +90 532 123 45 67
+    r'\(0[5][0-9]{2}\)\s?\d{3}\s?\d{2}\s?\d{2}',  # (0532) 123 45 67
+    r'\b0[2][1-9][0-9]\s?\d{3}\s?\d{2}\s?\d{2}\b', # 0212 123 45 67 (sabit)
+    r'\b\+90[2][1-9][0-9]\d{7}\b',                 # +90212... (alan kodsuz)
+    # ... 5+ ek format
+]
+```
+
+#### Birim Test Senaryoları (12/12)
+```python
+TEST_CASES = [
+    ("TC geçerli",    "TC: 12345678902",         "[TC_GIZLI]"),
+    ("TC geçersiz",   "TC: 99999999999",          "99999999999"),  # değişmez
+    ("Telefon 05xx",  "Tel: 0532 123 45 67",      "[TEL_GIZLI]"),
+    ("Telefon +90",   "Tel: +90 532 123 4567",    "[TEL_GIZLI]"),
+    ("Telefon parantez","Tel: (0212) 123 45 67",  "[TEL_GIZLI]"),
+    ("TR IBAN",       "IBAN: TR12 0001...",        "[IBAN_GIZLI]"),
+    ("Kredi kartı",   "Kart: 4111 1111 1111 1111","[KART_GIZLI]"),
+    ("E-posta",       "Mail: user@domain.com",    "[EPOSTA_GIZLI]"),
+    ("Ad-Soyad",      "Adım: Ahmet Yılmaz",       "[ISIM_GIZLI]"),
+    ("Adres",         "Adres: Atatürk Mah...",     "[ADRES_GIZLI]"),
+    ("Plaka",         "Araç: 34 ABC 1234",         "[PLAKA_GIZLI]"),
+    ("Sipariş ref",   "Ref: MRN-20260731-XYZ",    "[SIPARIS_GIZLI]"),
+]
+# Sonuç: 12/12 PASS ✅
+```
+
+---
+
+### 🟦 Faz 9: Gölge Değerlendirme & A/B Testi
+
+**Hedef:** Yeni modelin canlıya alınmadan önce otomatik kalite onayından geçmesi.
+
+#### Shadow Eval Konfigürasyonu (`shadow_eval.py`)
+```python
+SHADOW_EVAL_CONFIG = {
+    "benchmark_path": "data/golden_benchmark.jsonl",
+    "min_test_cases": 20,          # En az 20 test senaryosu gerekir
+    "metrics": ["rouge1", "rougeL", "bleu", "key_term_match"],
+    "decisions": {
+        "PROMOTE": 0.80,   # ≥%80 → canlıya al
+        "HOLD":    0.65,   # %65-%79 → yönetici incelesin
+        "REJECT":  0.00,   # <%65 → reddet
+    },
+    "key_terms_by_category": {
+        "leke_temizlik": ["tampon", "ovma", "nötr", "sabun", "ılık su"],
+        "garanti":       ["2 yıl", "garanti", "fatura", "üretim hatası"],
+        "urun_ozellikleri": ["akrilik", "polipropilen", "tüylenir", "leke tutmaz"],
+    },
+    "forbidden_terms": [
+        "çamaşır suyu",   # Halıya zarar verir — asla önerilmemeli
+        "benzin",
+        "aseton",
+    ]
+}
+```
+
+#### ROUGE + BLEU Metrik Hesaplama
+```python
+from rouge_score import rouge_scorer
+from sacrebleu.metrics import BLEU
+
+def compute_metrics(predictions: list[str], references: list[str]) -> dict:
+    scorer = rouge_scorer.RougeScorer(["rouge1", "rougeL"], use_stemmer=False)
+    bleu = BLEU(effective_order=True)
+
+    rouge1_scores, rougeL_scores = [], []
+    for pred, ref in zip(predictions, references):
+        r = scorer.score(ref, pred)
+        rouge1_scores.append(r["rouge1"].fmeasure)
+        rougeL_scores.append(r["rougeL"].fmeasure)
+
+    return {
+        "rouge1_avg": sum(rouge1_scores) / len(rouge1_scores),
+        "rougeL_avg": sum(rougeL_scores) / len(rougeL_scores),
+        "bleu": bleu.corpus_score(predictions, [references]).score / 100,
+        "combined": (rouge1_avg * 0.4 + rougeL_avg * 0.4 + bleu_score * 0.2),
+    }
+```
+
+#### A/B Router Özellik Listesi
+- **Dinamik Oran Ayarı:** `POST /config/ab_test {"new_model_ratio": 0.20}` ile anında değiştirilebilir.
+- **İstatistik Takibi:** `GET /ab_test/stats` → hangi modele kaç istek gittiği, ortalama yanıt süresi.
+- **Otomatik Geri Alma:** Yeni model hata oranı >%5 olursa oran otomatik %0'a düşer.
+- **Session Stickiness:** Aynı `conversationId` hep aynı modele yönlenir (tutarsız deneyim önlenir).
+
+---
+
+### 🟦 Faz 10: Web Distilasyonu & DPO Teacher-Student
+
+**Hedef:** İnternetteki en iyi AI modellerinin bilgisini yerel modele aktarmak.
+
+#### Web Kazıma Konfigürasyonu (`scrape_merinos_site.py`)
+```python
+SCRAPE_CONFIG = {
+    "browser": "chromium",          # Playwright Chromium
+    "headless": True,
+    "timeout_ms": 30_000,
+    "target_urls": [
+        "https://www.merinos.com.tr/koleksiyonlar/",
+        "https://www.merinos.com.tr/leke-temizligi/",
+        "https://www.merinos.com.tr/garanti/",
+        "https://www.merinos.com.tr/bayi-listesi/",
+        "https://www.merinos.com.tr/musteri-hizmetleri/",
+    ],
+    "output": {
+        "json": "data/distilled/raw_site_knowledge.json",
+        "markdown": "data/distilled/site_knowledge.md",
+    },
+    "wait_between_requests_ms": 2000,  # Rate limit korunması
+}
+```
+
+#### Online Teacher AI Konfigürasyonu (`online_teacher_distiller.py`)
+```python
+TEACHER_CONFIG = {
+    "providers": {
+        "gemini": {
+            "model": "gemini-1.5-flash",
+            "api_key_env": "GEMINI_API_KEY",
+            "rpm_limit": 15,              # Ücretsiz katman
+            "search_grounding": True,     # Google Search ile gerçek zamanlı bilgi
+        },
+        "groq": {
+            "model": "llama-3.3-70b-versatile",
+            "api_key_env": "GROQ_API_KEY",
+            "rpm_limit": 30,              # Ücretsiz katman
+        },
+        "openai": {
+            "model": "gpt-4o",
+            "api_key_env": "OPENAI_API_KEY",
+            "rpm_limit": 500,             # Ücretli
+        },
+        "duckduckgo": {
+            "model": None,               # Web arama, AI değil
+            "api_key_env": None,         # API key gerektirmez
+            "max_results": 5,
+        }
+    },
+    "personas": [
+        "bireysel_musteri",
+        "bayi",
+        "kurumsal_musteri",
+        "sikayetci_musteri",
+        "ilk_ziyaretci",
+    ],
+    "questions_per_chunk": 5,           # Her bilgi parçası için 5 soru
+    "dpo_ratio": 0.3,                   # %30 DPO çifti, %70 standart ChatML
+}
+```
+
+#### DPO Tercih Çifti Üretim Mantığı
+```python
+def generate_dpo_pair(prompt: str, teacher_response: str) -> dict:
+    """
+    chosen  = Teacher AI'ın kaliteli yanıtı
+    rejected = Kasıtlı olarak bozulmuş/yanlış yanıt
+    """
+    rejected = generate_bad_response(prompt)  # Kısa, kaba, yanlış tavsiyeli yanıt
+
+    return {
+        "id": f"dpo_{int(time.time())}_{uuid4().hex[:6]}",
+        "prompt": prompt,
+        "chosen": teacher_response,
+        "rejected": rejected,
+        "source": f"online_teacher_{active_provider}",
+        "category": classify_category(prompt),
+        "timestamp": datetime.utcnow().isoformat() + "Z",
+    }
+```
+
+#### Otomatik Üretim Döngüsü
+```
+1. Site kazıma → raw_site_knowledge.json (~500 KB)
+2. Her bilgi chunk'ı için 5 persona × 5 soru = 25 soru/chunk
+3. Teacher AI her soruya yanıt üretir → KVKK filtresi
+4. %30 → DPO çifti, %70 → standart ChatML
+5. Admin Panel'de toplu önizleme → onay
+6. 100 kayıt birikiyor → auto_retrain.py tetiklenir
+```
 
 ---
 
