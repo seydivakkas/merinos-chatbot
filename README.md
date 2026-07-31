@@ -13,17 +13,18 @@ Merinos için özel olarak geliştirilmiş **Fine-Tuned Qwen 2.5 7B QLoRA yapay 
 
 ## 📌 İçindekiler
 
-1. [🎯 Projenin Öne Çıkan Özellikleri](#-projenin-öne-çıkan-özellikleri)
-2. [🏗️ Sistem Mimarisi ve Veri Akışı](#️-sistem-mimarisi-ve-veri-akışı)
-3. [📁 Klasör Yapısı](#-klasör-yapısı)
-4. [⚡ Kurulum ve Çalıştırma](#-kurulum-ve-çalıştırma)
-5. [🛠️ Sürekli Öğrenme & Distilasyon Komutları](#️-sürekli-öğrenme--distilasyon-komutları)
-6. [🌐 Online Öğretmen AI & DPO Mimarisi](#-online-öğretmen-ai--dpo-mimarisi)
-7. [🔒 KVKK Gizlilik & Maskeleme Motoru (`privacy_masker.py`)](#-kvkk-gizlilik--maskeleme-motoru-privacy_maskerpy)
-8. [📊 Gölge Değerlendirme Motoru (`shadow_eval.py`)](#-gölge-değerlendirme-motoru-shadow_evalpy)
-9. [📑 API Uç Noktaları (Support Core - Port 8787)](#-api-uç-noktaları-support-core---port-8787)
-10. [💻 Admin Yönetim Paneli](#-admin-yönetim-paneli)
-11. [📜 Lisans](#-lisans)
+1. [🚀 Geliştirici Yol Haritası (Ben Nasıl Kodladım?)](docs/DEVELOPMENT_ROADMAP.md)
+2. [🎯 Projenin Öne Çıkan Özellikleri](#-projenin-öne-çıkan-özellikleri)
+3. [🏗️ Sistem Mimarisi ve Veri Akışı](#️-sistem-mimarisi-ve-veri-akışı)
+4. [📁 Klasör Yapısı](#-klasör-yapısı)
+5. [⚡ Kurulum ve Çalıştırma](#-kurulum-ve-çalıştırma)
+6. [🛠️ Sürekli Öğrenme & Distilasyon Komutları](#️-sürekli-öğrenme--distilasyon-komutları)
+7. [🌐 Online Öğretmen AI & DPO Mimarisi](#-online-öğretmen-ai--dpo-mimarisi)
+8. [🔒 KVKK Gizlilik & Maskeleme Motoru (`privacy_masker.py`)](#-kvkk-gizlilik--maskeleme-motoru-privacy_maskerpy)
+9. [📊 Gölge Değerlendirme Motoru (`shadow_eval.py`)](#-gölge-değerlendirme-motoru-shadow_evalpy)
+10. [📑 API Uç Noktaları (Support Core - Port 8787)](#-api-uç-noktaları-support-core---port-8787)
+11. [💻 Admin Yönetim Paneli](#-admin-yönetim-paneli)
+12. [📜 Lisans](#-lisans)
 
 ---
 
