@@ -1,0 +1,58 @@
+{
+  "generatedAt": "2026-07-28T14:52:25.094Z",
+  "decision": "DEMO_ONLY_ACCEPTED",
+  "checks": [
+    {
+      "id": "typescript-syntax",
+      "status": "PASS",
+      "command": "node scripts/ts-syntax-check.mjs",
+      "exitCode": 0,
+      "startedAt": "2026-07-28T14:52:21.040Z",
+      "stdout": "TypeScript syntax OK: 27 files\n",
+      "stderr": ""
+    },
+    {
+      "id": "project-scope",
+      "status": "PASS",
+      "command": "node --test tests/project-scope.test.mjs",
+      "exitCode": 0,
+      "startedAt": "2026-07-28T14:52:21.601Z",
+      "stdout": "TAP version 13\n# Subtest: project documentation covers architecture, flows and MVP\nok 1 - project documentation covers architecture, flows and MVP\n  ---\n  duration_ms: 3.861498\n  type: 'test'\n  ...\n# Subtest: demo data contains all four core capability domains\nok 2 - demo data contains all four core capability domains\n  ---\n  duration_ms: 1.234067\n  type: 'test'\n  ...\n# Subtest: LangGraph guide and Python template cover state and Redis persistence\nok 3 - LangGraph guide and Python template cover state and Redis persistence\n  ---\n  duration_ms: 2.370809\n  type: 'test'\n  ...\n# Subtest: implemented final project exposes API, persistence, RBAC, admin and Compose services\nok 4 - implemented final project exposes API, persistence, RBAC, admin and Compose services\n  ---\n  duration_ms: 1.593271\n  type: 'test'\n  ...\n1..4\n# tests 4\n# suites 0\n# pass 4\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 48.813534\n",
+      "stderr": ""
+    },
+    {
+      "id": "python-compile",
+      "status": "PASS",
+      "command": "python3 -m py_compile backend/src/merinos_agent/__init__.py backend/src/merinos_agent/api.py backend/src/merinos_agent/auth.py backend/src/merinos_agent/checkpointing.py backend/src/merinos_agent/config.py backend/src/merinos_agent/context_manager.py backend/src/merinos_agent/contracts.py backend/src/merinos_agent/database.py backend/src/merinos_agent/demo_repository.py backend/src/merinos_agent/graph.py backend/src/merinos_agent/graph_compat.py backend/src/merinos_agent/main.py backend/src/merinos_agent/security.py backend/src/merinos_agent/session_store.py backend/src/merinos_agent/state.py backend/src/merinos_agent/workers.py",
+      "exitCode": 0,
+      "startedAt": "2026-07-28T14:52:21.676Z",
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "id": "backend-tests",
+      "status": "PASS",
+      "command": "python3 -m pytest backend/tests -q",
+      "exitCode": 0,
+      "startedAt": "2026-07-28T14:52:22.235Z",
+      "stdout": "....................                                                     [100%]\n20 passed in 1.02s\n",
+      "stderr": ""
+    },
+    {
+      "id": "repository-safety",
+      "status": "PASS",
+      "forbidden": [],
+      "leaked": []
+    },
+    {
+      "id": "frontend-quality",
+      "status": "BLOCKED",
+      "reason": "Temiz npm ci bağımlılık kurulumu bu doğrulama ortamında tamamlanamadı."
+    },
+    {
+      "id": "docker-integration",
+      "status": "BLOCKED",
+      "reason": "Docker daemon/CLI bu doğrulama ortamında mevcut değil."
+    }
+  ]
+}

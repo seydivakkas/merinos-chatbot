@@ -1,0 +1,710 @@
+{
+  "acceptanceDecision": "DEMO_ONLY_ACCEPTED",
+  "artifactName": "Merinos_Chatbot_Demo_Localhost_Final.zip",
+  "files": [
+    {
+      "bytes": 160,
+      "path": ".dockerignore",
+      "sha256": "8d0e66a8be7ead30dfaec921f6f0b615a01093d18c45ab61215c5b9b34a85a79"
+    },
+    {
+      "bytes": 209,
+      "path": ".editorconfig",
+      "sha256": "2a4dca753c331a22f6879409c19d268aa471c7737bff70275a77d07e7603f727"
+    },
+    {
+      "bytes": 354,
+      "path": ".env.docker.example",
+      "sha256": "c831cfc42bd3e1bd024a158eb10dfa0e715ca11b9bc70f13bafa2923e9770016"
+    },
+    {
+      "bytes": 77,
+      "path": ".env.example",
+      "sha256": "adab552a9502743f28f530c4b693790605f606d85aeb43ffde1cd54038594f72"
+    },
+    {
+      "bytes": 98,
+      "path": ".gitattributes",
+      "sha256": "1daa3c8f7dc3c19a0a41f4d8d3f380f129d97cb7b369cf6eadfd7c7077a243b0"
+    },
+    {
+      "bytes": 564,
+      "path": ".gitignore",
+      "sha256": "3d9791eacd7ef4bc3eafab9762350bc380b4ca35ed02ab88710e860607e1810e"
+    },
+    {
+      "bytes": 76,
+      "path": ".npmrc",
+      "sha256": "494e64a8818b6158e89321250500ad5ad018e33ad5cfea06a1cacd2cf4da75fa"
+    },
+    {
+      "bytes": 8,
+      "path": ".nvmrc",
+      "sha256": "88029f8a967e9b0a57e49328ab94fa6d74e07946e2b5d33626c82d0dc6e93d81"
+    },
+    {
+      "bytes": 91,
+      "path": ".openai/hosting.json",
+      "sha256": "2a4ecbb78c6e1bbac11a3c3e4e13ed4e36adda62f94545bd103a4962529526dd"
+    },
+    {
+      "bytes": 5,
+      "path": ".python-version",
+      "sha256": "49a506dd32096b010d75205acf3430c9ae6c40351888129499e5a5e487126c93"
+    },
+    {
+      "bytes": 393,
+      "path": "CONTRIBUTING.md",
+      "sha256": "6ad3b82a056c0dc76e2bf4b907f3e1b928f993600ef544fcfe704fb1303e7eaa"
+    },
+    {
+      "bytes": 1013,
+      "path": "Dockerfile",
+      "sha256": "ef7f93d4195febd6c8513eed2455c2395be2b7554abb8b0efa47d695e94d9007"
+    },
+    {
+      "bytes": 4887,
+      "path": "FINAL-ACCEPTANCE-REPORT.md",
+      "sha256": "15223cc5fa53ac7726b1db7c8127842c92a836d5e2c7e0a9c99d87f2c26a23fd"
+    },
+    {
+      "bytes": 1141,
+      "path": "OPEN-RISKS.md",
+      "sha256": "1ef68e8bb9fac0348cc2e10a45257ab0c03b7eab8aed61dbf95a7d5649b16dda"
+    },
+    {
+      "bytes": 2094,
+      "path": "README.md",
+      "sha256": "b7cb9a22a6eb78c0955934be5fecdac87e222642a9d45b41f9fc61b801c052ee"
+    },
+    {
+      "bytes": 850,
+      "path": "RELEASE-NOTES.md",
+      "sha256": "d0e76b89e53c16e12d680354283eedaa13ba83b2ab9fcc9f98bfafd429b5495d"
+    },
+    {
+      "bytes": 3144,
+      "path": "acceptance-evidence/final-acceptance.json",
+      "sha256": "61fb4737e9ef7d6c21280ff5b32a4a53c85340d69ea3c0f039ece1845338e56f"
+    },
+    {
+      "bytes": 5972,
+      "path": "app/admin/page.tsx",
+      "sha256": "ebdb2016949c92fd5bfdf7c3a8dea0aa82a95880dc07a0a85079979f5c779ba3"
+    },
+    {
+      "bytes": 2404,
+      "path": "app/chatgpt-auth.ts",
+      "sha256": "17a965f8948b21510cdf8ecbd70c5fdf58100e10970463f6a8fd2cc4795f8044"
+    },
+    {
+      "bytes": 39523,
+      "path": "app/globals.css",
+      "sha256": "7f045571d32e6a4b7a886b93b6c994d68cdb38d0a77ed26adae46d5488802b5e"
+    },
+    {
+      "bytes": 661,
+      "path": "app/layout.tsx",
+      "sha256": "7f8545ba5f1c71cbd4a2efb050d72e753bfe11518536507465af53e7fd7fb1fd"
+    },
+    {
+      "bytes": 13632,
+      "path": "app/page.tsx",
+      "sha256": "fe9bd872d91a1abb81320516614f4de0abf99fdb440d3569742943bb73584116"
+    },
+    {
+      "bytes": 251,
+      "path": "app/providers.tsx",
+      "sha256": "32ec44b5582dbf4251fcf424ad5726eb07ac73175472536f5a1df369dcfd9e79"
+    },
+    {
+      "bytes": 450,
+      "path": "backend/.env.example",
+      "sha256": "a164ce7424a682009cc74b28800252131110336636fe25bd8354d2d6b96367d7"
+    },
+    {
+      "bytes": 1042,
+      "path": "backend/Dockerfile",
+      "sha256": "d48e9a3b24783bf6fca1dfa6eacd55ef9cabe1dfa244dcf98b5a460e9738e1c5"
+    },
+    {
+      "bytes": 3192,
+      "path": "backend/README.md",
+      "sha256": "5cc37bb06414a288ab63bee2af7fd6439dcd372fd2781807b6021578ff89c727"
+    },
+    {
+      "bytes": 363,
+      "path": "backend/docker-compose.yml",
+      "sha256": "98edeb335260c2dd28c1fb91fe7e3593e9448f5b1d3a1a9fde0878709abfede1"
+    },
+    {
+      "bytes": 970,
+      "path": "backend/pyproject.toml",
+      "sha256": "c5595f6c4c196e175eb4f66307ba9b831ad09ddbc00911ff4a0ae8d36a265ed3"
+    },
+    {
+      "bytes": 317,
+      "path": "backend/src/merinos_agent/__init__.py",
+      "sha256": "e0d62ea004dd96e0a41e97c6b673f175290323f06fcd1c19f1465a28c9391aa3"
+    },
+    {
+      "bytes": 18285,
+      "path": "backend/src/merinos_agent/api.py",
+      "sha256": "414c40b1bbc79a8749fc29435fe7529b7f85cc54c0bf3f9fe7985237d0aea42f"
+    },
+    {
+      "bytes": 2930,
+      "path": "backend/src/merinos_agent/auth.py",
+      "sha256": "5daa3c9ba66fbaa849266d091beec81ea1dc15ef1aa66931552c3cc990d9d049"
+    },
+    {
+      "bytes": 702,
+      "path": "backend/src/merinos_agent/checkpointing.py",
+      "sha256": "64a4d1177d132c212491cdd57dcd5023989a062e1c30bb3c50620e34268f16bf"
+    },
+    {
+      "bytes": 3122,
+      "path": "backend/src/merinos_agent/config.py",
+      "sha256": "02d9b778e4d3780e9e2126a5e61b11aa12c67213390fb42b6166a831cca3abf5"
+    },
+    {
+      "bytes": 4804,
+      "path": "backend/src/merinos_agent/context_manager.py",
+      "sha256": "1dc91373ad76edeb30f155de81419e5bec90364779cd764f34e969065f42299d"
+    },
+    {
+      "bytes": 3510,
+      "path": "backend/src/merinos_agent/contracts.py",
+      "sha256": "4597340d0aa88d0774f012252536a8c43b9d378d3cebbed4ada63a36d84d4f6f"
+    },
+    {
+      "bytes": 6098,
+      "path": "backend/src/merinos_agent/database.py",
+      "sha256": "db5b1569d181af0ba087a8740a34c91053a0239f15ab4a76a2c2321e6988b20a"
+    },
+    {
+      "bytes": 5839,
+      "path": "backend/src/merinos_agent/demo_repository.py",
+      "sha256": "07c505fb17748d3b4582efb81a02e439e403a892cdc1b243bf00a2ef97f603ea"
+    },
+    {
+      "bytes": 12754,
+      "path": "backend/src/merinos_agent/graph.py",
+      "sha256": "fd82f97fb0e44da4cb9a2195bfe75e952052218a0443fedb93734b03755b5bd0"
+    },
+    {
+      "bytes": 3111,
+      "path": "backend/src/merinos_agent/graph_compat.py",
+      "sha256": "23f2a0f0b3c6016c16adb93cfc9c16c4763709a88be16da21744eb00a36e5279"
+    },
+    {
+      "bytes": 3783,
+      "path": "backend/src/merinos_agent/main.py",
+      "sha256": "4f07c83cc82840b3d72b02bc2f41476fe2596bb4a5b62d54729058bf94bf8679"
+    },
+    {
+      "bytes": 654,
+      "path": "backend/src/merinos_agent/security.py",
+      "sha256": "7bff9bb72a7dbabcea426da3f5db6cec647c829fbfd278839a0e931c8c375b0d"
+    },
+    {
+      "bytes": 11116,
+      "path": "backend/src/merinos_agent/session_store.py",
+      "sha256": "ebabda945a14cf29ad6ab3220d4f578a73055436d0e16b4b900f1e96c889992a"
+    },
+    {
+      "bytes": 4026,
+      "path": "backend/src/merinos_agent/state.py",
+      "sha256": "3b5f77852942531540659200462465c833d4b84646192c8fd24f845c995c6b2c"
+    },
+    {
+      "bytes": 7050,
+      "path": "backend/src/merinos_agent/workers.py",
+      "sha256": "eff3c622249bd4ed4fcbadff7bb5d6d7b61c7ccfd98deaab393bd22c2cd4b801"
+    },
+    {
+      "bytes": 140,
+      "path": "backend/tests/conftest.py",
+      "sha256": "d9c0bfe46f973d4f8ce66586581d066b307a123056aa72afa357fb166655983a"
+    },
+    {
+      "bytes": 3077,
+      "path": "backend/tests/test_api.py",
+      "sha256": "8f22e6fb7da13c88fe9f107d0b879bb928641a35dc22c527fbf46d33417ec707"
+    },
+    {
+      "bytes": 1793,
+      "path": "backend/tests/test_context_manager.py",
+      "sha256": "2c9327d4f2313f7a03cabe86a8c333258be03f694b64eab61446231b6581bf02"
+    },
+    {
+      "bytes": 976,
+      "path": "backend/tests/test_demo_repository.py",
+      "sha256": "51dc1e6a1346bb74f00becc669cff560bcb9a8621882301c9b3cc5992140c8b7"
+    },
+    {
+      "bytes": 2573,
+      "path": "backend/tests/test_graph.py",
+      "sha256": "8c3caaec69fffd5ad807d750b960741e498cc136b06c7801794a2ea89c78f2dc"
+    },
+    {
+      "bytes": 636,
+      "path": "backend/tests/test_security.py",
+      "sha256": "312cb0dba608f489d66e32d5a6c8cdbb5091d9b2341d8a2fb5e98ccfcd375e11"
+    },
+    {
+      "bytes": 1695,
+      "path": "backend/tests/test_session_store.py",
+      "sha256": "3a6e9da38b56c41ade35d46cfeee1bdc3bfcbca633bb9cb55ceb94b81e87f31a"
+    },
+    {
+      "bytes": 1254,
+      "path": "build/sites-vite-plugin.ts",
+      "sha256": "81b7cbfaeb970611572256aba0e313425beb3809f6426f63750696c15d9c756b"
+    },
+    {
+      "bytes": 12148,
+      "path": "components/Chatbot.tsx",
+      "sha256": "fa23ae29ee6bbfec2860b42698e05e1cd0b188b1fc9dc34ffb61ce49ddc1582c"
+    },
+    {
+      "bytes": 1411,
+      "path": "components/DealerMap.tsx",
+      "sha256": "e323bc963d6c48d3c098c1d88f2d6a374fc3bb63b3883226bc767352af8b8e8a"
+    },
+    {
+      "bytes": 429,
+      "path": "components/ProductVisual.tsx",
+      "sha256": "a0b71036058c7dd3ba1bbdddab488a83e24ab8d6e42bd0c183989ca5ce3984fd"
+    },
+    {
+      "bytes": 550,
+      "path": "compose.dev.yaml",
+      "sha256": "ca6b04617b409a6bd3763b0c1c524177fe9e24891c23bc7119ddf7870c2b7edd"
+    },
+    {
+      "bytes": 828,
+      "path": "compose.test.yaml",
+      "sha256": "0c8bf95aea251fa4fc7029f099de5d764206de9417ffcaa8c03c85df2eec0de2"
+    },
+    {
+      "bytes": 2715,
+      "path": "compose.yaml",
+      "sha256": "95e0d5200a1e7c616aa28c34d68141eec4e28000e403f0a9f2a35a346c8af1a0"
+    },
+    {
+      "bytes": 25144,
+      "path": "cursor-tasks/00-PROJE-ANAYASASI.md",
+      "sha256": "4b3c72d3e2a69251a7b8eac54f75ba902450b78d1992c0b1ba66e5717812e404"
+    },
+    {
+      "bytes": 31481,
+      "path": "cursor-tasks/01-REPO-VE-GELISTIRME-TEMELI.md",
+      "sha256": "e6baf00e93924cf23d7df79f0e5e5ab716c2cfe92e2580e28f7c0aa53790478a"
+    },
+    {
+      "bytes": 38382,
+      "path": "cursor-tasks/02-MERINOS-DEMO-SITESI-VE-TASARIM-SISTEMI.md",
+      "sha256": "d0652c1d97a8673c1f29b9a1b1bca0307ee3958b7482a482d907ce7c553d6127"
+    },
+    {
+      "bytes": 62695,
+      "path": "cursor-tasks/03-CHATBOT-WIDGET-VE-KONUSMA-DENEYIMI.md",
+      "sha256": "707d41c83db9e7fda82151f27265f809fe401ca5f817584b0bc9c1b24154732a"
+    },
+    {
+      "bytes": 51097,
+      "path": "cursor-tasks/04-URUN-ARAMA-VE-FILTRELEME-AKISI.md",
+      "sha256": "6c61c92b8ba55945059e014aa6cc4fb6918fe572e605f324e650b9f505a362a7"
+    },
+    {
+      "bytes": 44507,
+      "path": "cursor-tasks/05-SIPARIS-DURUMU-SORGULAMA-AKISI.md",
+      "sha256": "b7955f285217b78f7685639f4f954ed76ceb474eb126244754fd2fe2a3bcdc55"
+    },
+    {
+      "bytes": 63465,
+      "path": "cursor-tasks/06-BAYI-BULMA-VE-HARITA-AKISI.md",
+      "sha256": "5a8799b96567d751efdad6482428d11030548f9c8082349dfb96c1487f9208b5"
+    },
+    {
+      "bytes": 50865,
+      "path": "cursor-tasks/07-SSS-VE-BILGI-BANKASI-AKISI.md",
+      "sha256": "0351ac2bd6ba34f1f1858615e2004b0d5cb6c668a32130467c6642ed31f1bb9e"
+    },
+    {
+      "bytes": 57514,
+      "path": "cursor-tasks/08-FRONTEND-ORTAK-STATE-VE-VERI-KATMANI.md",
+      "sha256": "4387ad6155ae8f0f4880337a7fa776200e158b1d158f68118e069c31af909623"
+    },
+    {
+      "bytes": 38261,
+      "path": "cursor-tasks/09-PYTHON-API-VE-SOZLESME-KATMANI.md",
+      "sha256": "c027eaa3ef4aa22e94c607e2fc846a7924d5a52e7a8012c45ac8cd3013b87f7f"
+    },
+    {
+      "bytes": 56434,
+      "path": "cursor-tasks/10-REDIS-OTURUM-VE-SESSION-STATE-YONETIMI.md",
+      "sha256": "88a85063a7c3c769d8910acac6abcdfcfdaf5a619b81709396c2c7c5907dc463"
+    },
+    {
+      "bytes": 54685,
+      "path": "cursor-tasks/11-TOKEN-BUTCESI-VE-CONTEXT-COMPRESSION.md",
+      "sha256": "2cb2014452ce168657775f2d5972c314517da6e95dbc1b11b31a287abac6084f"
+    },
+    {
+      "bytes": 59750,
+      "path": "cursor-tasks/12-LANGGRAPH-SUPERVISOR-WORKER-AKISI.md",
+      "sha256": "c1839ad744c16dd737c5ef844e6863e276adfb166af3220bc2fa29769932aa4d"
+    },
+    {
+      "bytes": 66559,
+      "path": "cursor-tasks/13-FRONTEND-BACKEND-ENTEGRASYONU.md",
+      "sha256": "237640c328592681d36fa7de03d3da63a7147573a998ec8b0836bc3cada328fb"
+    },
+    {
+      "bytes": 78004,
+      "path": "cursor-tasks/14-KVKK-GUVENLIK-VE-GOZLEMLENEBILIRLIK.md",
+      "sha256": "79f8984f3b0b3c613e405441a2cd88c21bb6541eafaf4aea4e510c74f22fb4e2"
+    },
+    {
+      "bytes": 62251,
+      "path": "cursor-tasks/15-TEST-OTOMASYONU-VE-KALITE-GUVENCE.md",
+      "sha256": "79e196fb849bb6057fd4a0d91d3e55aaadd0c7a2aaa1eac43dd406a3b069a465"
+    },
+    {
+      "bytes": 58039,
+      "path": "cursor-tasks/16-DOCKER-VE-LOCAL-CALISTIRMA-ORTAMI.md",
+      "sha256": "8cdacc6f853b6d240b2bc20228568b69959a06bc87c5eec138ddde83cab1da08"
+    },
+    {
+      "bytes": 69965,
+      "path": "cursor-tasks/17-KURUMSAL-SISTEM-ENTEGRASYONLARI.md",
+      "sha256": "8b77e5c5c92f4db96508164ff3cbcbf9621ca9cbbb9b779eaa18e41c4f8730e4"
+    },
+    {
+      "bytes": 63749,
+      "path": "cursor-tasks/18-CANLIYA-GECIS-OPERASYON-VE-BAKIM-PLANI.md",
+      "sha256": "c76117ec23b398f1d1908efb526f668f02205ad1fe94869cf3c68ac6ad751f2a"
+    },
+    {
+      "bytes": 65988,
+      "path": "cursor-tasks/19-PILOT-KULLANICI-KABUL-VE-BASARI-METRIKLERI.md",
+      "sha256": "95e4bdd82cae93a00d4cd2ad13485d56426279a28a1e911df129e93ee6a0bb37"
+    },
+    {
+      "bytes": 66969,
+      "path": "cursor-tasks/20-SON-KABUL-VE-TESLIM-PAKETI.md",
+      "sha256": "7b9b72df10591d7ab6e9203e7f1ad6a42272b6aa278740ac8e8295e37fb896de"
+    },
+    {
+      "bytes": 2021,
+      "path": "cursor-tasks/README.md",
+      "sha256": "e3b12b307bfb7dd1e5793a2a1223c80ca052e5b5b8452e4d920aa87bab7068a0"
+    },
+    {
+      "bytes": 423,
+      "path": "db/index.ts",
+      "sha256": "dc7610b00b918e0ffff1360a63626f16655ced3064b2eaf96095a4101fb14bcd"
+    },
+    {
+      "bytes": 169,
+      "path": "db/schema.ts",
+      "sha256": "13ddacbf0be50e054d450a6c642b7fdc1aa943fd6b99084711e07e58b600390d"
+    },
+    {
+      "bytes": 4359,
+      "path": "docs/01-SISTEM-MIMARISI.md",
+      "sha256": "74596c6001b63a673829881dadbbe66938254f70362e426bcbeeffcd568ad247"
+    },
+    {
+      "bytes": 2504,
+      "path": "docs/02-KULLANICI-AKISLARI.md",
+      "sha256": "7612dcaecd53e5710d54670a7f109aa446917cc008e4f351145664a0b7c45da7"
+    },
+    {
+      "bytes": 3742,
+      "path": "docs/03-MVP-KAPSAMI.md",
+      "sha256": "b09b95684766d5e54a154dc44711d938286956db517db2504a6df750322db5e6"
+    },
+    {
+      "bytes": 3110,
+      "path": "docs/04-API-SOZLESMELERI.md",
+      "sha256": "40739245541a78345f37fc4e283bd0b2a2de7d99bf9a582e9fdd9a085aa1b1d0"
+    },
+    {
+      "bytes": 1806,
+      "path": "docs/05-TEST-SENARYOLARI.md",
+      "sha256": "460476d762df2740e7bfd3b1d577450c9a0c2fbd55b0b8820f6576a4e1fb3a48"
+    },
+    {
+      "bytes": 19380,
+      "path": "docs/06-LANGGRAPH-REDIS-STATE-MIMARISI.md",
+      "sha256": "0338d195c62fd290c7add259090295ea34fd3cdf6df8d07e3313f60c2362b9b1"
+    },
+    {
+      "bytes": 9895,
+      "path": "docs/07-SUPERVISOR-WORKER-MIMARISI.md",
+      "sha256": "d92676849386739726fa05210d60d983da424f88987954d5fb01289d3c5f04cf"
+    },
+    {
+      "bytes": 1161,
+      "path": "docs/08-TASARIM-SISTEMI.md",
+      "sha256": "28056304e7cadb6a783fe87ce344407a2adf91882a422fc5b9e98191bc479cc1"
+    },
+    {
+      "bytes": 1121,
+      "path": "docs/09-GUVENLIK-VE-KVKK.md",
+      "sha256": "bd23f748952bd8f4c1591a659372ed00a3f5defaa82b4e36d4502a40dd6cbc11"
+    },
+    {
+      "bytes": 885,
+      "path": "docs/10-OPERASYON-RUNBOOK.md",
+      "sha256": "4f86f63f9167ffa82bc7ae37f57f7fc0c4854ba3135f12f672f2f25dbe24cd3a"
+    },
+    {
+      "bytes": 759,
+      "path": "docs/11-PILOT-VE-KPI.md",
+      "sha256": "5f3180c91599e9dae4c310f1d336e2fd11505062a26da107bb0c3cfe711f27d2"
+    },
+    {
+      "bytes": 956,
+      "path": "docs/12-HANDOFF.md",
+      "sha256": "77340ee05bd88b6dcae7dbeee60c73c4996a85280c4677154c876f3f30b33c6e"
+    },
+    {
+      "bytes": 710,
+      "path": "docs/README.md",
+      "sha256": "0264ab3088e8d3e3c18b13d405244a982db4f13cf354035a16149b82b716c488"
+    },
+    {
+      "bytes": 18278,
+      "path": "docs/openapi-v1.json",
+      "sha256": "739e411b80d4aa124d61b79545ca8352a4da486623e275845091715c29490ceb"
+    },
+    {
+      "bytes": 148,
+      "path": "drizzle.config.ts",
+      "sha256": "af081f7384aaeb0082cf422e29f139d137ca2f6a57c69b2c37b9fb1f8479867b"
+    },
+    {
+      "bytes": 61,
+      "path": "drizzle/meta/_journal.json",
+      "sha256": "90cb374e093894d0efce6f1830d873a42aadd8ba49d2f024495e5cb2e1c8c303"
+    },
+    {
+      "bytes": 465,
+      "path": "eslint.config.mjs",
+      "sha256": "870f1adccecf3051cbcd9fd307cef51d7633cf510979c181a81f4b1797273493"
+    },
+    {
+      "bytes": 1700,
+      "path": "examples/d1/app/api/notes/route.ts",
+      "sha256": "a3d4a74fd53b7bf53e2df41f169d9d9d44a8b22aeb6d92f4e754956079af8909"
+    },
+    {
+      "bytes": 370,
+      "path": "examples/d1/db/schema.ts",
+      "sha256": "d89eabd95716ce404f5f7ca2a254220435be8ddce7c899d7ef461ff22ec80454"
+    },
+    {
+      "bytes": 3830,
+      "path": "lib/api/client.ts",
+      "sha256": "06b3789c1eb966831be89b144c523c36feb4c213a9fb012875a06effb20a0f3a"
+    },
+    {
+      "bytes": 7504,
+      "path": "lib/chatbot/engine.ts",
+      "sha256": "019d7a77506159df0762b34c7a5ef0d6257220b41007f276080b85edea216fc3"
+    },
+    {
+      "bytes": 2624,
+      "path": "lib/chatbot/transport.ts",
+      "sha256": "e3b0ad94fe59d1106728e9065f85c568756dd4b5dbc770c677179c49961d4e4a"
+    },
+    {
+      "bytes": 1230,
+      "path": "lib/data/contracts.ts",
+      "sha256": "a22ead9a0897cfeba5a82f39bdfaa0c78d824de7620b4ca5b7591c40d832b910"
+    },
+    {
+      "bytes": 1864,
+      "path": "lib/data/http-repositories.ts",
+      "sha256": "04e91df94620bf52900f993b4aebf1bf15eab9cbf768edad6d33bfc260e2e9f1"
+    },
+    {
+      "bytes": 2895,
+      "path": "lib/data/local-repositories.ts",
+      "sha256": "063263c62838537302636a4a9ef886f951d9b7d01523aeac8f437efb6c182c46"
+    },
+    {
+      "bytes": 532,
+      "path": "lib/data/repository-factory.ts",
+      "sha256": "bcfff85ae2fde4e6e87c2285e8ae01fff8151bfbd234b5409e5eb2ceea1d2c9a"
+    },
+    {
+      "bytes": 743,
+      "path": "lib/demo-data.ts",
+      "sha256": "d89323eb66a5d6f8fcc7afdda85c6e75afa82caeab1cbd510df3eadf0504af7f"
+    },
+    {
+      "bytes": 1481,
+      "path": "lib/domain/dealer.ts",
+      "sha256": "f7aa90aac314d34402e19645ac9735bddf26dcf935fe21c6d86b3f0a1e04f373"
+    },
+    {
+      "bytes": 1641,
+      "path": "lib/domain/faq.ts",
+      "sha256": "650dd80625772d41711e10c9a61871704ec646b8697a1843b0d00c9cf53c7a9f"
+    },
+    {
+      "bytes": 790,
+      "path": "lib/domain/normalization.ts",
+      "sha256": "d84c32bcb6677e582fe81b9a3460582ad862ff9485151f528d7295f4818da2b5"
+    },
+    {
+      "bytes": 1057,
+      "path": "lib/domain/order.ts",
+      "sha256": "2bb8f9e117835bfa7ad06294be939104632f4c798d373c12bea575b707514658"
+    },
+    {
+      "bytes": 4369,
+      "path": "lib/domain/product-search.ts",
+      "sha256": "43d6b974b6fe9701c8a39a91d6fd8b32a0237d40bb3c91169dc4df70f4606844"
+    },
+    {
+      "bytes": 2249,
+      "path": "lib/state/ExperienceContext.tsx",
+      "sha256": "748719ddb7165c93b2c4d3a7bb83821ca98f308e4039c49fff4ab6e907c8d6a0"
+    },
+    {
+      "bytes": 2512,
+      "path": "lib/types.ts",
+      "sha256": "4558f5d9e42aa8c70bdec6e0fdf9019e48c0f481a43242ff6f5e1b4e04a0b570"
+    },
+    {
+      "bytes": 133,
+      "path": "next.config.ts",
+      "sha256": "614bce25b089c3f19b1e17a6346c74b858034040154c6621e7d35303004767cc"
+    },
+    {
+      "bytes": 380145,
+      "path": "package-lock.json",
+      "sha256": "283dbdf55081ff6e460baff80764f39f722f13a0720e1a5fa13153ea877051a5"
+    },
+    {
+      "bytes": 2480,
+      "path": "package.json",
+      "sha256": "cbd5ab5bf8f3b2a88d6509bc93c0bb94395086781a98d04d01330a87287bb996"
+    },
+    {
+      "bytes": 94,
+      "path": "postcss.config.mjs",
+      "sha256": "dfac7ac2d86d326a0e5adb024e7943c181393ed17a5fcb8f0315b24c7da6ddde"
+    },
+    {
+      "bytes": 712,
+      "path": "public/favicon.svg",
+      "sha256": "e6d2e59b7b5bbb0342e0fb496dfc262decbfe4426bbb7b047aec8d467d1dc6f7"
+    },
+    {
+      "bytes": 391,
+      "path": "public/file.svg",
+      "sha256": "2b67812c325c199a02536cdbeea0c593a72f707d323b72ee3e08dbab06753bd4"
+    },
+    {
+      "bytes": 1035,
+      "path": "public/globe.svg",
+      "sha256": "b614b9bf183925957661ac851498fe1d8029fd43a62fbfed86f9e2624a57e7cf"
+    },
+    {
+      "bytes": 385,
+      "path": "public/window.svg",
+      "sha256": "644768c4aaeb4767bce293344eeb0c125fb804a94d801440424072202d85e3a1"
+    },
+    {
+      "bytes": 710,
+      "path": "scripts/build-verified.sh",
+      "sha256": "41714b636524ed4aa1eb5a77a4c95a6471fd53d2957e852ccf187f9335eee17f"
+    },
+    {
+      "bytes": 4336,
+      "path": "scripts/final-acceptance.mjs",
+      "sha256": "acdd0d1b04377e197db8d05d101d911560a50206a4729add41e3e916f4b826cc"
+    },
+    {
+      "bytes": 6430,
+      "path": "scripts/install-ci.sh",
+      "sha256": "c86541a04dec39f982eb6b103b60e3b376c518e84816b7876635877fb4c8569f"
+    },
+    {
+      "bytes": 1530,
+      "path": "scripts/sites-env.sh",
+      "sha256": "df86ebfc27d2f00860036658e933ac0ddd7b5f6879aa5d51218f0863c7e1fb60"
+    },
+    {
+      "bytes": 1587,
+      "path": "scripts/ts-syntax-check.mjs",
+      "sha256": "34e245f59d5de3368f3c1a58781286595104d686d4b436ac71eb7a02a67c5196"
+    },
+    {
+      "bytes": 1220,
+      "path": "scripts/validate-artifact.sh",
+      "sha256": "826354a781d909a664342b6a6f1a3155529e21f757dc163befa937420c713c2b"
+    },
+    {
+      "bytes": 6922,
+      "path": "shared/demo-data.json",
+      "sha256": "071ca2b400cba0a7aab8d6b774fe65116e8e666defd831f64b337b3a889ad29a"
+    },
+    {
+      "bytes": 4077,
+      "path": "tests/project-scope.test.mjs",
+      "sha256": "1276b324bd0590c4fecdf458129d6fd3905ec7cec47bb0cd9436e0ea62f45859"
+    },
+    {
+      "bytes": 1171,
+      "path": "tests/rendered-html.test.mjs",
+      "sha256": "af9e33db023b1f911203419f4d00310b3cb098d60022c02f0cc66ddae54e36c2"
+    },
+    {
+      "bytes": 666,
+      "path": "tsconfig.json",
+      "sha256": "be18523b23b78b6e1a876ddd107d330f0168bddf09d751b57e0b5edce69c66f3"
+    },
+    {
+      "bytes": 1807,
+      "path": "vite.config.ts",
+      "sha256": "43e5f02f727ca043f08ebf34789f330580a7a0cb90f426c92f4a454d066988fc"
+    },
+    {
+      "bytes": 1731,
+      "path": "worker/index.ts",
+      "sha256": "2ed36d7fa996e946d9d7695c5925e7760246f6bf8fa35c06f1bc515c087dc450"
+    }
+  ],
+  "generatedAt": "2026-07-28T00:00:00+03:00",
+  "implementedCapabilities": [
+    "product_search",
+    "demo_order_status",
+    "dealer_locator",
+    "published_faq",
+    "chatbot_widget",
+    "fastapi_v1",
+    "langgraph_supervisor_worker",
+    "redis_session_cas_lock_idempotency",
+    "postgresql_admin_models",
+    "jwt_rbac_admin_panel",
+    "docker_compose_local_stack"
+  ],
+  "projectRoot": "merinos-chatbot-demo",
+  "taskFiles": 21,
+  "validationSummary": {
+    "backendTests": "20/20 PASS",
+    "dockerIntegration": "BLOCKED: Docker daemon unavailable in validation environment",
+    "frontendFullQuality": "BLOCKED: clean npm dependency installation unavailable in validation environment",
+    "projectScopeTests": "4/4 PASS",
+    "repositorySafety": "PASS",
+    "typescriptSyntax": "27 files PASS"
+  }
+}

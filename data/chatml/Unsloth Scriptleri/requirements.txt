@@ -1,0 +1,21 @@
+# Merinos Fine-Tuning Requirements
+# Install with: pip install -r requirements.txt
+
+# Core
+unsloth>=2024.12.0
+torch>=2.4.0
+transformers>=4.46.0
+datasets>=3.0.0
+accelerate>=1.0.0
+
+# Training
+trl>=0.12.0
+peft>=0.14.0
+bitsandbytes>=0.45.0
+
+# Optional - for logging
+# wandb
+# tensorboard
+
+# Optional - for GGUF conversion
+# llama-cpp-python

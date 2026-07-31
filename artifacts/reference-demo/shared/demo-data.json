@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-28T00:00:00Z",
+  "products": [
+    {"id":1,"code":"90823","name":"Elegance 90823","collection":"Elegance","category":"Salon Halısı","color":"Krem","size":"160x230","price":12890,"stock":"Stokta","pattern":"pattern-elegance"},
+    {"id":2,"code":"36124","name":"Therapy 36124","collection":"Therapy","category":"Oturma Odası","color":"Bej","size":"200x290","price":18450,"stock":"Sınırlı stok","pattern":"pattern-therapy"},
+    {"id":3,"code":"60894","name":"Rodin 60894","collection":"Rodin","category":"Salon Halısı","color":"Gri","size":"160x230","price":14110,"stock":"Stokta","pattern":"pattern-rodin"},
+    {"id":4,"code":"74436","name":"Vega 74436","collection":"Vega","category":"Yatak Odası","color":"Mavi","size":"120x180","price":7290,"stock":"Stokta","pattern":"pattern-vega"},
+    {"id":5,"code":"91001","name":"Valeria 91001","collection":"Valeria","category":"Oturma Odası","color":"Krem","size":"200x290","price":16990,"stock":"Stokta","pattern":"pattern-valeria"},
+    {"id":6,"code":"34931","name":"Diyez 34931","collection":"Diyez","category":"Koridor","color":"Antrasit","size":"80x300","price":6875,"stock":"Sınırlı stok","pattern":"pattern-diyez"},
+    {"id":7,"code":"90841","name":"Elegance 90841","collection":"Elegance","category":"Yatak Odası","color":"Bej","size":"160x230","price":11990,"stock":"Stokta","pattern":"pattern-elegance"},
+    {"id":8,"code":"74458","name":"Vega 74458","collection":"Vega","category":"Salon Halısı","color":"Mavi","size":"200x290","price":17350,"stock":"Stokta","pattern":"pattern-vega"}
+  ],
+  "orders": [
+    {"number":"MRN-2026-1042","status":"Kargoya verildi","summary":"Siparişiniz dağıtım merkezine doğru yola çıktı.","estimatedDate":"25 Temmuz 2026","cargoCode":"DEMO-784512","steps":[{"label":"Sipariş alındı","detail":"22 Temmuz · 10.14","state":"done"},{"label":"Hazırlandı","detail":"22 Temmuz · 18.40","state":"done"},{"label":"Kargoya verildi","detail":"23 Temmuz · 09.20","state":"current"},{"label":"Teslimat","detail":"Tahmini 25 Temmuz","state":"next"}]},
+    {"number":"MRN-2026-2048","status":"Hazırlanıyor","summary":"Ürünleriniz sevkiyat için hazırlanıyor.","estimatedDate":"28 Temmuz 2026","steps":[{"label":"Sipariş alındı","detail":"23 Temmuz · 08.32","state":"done"},{"label":"Hazırlanıyor","detail":"Kalite kontrol aşamasında","state":"current"},{"label":"Kargo","detail":"Tahmini 24 Temmuz","state":"next"},{"label":"Teslimat","detail":"Tahmini 28 Temmuz","state":"next"}]}
+  ],
+  "dealers": [
+    {"id":"gantep-sehitkamil","name":"Merinos Demo Şehitkamil","city":"Gaziantep","district":"Şehitkamil","address":"İncilipınar Mahallesi, Gaziantep","phone":"0342 000 00 01","distance":"3,2 km","hours":"09.00–20.00","mapX":34,"mapY":32,"latitude":37.0662,"longitude":37.3833},
+    {"id":"gantep-sahinbey","name":"Merinos Demo Şahinbey","city":"Gaziantep","district":"Şahinbey","address":"Karataş Mahallesi, Gaziantep","phone":"0342 000 00 02","distance":"6,8 km","hours":"09.00–20.00","mapX":67,"mapY":61,"latitude":37.0167,"longitude":37.3333},
+    {"id":"istanbul-kadikoy","name":"Merinos Demo Kadıköy","city":"İstanbul","district":"Kadıköy","address":"Kozyatağı Mahallesi, İstanbul","phone":"0216 000 00 03","distance":"2,4 km","hours":"10.00–21.00","mapX":42,"mapY":38,"latitude":40.9927,"longitude":29.1244},
+    {"id":"istanbul-umraniye","name":"Merinos Demo Ümraniye","city":"İstanbul","district":"Ümraniye","address":"Yukarı Dudullu Mahallesi, İstanbul","phone":"0216 000 00 04","distance":"7,1 km","hours":"10.00–21.00","mapX":70,"mapY":55,"latitude":41.0164,"longitude":29.1248},
+    {"id":"ankara-cankaya","name":"Merinos Demo Çankaya","city":"Ankara","district":"Çankaya","address":"Balgat Mahallesi, Ankara","phone":"0312 000 00 05","distance":"4,5 km","hours":"09.30–20.00","mapX":53,"mapY":44,"latitude":39.9108,"longitude":32.8211},
+    {"id":"bursa-nilufer","name":"Merinos Demo Nilüfer","city":"Bursa","district":"Nilüfer","address":"Üçevler Mahallesi, Bursa","phone":"0224 000 00 06","distance":"5,3 km","hours":"09.30–20.00","mapX":48,"mapY":54,"latitude":40.2137,"longitude":28.9846}
+  ],
+  "faqs": [
+    {"id":"measure","topic":"measure","question":"Doğru halı ölçüsünü nasıl seçerim?","answer":"Oturma grubunun en az ön ayaklarının halı üzerinde kalması dengeli bir görünüm sağlar. Salonlarda 160x230 cm ve 200x290 cm sık kullanılan başlangıç ölçüleridir; kesin seçim için alanı zeminde bantla işaretleyebilirsiniz.","keywords":["ölçü","boyut","160x230","200x290","ebat"],"aliases":["halı ölçüsü","hangi ebat"],"status":"published","source":"Merinos Demo Bilgi Bankası","contentVersion":"2026.07.1","reviewedAt":"2026-07-20"},
+    {"id":"cleaning","topic":"cleaning","question":"Halı bakımı ve temizliği nasıl yapılır?","answer":"Ürün etiketindeki bakım talimatını esas alın. Düzenli olarak düşük güçte süpürün, dökülen sıvıya bastırmadan temiz bir bezle müdahale edin ve kimyasal uygulamadan önce görünmeyen küçük bir alanda deneyin.","keywords":["temiz","bakım","leke","süpür"],"aliases":["halı temizliği","leke çıkarma"],"status":"published","source":"Merinos Demo Bilgi Bankası","contentVersion":"2026.07.1","reviewedAt":"2026-07-20"},
+    {"id":"return","topic":"return","question":"İade süreci nasıl işler?","answer":"Bu prototip gerçek satış sistemine bağlı değildir. Canlı sürümde uygun siparişler için iade talebi müşteri hesabından başlatılacak; süre, koşul ve kargo adımları siparişe özel olarak gösterilecektir.","keywords":["iade","değişim","vazgeç","geri gönder"],"aliases":["ürünü iade et","değişim koşulları"],"status":"published","source":"Merinos Demo Bilgi Bankası","contentVersion":"2026.07.1","reviewedAt":"2026-07-20"},
+    {"id":"delivery","topic":"delivery","question":"Teslimat ve kargo durumunu nereden görürüm?","answer":"Dijital asistanda “Siparişim” seçeneğine dokunup sipariş numaranızı yazabilirsiniz. Bu demoda MRN-2026-1042 veya MRN-2026-2048 numaralarını deneyin.","keywords":["teslimat","kargo","sipariş","nerede"],"aliases":["kargom nerede","sipariş takibi"],"status":"published","source":"Merinos Demo Bilgi Bankası","contentVersion":"2026.07.1","reviewedAt":"2026-07-20"},
+    {"id":"stock","topic":"stock","question":"Mağaza stoku nasıl doğrulanır?","answer":"Demo ürün kartlarındaki stok bilgileri temsilidir. Canlı sürümde ürün ve mağaza seçildikten sonra güncel stok, stok servisi üzerinden doğrulanacak ve son güncelleme zamanı kullanıcıya gösterilecektir.","keywords":["stok","mağaza","bayi","var mı"],"aliases":["mağazada var mı","stok sorgula"],"status":"published","source":"Merinos Demo Bilgi Bankası","contentVersion":"2026.07.1","reviewedAt":"2026-07-20"}
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "name": "merinos-chatbot-platform",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Merinos AI destekli musteri destek chatbotu - mimari referans uygulamasi (Support Core + Agent Orchestrator + Admin Panel)",
+  "type": "module",
+  "scripts": {
+    "seed": "tsx scripts/seed.ts",
+    "demo": "tsx scripts/demo.ts",
+    "ui": "tsx scripts/serve-all.ts",
+    "start": "tsx scripts/serve-all.ts",
+    "meri-server": "python scripts/inference_server.py",
+    "collect": "tsx scripts/collect_training_data.ts",
+    "collect-verbose": "tsx scripts/collect_training_data.ts --verbose",
+    "collect-dry": "tsx scripts/collect_training_data.ts --dry-run",
+    "scrape-site": "python scripts/scrape_merinos_site.py",
+    "distill": "python scripts/distill_teacher_dataset.py",
+    "distill-auto": "python scripts/distill_teacher_dataset.py --num-samples 100 --auto-approve",
+    "distill-online": "python scripts/online_teacher_distiller.py",
+    "retrain": "python scripts/auto_retrain.py",
+    "retrain-dry": "python scripts/auto_retrain.py --dry-run",
+    "retrain-force": "python scripts/auto_retrain.py --force",
+    "retrain-status": "python scripts/auto_retrain.py --eval-only",
+    "mask": "python scripts/privacy_masker.py --mask-pending",
+    "mask-test": "python scripts/privacy_masker.py --test",
+    "shadow-eval": "python scripts/shadow_eval.py",
+    "shadow-eval-test": "python scripts/shadow_eval.py --test",
+    "scheduler": "tsx scripts/scheduler.ts",
+    "chat": "tsx scripts/chat_interactive.ts",
+    "chat-gpu": "python scripts/chat_interactive.py",
+    "server": "tsx support-core/src/index.ts",
+    "test": "tsx tests/run.ts",
+    "build-admin-data": "tsx scripts/build-admin-data.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "24.1.0",
+    "tsx": "4.20.3",
+    "typescript": "5.8.3"
+  }
+}

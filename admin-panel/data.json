@@ -1,0 +1,2459 @@
+{
+  "generatedAt": "2026-07-26T07:44:50.048Z",
+  "conversations": [
+    {
+      "id": "conv_afdad8d9-ac93-47b1-84d0-a6a8893f7ac3",
+      "chatwootConversationId": "cw-conv-idem-1",
+      "channel": "web_chat",
+      "language": "tr",
+      "customerProfileId": null,
+      "assignedAgentId": null,
+      "status": "open",
+      "createdAt": "2026-07-26T07:44:49.903Z",
+      "updatedAt": "2026-07-26T07:44:49.903Z"
+    }
+  ],
+  "ticketDraftsPendingApproval": [
+    {
+      "id": "draft_d4220650-5b9d-4113-848d-d8b6592230f2",
+      "conversationId": "conv-demo-4",
+      "category": "warranty_problem",
+      "subcategory": "iade",
+      "priority": "medium",
+      "fields": {
+        "musteriNotu": "Uruntimde defo var"
+      },
+      "missingFields": [],
+      "status": "draft",
+      "createdAt": "2026-07-26T07:44:49.902Z",
+      "updatedAt": "2026-07-26T07:44:49.902Z"
+    },
+    {
+      "id": "draft_e2b4e5bf-c3ac-4a63-a66a-e28dbfc3ec3d",
+      "conversationId": "conv-demo-8",
+      "category": "warranty_problem",
+      "subcategory": "iade",
+      "priority": "medium",
+      "fields": {
+        "musteriNotu": "test"
+      },
+      "missingFields": [],
+      "status": "pending_retry",
+      "createdAt": "2026-07-26T07:44:49.906Z",
+      "updatedAt": "2026-07-26T07:44:49.907Z"
+    },
+    {
+      "id": "draft_04a2578b-3716-4bc6-82b2-d12eec6e7d19",
+      "conversationId": "conv-cb-1",
+      "category": "warranty_problem",
+      "subcategory": "iade",
+      "priority": "medium",
+      "fields": {
+        "musteriNotu": "test"
+      },
+      "missingFields": [],
+      "status": "pending_retry",
+      "createdAt": "2026-07-26T07:44:49.958Z",
+      "updatedAt": "2026-07-26T07:44:49.959Z"
+    },
+    {
+      "id": "draft_d372f43f-5a20-4037-8ea3-11eaf8f4da1b",
+      "conversationId": "conv-cb-2",
+      "category": "warranty_problem",
+      "subcategory": "iade",
+      "priority": "medium",
+      "fields": {
+        "musteriNotu": "test"
+      },
+      "missingFields": [],
+      "status": "pending_retry",
+      "createdAt": "2026-07-26T07:44:49.960Z",
+      "updatedAt": "2026-07-26T07:44:49.961Z"
+    }
+  ],
+  "pendingApprovals": [],
+  "slaAtRisk": [
+    {
+      "id": "sla_d3da2266-cd57-4ec3-bb84-947d238fc41c",
+      "ticketDraftId": "draft-sla-test",
+      "category": "warranty_problem",
+      "priority": "high",
+      "firstResponseDueAt": "2026-07-26T02:59:49.908Z",
+      "resolutionDueAt": "2026-07-26T06:44:49.908Z",
+      "status": "breached",
+      "escalated": true,
+      "createdAt": "2026-07-26T02:44:49.908Z"
+    }
+  ],
+  "deadLetters": [
+    {
+      "id": "dlq_409d141a-38f2-4c1d-8023-81e9e29474db",
+      "topic": "ticket.create.retry",
+      "payload": {
+        "draftId": "draft_e2b4e5bf-c3ac-4a63-a66a-e28dbfc3ec3d",
+        "idempotencyKey": "ticket-create-draft_e2b4e5bf-c3ac-4a63-a66a-e28dbfc3ec3d"
+      },
+      "error": "frappe_unreachable",
+      "attempts": 2,
+      "status": "pending",
+      "createdAt": "2026-07-26T07:44:49.907Z"
+    },
+    {
+      "id": "dlq_27b2cc9c-288b-4e9a-9e94-7c3545201b26",
+      "topic": "ticket.create.retry",
+      "payload": {
+        "draftId": "draft_04a2578b-3716-4bc6-82b2-d12eec6e7d19",
+        "idempotencyKey": "ticket-create-draft_04a2578b-3716-4bc6-82b2-d12eec6e7d19"
+      },
+      "error": "frappe_unreachable",
+      "attempts": 2,
+      "status": "pending",
+      "createdAt": "2026-07-26T07:44:49.960Z"
+    },
+    {
+      "id": "dlq_ae7d87fa-793a-4e1a-a43c-878e2249c4c1",
+      "topic": "ticket.create.retry",
+      "payload": {
+        "draftId": "draft_d372f43f-5a20-4037-8ea3-11eaf8f4da1b",
+        "idempotencyKey": "ticket-create-draft_d372f43f-5a20-4037-8ea3-11eaf8f4da1b"
+      },
+      "error": "circuit_open:frappe",
+      "attempts": 2,
+      "status": "pending",
+      "createdAt": "2026-07-26T07:44:49.961Z"
+    }
+  ],
+  "notFoundLogs": [],
+  "auditSample": [
+    {
+      "id": "audit_c37b1f65-7fce-4a99-b0df-7536c3bb97d7",
+      "actor": "routing_engine",
+      "action": "routing_decided",
+      "targetType": "conversation",
+      "targetId": "conv-demo-2",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_937825c7-8074-4e76-88c3-792a215d7335",
+      "detailMasked": "en_yuksek_skor_secildi",
+      "createdAt": "2026-07-26T07:44:49.900Z"
+    },
+    {
+      "id": "audit_9b7c2248-c0a6-4ae8-a662-dcd7068159bb",
+      "actor": "agent_orchestrator",
+      "action": "transfer_to_human",
+      "targetType": "conversation",
+      "targetId": "conv-demo-2",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_937825c7-8074-4e76-88c3-792a215d7335",
+      "detailMasked": "human_support_required:conflicting_sources",
+      "createdAt": "2026-07-26T07:44:49.901Z"
+    },
+    {
+      "id": "audit_e18fd933-0883-4467-88aa-5e478d2d8405",
+      "actor": "routing_engine",
+      "action": "routing_decided",
+      "targetType": "conversation",
+      "targetId": "conv-demo-3",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_220af15a-6b31-431d-867a-4220a1680294",
+      "detailMasked": "aday_yok_departman_kuyruguna_eklendi_eskalasyon",
+      "createdAt": "2026-07-26T07:44:49.901Z"
+    },
+    {
+      "id": "audit_ea19ec81-f895-49e4-852c-83b9c870b159",
+      "actor": "agent_orchestrator",
+      "action": "transfer_to_human",
+      "targetType": "conversation",
+      "targetId": "conv-demo-3",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_220af15a-6b31-431d-867a-4220a1680294",
+      "detailMasked": "human_support_required:permission_denied",
+      "createdAt": "2026-07-26T07:44:49.901Z"
+    },
+    {
+      "id": "audit_84876eb7-9cca-481c-840d-a043542b46aa",
+      "actor": "ticket_draft_service",
+      "action": "ticket_draft_created",
+      "targetType": "ticket_draft",
+      "targetId": "draft_d4220650-5b9d-4113-848d-d8b6592230f2",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_7ad0f4d6-edcc-4b44-8511-10f8b4358fb4",
+      "detailMasked": "",
+      "createdAt": "2026-07-26T07:44:49.902Z"
+    },
+    {
+      "id": "audit_1c9ba698-0c3f-4268-93b2-eda77cdf0af0",
+      "actor": "agent_orchestrator",
+      "action": "approval_requested",
+      "targetType": "approval_request",
+      "targetId": "appr_face30fd-05e1-45d3-ae0c-0254d3897c38",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_342218d4-d001-40bb-a5d2-82366f165e42",
+      "detailMasked": "Ticket olustur: warranty_problem/iade",
+      "createdAt": "2026-07-26T07:44:49.902Z"
+    },
+    {
+      "id": "audit_daf5c089-8aba-4948-999f-ff1865279add",
+      "actor": "customer",
+      "action": "approval_rejected",
+      "targetType": "approval_request",
+      "targetId": "appr_face30fd-05e1-45d3-ae0c-0254d3897c38",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_e218addb-5e04-4b6f-ad29-e3aa926eae8f",
+      "detailMasked": "",
+      "createdAt": "2026-07-26T07:44:49.903Z"
+    },
+    {
+      "id": "audit_80811c49-c877-4134-8f0b-d4be2b4a42b5",
+      "actor": "ticket_draft_service",
+      "action": "ticket_draft_created",
+      "targetType": "ticket_draft",
+      "targetId": "draft_10b57c34-1ac9-4ea8-aa21-ab39d38374b8",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_4ca13a65-d45b-441f-a6b1-c031eb103255",
+      "detailMasked": "",
+      "createdAt": "2026-07-26T07:44:49.904Z"
+    },
+    {
+      "id": "audit_57e2586b-44d7-486e-8957-8eaa44e39da1",
+      "actor": "agent_orchestrator",
+      "action": "approval_requested",
+      "targetType": "approval_request",
+      "targetId": "appr_492d2558-f95b-44ca-8f65-c40437613004",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_66167532-2c72-41b4-bb2f-d9cc42584d12",
+      "detailMasked": "Ticket olustur: delivery_problem/gecikme",
+      "createdAt": "2026-07-26T07:44:49.904Z"
+    },
+    {
+      "id": "audit_01510cff-73e7-4ad2-92c5-6f537e2c1e1b",
+      "actor": "customer",
+      "action": "approval_approved",
+      "targetType": "approval_request",
+      "targetId": "appr_492d2558-f95b-44ca-8f65-c40437613004",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_2c904a15-cbab-4ab4-a5eb-a4a3804041b0",
+      "detailMasked": "",
+      "createdAt": "2026-07-26T07:44:49.904Z"
+    },
+    {
+      "id": "audit_aa08a143-c745-43b5-9104-cd7445bd0f16",
+      "actor": "support-core",
+      "action": "approval_consumed",
+      "targetType": "approval_request",
+      "targetId": "appr_492d2558-f95b-44ca-8f65-c40437613004",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_6df3ac13-d0e4-40d0-97f1-c2d442e9033d",
+      "detailMasked": "",
+      "createdAt": "2026-07-26T07:44:49.904Z"
+    },
+    {
+      "id": "audit_b114d50a-9c00-4875-b71c-5d4fd21c341d",
+      "actor": "ticket_draft_service",
+      "action": "ticket_finalized",
+      "targetType": "ticket_draft",
+      "targetId": "draft_10b57c34-1ac9-4ea8-aa21-ab39d38374b8",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_6df3ac13-d0e4-40d0-97f1-c2d442e9033d",
+      "detailMasked": "FRAPPE-TCK_4c93c8b9-3871-4a11-9d71-7f8680c4d9f8",
+      "createdAt": "2026-07-26T07:44:49.905Z"
+    },
+    {
+      "id": "audit_1987d26a-5c56-4757-bc2e-01f47362d673",
+      "actor": "routing_engine",
+      "action": "routing_decided",
+      "targetType": "conversation",
+      "targetId": "conv-demo-7",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_7b044934-cda4-4b41-a0e0-efb8c9d6fd48",
+      "detailMasked": "en_yuksek_skor_secildi",
+      "createdAt": "2026-07-26T07:44:49.906Z"
+    },
+    {
+      "id": "audit_a6ebf95c-17ea-48dc-a4d7-b3d87ab281db",
+      "actor": "agent_orchestrator",
+      "action": "transfer_to_human",
+      "targetType": "conversation",
+      "targetId": "conv-demo-7",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_7b044934-cda4-4b41-a0e0-efb8c9d6fd48",
+      "detailMasked": "test",
+      "createdAt": "2026-07-26T07:44:49.906Z"
+    },
+    {
+      "id": "audit_e8839317-b8f7-4766-a4dd-98cf26c7b76d",
+      "actor": "ticket_draft_service",
+      "action": "ticket_draft_created",
+      "targetType": "ticket_draft",
+      "targetId": "draft_e2b4e5bf-c3ac-4a63-a66a-e28dbfc3ec3d",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_d97fedef-851d-40a1-bb4c-1aba4f2c3960",
+      "detailMasked": "",
+      "createdAt": "2026-07-26T07:44:49.906Z"
+    },
+    {
+      "id": "audit_ba2d5a67-f673-4d64-b734-d23e51cb88ab",
+      "actor": "agent_orchestrator",
+      "action": "approval_requested",
+      "targetType": "approval_request",
+      "targetId": "appr_8f3a6a5d-7c39-4445-a521-7aa823c8acb5",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_5ab79cff-3567-4f34-af3b-b4212d9b0925",
+      "detailMasked": "Ticket olustur: warranty_problem/iade",
+      "createdAt": "2026-07-26T07:44:49.906Z"
+    },
+    {
+      "id": "audit_fd41d38a-debc-44e0-ac1d-e904a5f87b37",
+      "actor": "customer",
+      "action": "approval_approved",
+      "targetType": "approval_request",
+      "targetId": "appr_8f3a6a5d-7c39-4445-a521-7aa823c8acb5",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_d01ab682-2d23-411a-b4cc-05456c967b96",
+      "detailMasked": "",
+      "createdAt": "2026-07-26T07:44:49.906Z"
+    },
+    {
+      "id": "audit_bb4a3d80-5359-48bf-9854-b6f22753313d",
+      "actor": "support-core",
+      "action": "approval_consumed",
+      "targetType": "approval_request",
+      "targetId": "appr_8f3a6a5d-7c39-4445-a521-7aa823c8acb5",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_a57c7930-bcc8-46a4-86d1-0ee2fe4ad195",
+      "detailMasked": "",
+      "createdAt": "2026-07-26T07:44:49.907Z"
+    },
+    {
+      "id": "audit_313db27e-9b7b-4757-83f6-6c4e31e6ea25",
+      "actor": "ticket_draft_service",
+      "action": "ticket_finalize_failed_queued_for_retry",
+      "targetType": "ticket_draft",
+      "targetId": "draft_e2b4e5bf-c3ac-4a63-a66a-e28dbfc3ec3d",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_a57c7930-bcc8-46a4-86d1-0ee2fe4ad195",
+      "detailMasked": "frappe_unreachable",
+      "createdAt": "2026-07-26T07:44:49.907Z"
+    },
+    {
+      "id": "audit_bdde396d-31ee-47e5-948d-4c4d3c1c56c6",
+      "actor": "icerik_ekibi",
+      "action": "document_intake_rejected",
+      "targetType": "knowledge_document",
+      "targetId": "doc-test-zararli-001",
+      "policyVersion": "policy-v1",
+      "correlationId": "intake_c38f82e1-2d50-4331-a4f3-c6370633f7d3",
+      "detailMasked": "Zararli icerik deseni tespit edildi: /<script/i",
+      "createdAt": "2026-07-26T07:44:49.909Z"
+    },
+    {
+      "id": "audit_c27ac4c1-f5b6-42f1-9632-dd6aee186e9a",
+      "actor": "icerik_ekibi",
+      "action": "document_intake_rejected",
+      "targetType": "knowledge_document",
+      "targetId": "doc-test-eksik-001",
+      "policyVersion": "policy-v1",
+      "correlationId": "intake_92a09a60-5cdb-48ea-8169-7b4ce2e21419",
+      "detailMasked": "Eksik zorunlu metadata alanlari: visibility, targetGroups",
+      "createdAt": "2026-07-26T07:44:49.910Z"
+    },
+    {
+      "id": "audit_93012249-a731-4ca4-992a-041a2147cde3",
+      "actor": "icerik_ekibi",
+      "action": "document_intake_published",
+      "targetType": "knowledge_document",
+      "targetId": "doc-test-basarili-001",
+      "policyVersion": "policy-v1",
+      "correlationId": "intake_70dcc089-e102-4b3f-8292-db7f1a9faddb",
+      "detailMasked": "Belge kabul hatti basariyla tamamlandi",
+      "createdAt": "2026-07-26T07:44:49.911Z"
+    },
+    {
+      "id": "audit_d193228f-bdbc-4fba-9a9c-d45514e16084",
+      "actor": "conv-demo-feedback-1",
+      "action": "answer_feedback_negative",
+      "targetType": "conversation",
+      "targetId": "conv-demo-feedback-1",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_6c8c9e1c-de26-45e1-9ae8-3cf8e82759f4",
+      "detailMasked": "Cevap yetersizdi, daha detay istiyorum. Telefon: [phone:masked]",
+      "createdAt": "2026-07-26T07:44:49.955Z"
+    },
+    {
+      "id": "audit_712f1891-b266-437b-8f5c-279911ed44d0",
+      "actor": "ayse.temsilci",
+      "action": "agent_correction_submitted",
+      "targetType": "conversation",
+      "targetId": "conv-demo-feedback-1",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_6936ac8d-52a3-48c5-a3ea-0c818cea0e23",
+      "detailMasked": "Kahve lekesi icin once fazla sivi alinmali, sonra notr deterjanla nazikce ovulmelidir; agartici asla kullanilmamalidir.",
+      "createdAt": "2026-07-26T07:44:49.955Z"
+    },
+    {
+      "id": "audit_cbcfcfa0-0dd5-432a-9659-1cf1fb60812a",
+      "actor": "agent-orchestrator",
+      "action": "approval_requested",
+      "targetType": "approval_request",
+      "targetId": "appr_889be6ca-91c9-488b-97ff-3e2f3473dd6d",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_412b866d-54f3-4baa-bfc3-e463171ddc63",
+      "detailMasked": "1000 TL uzeri iade onayi",
+      "createdAt": "2026-07-26T07:44:49.957Z"
+    },
+    {
+      "id": "audit_ecc499b6-80f3-43c9-b35a-5f6b69ba5f11",
+      "actor": "destek.yoneticisi",
+      "action": "approval_vote_approved",
+      "targetType": "approval_request",
+      "targetId": "appr_889be6ca-91c9-488b-97ff-3e2f3473dd6d",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_6f408ae6-fd1f-4295-9d16-89b07c3049fa",
+      "detailMasked": "",
+      "createdAt": "2026-07-26T07:44:49.957Z"
+    },
+    {
+      "id": "audit_b09b1059-414d-435f-a6a3-da620cf9120a",
+      "actor": "ikinci.onaylayici",
+      "action": "approval_vote_approved",
+      "targetType": "approval_request",
+      "targetId": "appr_889be6ca-91c9-488b-97ff-3e2f3473dd6d",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_b252cc2f-3332-4e60-8b89-e2a35bf485dd",
+      "detailMasked": "",
+      "createdAt": "2026-07-26T07:44:49.957Z"
+    },
+    {
+      "id": "audit_f68f22ec-bc0c-450e-b806-7e3a7fb57383",
+      "actor": "ikinci.onaylayici",
+      "action": "approval_approved_four_eyes_complete",
+      "targetType": "approval_request",
+      "targetId": "appr_889be6ca-91c9-488b-97ff-3e2f3473dd6d",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_b252cc2f-3332-4e60-8b89-e2a35bf485dd",
+      "detailMasked": "",
+      "createdAt": "2026-07-26T07:44:49.958Z"
+    },
+    {
+      "id": "audit_a2b55cff-bbcc-4e55-8b35-82169da9013d",
+      "actor": "agent-orchestrator",
+      "action": "approval_requested",
+      "targetType": "approval_request",
+      "targetId": "appr_b9cc79c8-18aa-44a2-a70f-69c9c6af14fe",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_a560f3f9-3f1a-401f-b368-31dc12ad6c91",
+      "detailMasked": "2000 TL uzeri iade onayi",
+      "createdAt": "2026-07-26T07:44:49.958Z"
+    },
+    {
+      "id": "audit_89fe7378-ad74-4758-a852-f650a22f072e",
+      "actor": "destek.yoneticisi",
+      "action": "approval_vote_rejected",
+      "targetType": "approval_request",
+      "targetId": "appr_b9cc79c8-18aa-44a2-a70f-69c9c6af14fe",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_184c082b-38ad-4eff-add5-ad4a396fb429",
+      "detailMasked": "",
+      "createdAt": "2026-07-26T07:44:49.958Z"
+    },
+    {
+      "id": "audit_8e134ba4-92fd-46a6-8877-74ba825fb864",
+      "actor": "destek.yoneticisi",
+      "action": "approval_rejected",
+      "targetType": "approval_request",
+      "targetId": "appr_b9cc79c8-18aa-44a2-a70f-69c9c6af14fe",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_184c082b-38ad-4eff-add5-ad4a396fb429",
+      "detailMasked": "",
+      "createdAt": "2026-07-26T07:44:49.958Z"
+    },
+    {
+      "id": "audit_7fa81577-a0e3-4bd1-9e0a-b85f2e05620e",
+      "actor": "ticket_draft_service",
+      "action": "ticket_draft_created",
+      "targetType": "ticket_draft",
+      "targetId": "draft_04a2578b-3716-4bc6-82b2-d12eec6e7d19",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_800fd42b-e89d-4be8-8d49-5ea4f7ff4f33",
+      "detailMasked": "",
+      "createdAt": "2026-07-26T07:44:49.958Z"
+    },
+    {
+      "id": "audit_c9e62a4a-7815-4e75-868f-28c0c5cd31e6",
+      "actor": "agent_orchestrator",
+      "action": "approval_requested",
+      "targetType": "approval_request",
+      "targetId": "appr_c9135b4d-6e34-4aed-b924-adcd58cb094c",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_d9cce141-b481-4c1b-af06-7f6b2644c455",
+      "detailMasked": "Ticket olustur: warranty_problem/iade",
+      "createdAt": "2026-07-26T07:44:49.959Z"
+    },
+    {
+      "id": "audit_8dd7e3ee-fa8c-408a-8d3d-5f6ff88efb99",
+      "actor": "customer",
+      "action": "approval_approved",
+      "targetType": "approval_request",
+      "targetId": "appr_c9135b4d-6e34-4aed-b924-adcd58cb094c",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_6c192a98-7c52-4c84-9302-97eb754fd8d9",
+      "detailMasked": "",
+      "createdAt": "2026-07-26T07:44:49.959Z"
+    },
+    {
+      "id": "audit_6d55e4cf-636e-4425-b4f1-4aa6a30a10bf",
+      "actor": "support-core",
+      "action": "approval_consumed",
+      "targetType": "approval_request",
+      "targetId": "appr_c9135b4d-6e34-4aed-b924-adcd58cb094c",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_c28383f8-64d7-4775-8a58-8aa13a06bc5a",
+      "detailMasked": "",
+      "createdAt": "2026-07-26T07:44:49.959Z"
+    },
+    {
+      "id": "audit_d303a1a3-ddbb-480b-a8b3-acd8c9b62de6",
+      "actor": "ticket_draft_service",
+      "action": "ticket_finalize_failed_queued_for_retry",
+      "targetType": "ticket_draft",
+      "targetId": "draft_04a2578b-3716-4bc6-82b2-d12eec6e7d19",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_c28383f8-64d7-4775-8a58-8aa13a06bc5a",
+      "detailMasked": "frappe_unreachable",
+      "createdAt": "2026-07-26T07:44:49.960Z"
+    },
+    {
+      "id": "audit_5054e671-7dab-4db0-9a6a-d7cacb5deab3",
+      "actor": "ticket_draft_service",
+      "action": "ticket_draft_created",
+      "targetType": "ticket_draft",
+      "targetId": "draft_d372f43f-5a20-4037-8ea3-11eaf8f4da1b",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_83a33820-7e98-43ef-9895-eb4c552eac02",
+      "detailMasked": "",
+      "createdAt": "2026-07-26T07:44:49.960Z"
+    },
+    {
+      "id": "audit_0627d3de-b09d-4660-be30-4c5422317114",
+      "actor": "agent_orchestrator",
+      "action": "approval_requested",
+      "targetType": "approval_request",
+      "targetId": "appr_a36d0641-de7b-45f7-b717-bbac8482237a",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_71953822-0a9f-4943-8f90-b13144a999dc",
+      "detailMasked": "Ticket olustur: warranty_problem/iade",
+      "createdAt": "2026-07-26T07:44:49.960Z"
+    },
+    {
+      "id": "audit_c480db70-fe9f-47d0-879c-d861fd24a00b",
+      "actor": "customer",
+      "action": "approval_approved",
+      "targetType": "approval_request",
+      "targetId": "appr_a36d0641-de7b-45f7-b717-bbac8482237a",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_033f08a9-d878-44b8-8f9f-2dce52068496",
+      "detailMasked": "",
+      "createdAt": "2026-07-26T07:44:49.961Z"
+    },
+    {
+      "id": "audit_d721d4fc-d663-473f-9521-243b39e80b44",
+      "actor": "support-core",
+      "action": "approval_consumed",
+      "targetType": "approval_request",
+      "targetId": "appr_a36d0641-de7b-45f7-b717-bbac8482237a",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_72681ccb-4236-483a-9e3c-9d6e6622c177",
+      "detailMasked": "",
+      "createdAt": "2026-07-26T07:44:49.961Z"
+    },
+    {
+      "id": "audit_49a6710e-6cab-4439-a50d-fda6e6e01d11",
+      "actor": "ticket_draft_service",
+      "action": "ticket_finalize_failed_queued_for_retry",
+      "targetType": "ticket_draft",
+      "targetId": "draft_d372f43f-5a20-4037-8ea3-11eaf8f4da1b",
+      "policyVersion": "policy-v1",
+      "correlationId": "corr_72681ccb-4236-483a-9e3c-9d6e6622c177",
+      "detailMasked": "circuit_open:frappe",
+      "createdAt": "2026-07-26T07:44:49.961Z"
+    }
+  ],
+  "routingDecisions": [
+    {
+      "id": "routing_51c28470-83ca-449b-9e41-135fc1129a20",
+      "conversationId": "conv-demo-2",
+      "department": "kalite_musteri_hizmetleri",
+      "candidates": [
+        {
+          "agentId": "agent_62556a56-14f2-43f7-810d-2ef843dc0d4b",
+          "score": 14
+        }
+      ],
+      "selectedAgentId": "agent_62556a56-14f2-43f7-810d-2ef843dc0d4b",
+      "ruleVersion": "routing-v1",
+      "reason": "en_yuksek_skor_secildi",
+      "queued": false,
+      "createdAt": "2026-07-26T07:44:49.900Z"
+    },
+    {
+      "id": "routing_fe61f14d-6649-4c26-8759-b6f24c4544a4",
+      "conversationId": "conv-demo-3",
+      "department": "bayi_yonetimi",
+      "candidates": [],
+      "selectedAgentId": null,
+      "ruleVersion": "routing-v1",
+      "reason": "aday_yok_departman_kuyruguna_eklendi_eskalasyon",
+      "queued": true,
+      "createdAt": "2026-07-26T07:44:49.901Z"
+    },
+    {
+      "id": "routing_2a38039a-067b-4567-809a-81088dfa9cd4",
+      "conversationId": "conv-demo-7",
+      "department": "genel_musteri_hizmetleri",
+      "candidates": [
+        {
+          "agentId": "agent_62556a56-14f2-43f7-810d-2ef843dc0d4b",
+          "score": 9.500002777777778
+        }
+      ],
+      "selectedAgentId": "agent_62556a56-14f2-43f7-810d-2ef843dc0d4b",
+      "ruleVersion": "routing-v1",
+      "reason": "en_yuksek_skor_secildi",
+      "queued": false,
+      "createdAt": "2026-07-26T07:44:49.905Z"
+    }
+  ],
+  "documentsReviewDue": [
+    {
+      "documentId": "doc-test-gozden-gecirme-001",
+      "title": "Gozden Gecirmesi Gecikmis Belge",
+      "owner": "hukuk",
+      "reviewDueAt": "2026-06-26T07:44:49.912Z"
+    }
+  ],
+  "intakeSubmissionsRecent": [
+    {
+      "id": "intake_c38f82e1-2d50-4331-a4f3-c6370633f7d3",
+      "documentId": "doc-test-zararli-001",
+      "proposedDocument": {
+        "documentId": "doc-test-zararli-001",
+        "contentHash": "hash-test-zararli-001",
+        "title": "Test Zararli Belge",
+        "docType": "maintenance",
+        "section": "Test",
+        "language": "tr",
+        "version": "1.0",
+        "effectiveFrom": "2026-07-26T07:44:49.908Z",
+        "effectiveTo": null,
+        "reviewDueAt": "2027-07-26T07:44:49.908Z",
+        "owner": "icerik_ekibi",
+        "approver": "kalite_lideri",
+        "visibility": "public",
+        "targetGroups": [
+          "visitor"
+        ],
+        "status": "incelemede",
+        "tags": [
+          "test"
+        ],
+        "answer": "Musteri e-postasi: ornek@musteri.com adresine gonderin. <script>alert(1)</script>",
+        "conflictsWith": []
+      },
+      "submittedBy": "icerik_ekibi",
+      "status": "rejected",
+      "steps": [
+        {
+          "step": "owner_verification",
+          "ok": true,
+          "detail": "Gonderen ve veri sahibi dogrulandi (icerik_ekibi / onaylayan: kalite_lideri)",
+          "at": "2026-07-26T07:44:49.909Z"
+        },
+        {
+          "step": "malicious_pii_scan",
+          "ok": false,
+          "detail": "Zararli icerik deseni tespit edildi: /<script/i",
+          "at": "2026-07-26T07:44:49.909Z"
+        }
+      ],
+      "rejectedAtStep": "malicious_pii_scan",
+      "rejectedReason": "Zararli icerik deseni tespit edildi: /<script/i",
+      "createdAt": "2026-07-26T07:44:49.909Z",
+      "updatedAt": "2026-07-26T07:44:49.909Z"
+    },
+    {
+      "id": "intake_92a09a60-5cdb-48ea-8169-7b4ce2e21419",
+      "documentId": "doc-test-eksik-001",
+      "proposedDocument": {
+        "documentId": "doc-test-eksik-001",
+        "contentHash": "hash-test-eksik-001",
+        "title": "Test Eksik Metadata Belgesi",
+        "docType": "maintenance",
+        "section": "Test",
+        "language": "tr",
+        "version": "1.0",
+        "effectiveFrom": "2026-07-26T07:44:49.909Z",
+        "effectiveTo": null,
+        "reviewDueAt": "2027-07-26T07:44:49.909Z",
+        "owner": "icerik_ekibi",
+        "approver": "kalite_lideri",
+        "visibility": null,
+        "targetGroups": null,
+        "status": "incelemede",
+        "tags": [
+          "test"
+        ],
+        "answer": "Bu belgenin gizlilik seviyesi belirtilmemis.",
+        "conflictsWith": []
+      },
+      "submittedBy": "icerik_ekibi",
+      "status": "rejected",
+      "steps": [
+        {
+          "step": "owner_verification",
+          "ok": true,
+          "detail": "Gonderen ve veri sahibi dogrulandi (icerik_ekibi / onaylayan: kalite_lideri)",
+          "at": "2026-07-26T07:44:49.909Z"
+        },
+        {
+          "step": "malicious_pii_scan",
+          "ok": true,
+          "detail": "Zararli icerik veya PII deseni bulunamadi",
+          "at": "2026-07-26T07:44:49.909Z"
+        },
+        {
+          "step": "metadata_check",
+          "ok": false,
+          "detail": "Eksik zorunlu metadata alanlari: visibility, targetGroups",
+          "at": "2026-07-26T07:44:49.909Z"
+        }
+      ],
+      "rejectedAtStep": "metadata_check",
+      "rejectedReason": "Eksik zorunlu metadata alanlari: visibility, targetGroups",
+      "createdAt": "2026-07-26T07:44:49.909Z",
+      "updatedAt": "2026-07-26T07:44:49.909Z"
+    },
+    {
+      "id": "intake_70dcc089-e102-4b3f-8292-db7f1a9faddb",
+      "documentId": "doc-test-basarili-001",
+      "proposedDocument": {
+        "documentId": "doc-test-basarili-001",
+        "contentHash": "hash-test-basarili-001",
+        "title": "Kumas Kanepe Temizlik Rehberi",
+        "docType": "maintenance",
+        "section": "Bakim > Kumas Kanepe",
+        "language": "tr",
+        "version": "1.0",
+        "effectiveFrom": "2026-07-26T07:44:49.910Z",
+        "effectiveTo": null,
+        "reviewDueAt": "2027-07-26T07:44:49.910Z",
+        "owner": "urun_kalite",
+        "approver": "kalite_lideri",
+        "visibility": "public",
+        "targetGroups": [
+          "visitor",
+          "registered",
+          "dealer",
+          "corporate",
+          "employee"
+        ],
+        "status": "yururlukte",
+        "tags": [
+          "kumas",
+          "kanepe",
+          "temizlik",
+          "bakim"
+        ],
+        "answer": "Kumas kanepe temizliginde once yumusak fircayla toz alinir, ardindan kumasa uygun kopuk bazli temizleyici kullanilir.",
+        "conflictsWith": [],
+        "embeddingModelVersion": "mock-embed-v1",
+        "indexedAt": "2026-07-26T07:44:49.910Z"
+      },
+      "submittedBy": "icerik_ekibi",
+      "status": "published",
+      "steps": [
+        {
+          "step": "owner_verification",
+          "ok": true,
+          "detail": "Gonderen ve veri sahibi dogrulandi (urun_kalite / onaylayan: kalite_lideri)",
+          "at": "2026-07-26T07:44:49.910Z"
+        },
+        {
+          "step": "malicious_pii_scan",
+          "ok": true,
+          "detail": "Zararli icerik veya PII deseni bulunamadi",
+          "at": "2026-07-26T07:44:49.910Z"
+        },
+        {
+          "step": "metadata_check",
+          "ok": true,
+          "detail": "Zorunlu metadata alanlari tam",
+          "at": "2026-07-26T07:44:49.910Z"
+        },
+        {
+          "step": "chunking",
+          "ok": true,
+          "detail": "Belge 1 parcaya (chunk) bolundu",
+          "at": "2026-07-26T07:44:49.910Z"
+        },
+        {
+          "step": "validity_check",
+          "ok": true,
+          "detail": "Tarih/surum alanlari tutarli",
+          "at": "2026-07-26T07:44:49.910Z"
+        },
+        {
+          "step": "indexing",
+          "ok": true,
+          "detail": "Belge indekslendi (embedding modeli: mock-embed-v1)",
+          "at": "2026-07-26T07:44:49.910Z"
+        },
+        {
+          "step": "sample_question_test",
+          "ok": true,
+          "detail": "Ornek sorularin tamami (1) belgeyi basariyla getirdi",
+          "at": "2026-07-26T07:44:49.910Z"
+        },
+        {
+          "step": "publish_approval",
+          "ok": true,
+          "detail": "Belge bilgi tabanina yayinlandi",
+          "at": "2026-07-26T07:44:49.910Z"
+        }
+      ],
+      "rejectedAtStep": null,
+      "rejectedReason": null,
+      "createdAt": "2026-07-26T07:44:49.910Z",
+      "updatedAt": "2026-07-26T07:44:49.911Z"
+    }
+  ],
+  "intakeRejectedCount": 2,
+  "latestRagEvalRun": {
+    "id": "rageval_45858574-0fef-4ae8-a205-ab9aeb6c9fa5",
+    "runAt": "2026-07-26T07:44:49.954Z",
+    "totalCases": 200,
+    "statusAccuracyRate": 1,
+    "sourceAccuracyRate": 1,
+    "hallucinationRate": 0,
+    "staleDocUsageRate": 0,
+    "unauthorizedLeakRate": 0,
+    "citationRate": 1,
+    "details": [
+      {
+        "caseId": "q1",
+        "question": "Halimdaki kahve lekesini nasil cikarabilirim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q2",
+        "question": "Halimdaki cay lekesini nasil cikarabilirim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q3",
+        "question": "Halimdaki sarap lekesini nasil cikarabilirim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q4",
+        "question": "Halimdaki yag lekesini nasil cikarabilirim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q5",
+        "question": "Halimdaki cikolata lekesini nasil cikarabilirim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q6",
+        "question": "Halimdaki kan lekesini nasil cikarabilirim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q7",
+        "question": "Halimdaki murekkep lekesini nasil cikarabilirim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q8",
+        "question": "Halimdaki boya lekesini nasil cikarabilirim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q9",
+        "question": "Halimdaki camur lekesini nasil cikarabilirim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q10",
+        "question": "Halimdaki meyve suyu lekesini nasil cikarabilirim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q11",
+        "question": "Halimdaki ketcap lekesini nasil cikarabilirim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q12",
+        "question": "Halimdaki sos lekesini nasil cikarabilirim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q13",
+        "question": "Halimdaki ayak izi lekesini nasil cikarabilirim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q14",
+        "question": "Halimdaki evcil hayvan lekesini nasil cikarabilirim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q15",
+        "question": "Halimdaki mum lekesini nasil cikarabilirim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q16",
+        "question": "Halimdaki rimel lekesini nasil cikarabilirim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q17",
+        "question": "Halimdaki ruj lekesini nasil cikarabilirim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q18",
+        "question": "Halimdaki tukuruk lekesini nasil cikarabilirim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q19",
+        "question": "Halimdaki nane surubu lekesini nasil cikarabilirim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q20",
+        "question": "Halimdaki bal lekesini nasil cikarabilirim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q21",
+        "question": "Halimdaki recel lekesini nasil cikarabilirim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q22",
+        "question": "Halimdaki sut lekesini nasil cikarabilirim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q23",
+        "question": "Halimdaki limonata lekesini nasil cikarabilirim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q24",
+        "question": "Halimdaki cilek lekesini nasil cikarabilirim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q25",
+        "question": "Kahve lekesi haliya bulasti, nasil temizlerim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q26",
+        "question": "Cay lekesi haliya bulasti, nasil temizlerim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q27",
+        "question": "Sarap lekesi haliya bulasti, nasil temizlerim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q28",
+        "question": "Yag lekesi haliya bulasti, nasil temizlerim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q29",
+        "question": "Cikolata lekesi haliya bulasti, nasil temizlerim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q30",
+        "question": "Kan lekesi haliya bulasti, nasil temizlerim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q31",
+        "question": "Murekkep lekesi haliya bulasti, nasil temizlerim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q32",
+        "question": "Boya lekesi haliya bulasti, nasil temizlerim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q33",
+        "question": "Camur lekesi haliya bulasti, nasil temizlerim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q34",
+        "question": "Meyve suyu lekesi haliya bulasti, nasil temizlerim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q35",
+        "question": "Ketcap lekesi haliya bulasti, nasil temizlerim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q36",
+        "question": "Sos lekesi haliya bulasti, nasil temizlerim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q37",
+        "question": "Ayak izi lekesi haliya bulasti, nasil temizlerim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q38",
+        "question": "Evcil hayvan lekesi haliya bulasti, nasil temizlerim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q39",
+        "question": "Mum lekesi haliya bulasti, nasil temizlerim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q40",
+        "question": "Rimel lekesi haliya bulasti, nasil temizlerim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q41",
+        "question": "Ruj lekesi haliya bulasti, nasil temizlerim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q42",
+        "question": "Tukuruk lekesi haliya bulasti, nasil temizlerim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q43",
+        "question": "Nane surubu lekesi haliya bulasti, nasil temizlerim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q44",
+        "question": "Bal lekesi haliya bulasti, nasil temizlerim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q45",
+        "question": "Recel lekesi haliya bulasti, nasil temizlerim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q46",
+        "question": "Sut lekesi haliya bulasti, nasil temizlerim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q47",
+        "question": "Limonata lekesi haliya bulasti, nasil temizlerim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q48",
+        "question": "Cilek lekesi haliya bulasti, nasil temizlerim?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q49",
+        "question": "Halida olusan kahve lekesi icin bakim oneriniz var mi?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q50",
+        "question": "Halida olusan cay lekesi icin bakim oneriniz var mi?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q51",
+        "question": "Halida olusan sarap lekesi icin bakim oneriniz var mi?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q52",
+        "question": "Halida olusan yag lekesi icin bakim oneriniz var mi?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q53",
+        "question": "Halida olusan cikolata lekesi icin bakim oneriniz var mi?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q54",
+        "question": "Halida olusan kan lekesi icin bakim oneriniz var mi?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q55",
+        "question": "Halida olusan murekkep lekesi icin bakim oneriniz var mi?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q56",
+        "question": "Halida olusan boya lekesi icin bakim oneriniz var mi?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q57",
+        "question": "Halida olusan camur lekesi icin bakim oneriniz var mi?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q58",
+        "question": "Halida olusan meyve suyu lekesi icin bakim oneriniz var mi?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q59",
+        "question": "Halida olusan ketcap lekesi icin bakim oneriniz var mi?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q60",
+        "question": "Halida olusan sos lekesi icin bakim oneriniz var mi?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q61",
+        "question": "Halida olusan ayak izi lekesi icin bakim oneriniz var mi?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q62",
+        "question": "Halida olusan evcil hayvan lekesi icin bakim oneriniz var mi?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q63",
+        "question": "Halida olusan mum lekesi icin bakim oneriniz var mi?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q64",
+        "question": "Halida olusan rimel lekesi icin bakim oneriniz var mi?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q65",
+        "question": "Halida olusan ruj lekesi icin bakim oneriniz var mi?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q66",
+        "question": "Halida olusan tukuruk lekesi icin bakim oneriniz var mi?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q67",
+        "question": "Halida olusan nane surubu lekesi icin bakim oneriniz var mi?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q68",
+        "question": "Halida olusan bal lekesi icin bakim oneriniz var mi?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q69",
+        "question": "Halida olusan recel lekesi icin bakim oneriniz var mi?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q70",
+        "question": "Halida olusan sut lekesi icin bakim oneriniz var mi?",
+        "expectedStatus": "grounded",
+        "actualStatus": "grounded",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": true
+      },
+      {
+        "caseId": "q71",
+        "question": "Garanti suresi ne kadar?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q72",
+        "question": "Urunum icin garanti sartlari nelerdir?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q73",
+        "question": "Garanti kapsami hakkinda bilgi verir misiniz?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q74",
+        "question": "Kac yil garantiniz var?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q75",
+        "question": "Garanti suresi dolmadan once ne yapmaliyim?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q76",
+        "question": "Garanti belgesi sartlarini ogrenebilir miyim?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q77",
+        "question": "Urun garantisi ile ilgili detay istiyorum.",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q78",
+        "question": "Garanti suresi konusunda net bir bilgi alabilir miyim?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q79",
+        "question": "Garanti kosullariniz nelerdir, aciklar misiniz?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q80",
+        "question": "Yeni aldigim urunun garanti suresi kac yil?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q81",
+        "question": "Merhaba, Garanti suresi ne kadar?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q82",
+        "question": "Merhaba, Urunum icin garanti sartlari nelerdir?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q83",
+        "question": "Merhaba, Garanti kapsami hakkinda bilgi verir misiniz?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q84",
+        "question": "Merhaba, Kac yil garantiniz var?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q85",
+        "question": "Merhaba, Garanti suresi dolmadan once ne yapmaliyim?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q86",
+        "question": "Merhaba, Garanti belgesi sartlarini ogrenebilir miyim?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q87",
+        "question": "Merhaba, Urun garantisi ile ilgili detay istiyorum.",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q88",
+        "question": "Merhaba, Garanti suresi konusunda net bir bilgi alabilir miyim?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q89",
+        "question": "Merhaba, Garanti kosullariniz nelerdir, aciklar misiniz?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q90",
+        "question": "Merhaba, Yeni aldigim urunun garanti suresi kac yil?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q91",
+        "question": "Selam, Garanti suresi ne kadar?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q92",
+        "question": "Selam, Urunum icin garanti sartlari nelerdir?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q93",
+        "question": "Selam, Garanti kapsami hakkinda bilgi verir misiniz?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q94",
+        "question": "Selam, Kac yil garantiniz var?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q95",
+        "question": "Selam, Garanti suresi dolmadan once ne yapmaliyim?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q96",
+        "question": "Selam, Garanti belgesi sartlarini ogrenebilir miyim?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q97",
+        "question": "Selam, Urun garantisi ile ilgili detay istiyorum.",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q98",
+        "question": "Selam, Garanti suresi konusunda net bir bilgi alabilir miyim?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q99",
+        "question": "Selam, Garanti kosullariniz nelerdir, aciklar misiniz?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q100",
+        "question": "Selam, Yeni aldigim urunun garanti suresi kac yil?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q101",
+        "question": "Bir sorum olacakti: Garanti suresi ne kadar?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q102",
+        "question": "Bir sorum olacakti: Urunum icin garanti sartlari nelerdir?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q103",
+        "question": "Bir sorum olacakti: Garanti kapsami hakkinda bilgi verir misiniz?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q104",
+        "question": "Bir sorum olacakti: Kac yil garantiniz var?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q105",
+        "question": "Bir sorum olacakti: Garanti suresi dolmadan once ne yapmaliyim?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q106",
+        "question": "Bir sorum olacakti: Garanti belgesi sartlarini ogrenebilir miyim?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q107",
+        "question": "Bir sorum olacakti: Urun garantisi ile ilgili detay istiyorum.",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q108",
+        "question": "Bir sorum olacakti: Garanti suresi konusunda net bir bilgi alabilir miyim?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q109",
+        "question": "Bir sorum olacakti: Garanti kosullariniz nelerdir, aciklar misiniz?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q110",
+        "question": "Bir sorum olacakti: Yeni aldigim urunun garanti suresi kac yil?",
+        "expectedStatus": "conflicting_sources",
+        "actualStatus": "conflicting_sources",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q111",
+        "question": "Bayi komisyon politikaniz nedir?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q112",
+        "question": "Bayilere ozel komisyon oranlari hakkinda bilgi verir misiniz?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q113",
+        "question": "Bayi komisyon yuzdesi ne kadar?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q114",
+        "question": "Bayi olarak komisyon kosullarimi ogrenebilir miyim?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q115",
+        "question": "Ic komisyon politikasi dokumanina ulasabilir miyim?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q116",
+        "question": "Bayi komisyon oranlarini degistirdiniz mi?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q117",
+        "question": "Komisyon politikasi hangi kaynakta anlatiliyor?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q118",
+        "question": "Bayi komisyonu nasil hesaplaniyor?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q119",
+        "question": "Bayi komisyon politikaniz nedir?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q120",
+        "question": "Bayilere ozel komisyon oranlari hakkinda bilgi verir misiniz?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q121",
+        "question": "Bayi komisyon yuzdesi ne kadar?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q122",
+        "question": "Bayi olarak komisyon kosullarimi ogrenebilir miyim?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q123",
+        "question": "Ic komisyon politikasi dokumanina ulasabilir miyim?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q124",
+        "question": "Bayi komisyon oranlarini degistirdiniz mi?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q125",
+        "question": "Komisyon politikasi hangi kaynakta anlatiliyor?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q126",
+        "question": "Bayi komisyonu nasil hesaplaniyor?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q127",
+        "question": "Bayi komisyon politikaniz nedir?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q128",
+        "question": "Bayilere ozel komisyon oranlari hakkinda bilgi verir misiniz?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q129",
+        "question": "Bayi komisyon yuzdesi ne kadar?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q130",
+        "question": "Bayi olarak komisyon kosullarimi ogrenebilir miyim?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q131",
+        "question": "Ic komisyon politikasi dokumanina ulasabilir miyim?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q132",
+        "question": "Bayi komisyon oranlarini degistirdiniz mi?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q133",
+        "question": "Komisyon politikasi hangi kaynakta anlatiliyor?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q134",
+        "question": "Bayi komisyonu nasil hesaplaniyor?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q135",
+        "question": "Bayi komisyon politikaniz nedir?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q136",
+        "question": "Bayilere ozel komisyon oranlari hakkinda bilgi verir misiniz?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q137",
+        "question": "Bayi komisyon yuzdesi ne kadar?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q138",
+        "question": "Bayi olarak komisyon kosullarimi ogrenebilir miyim?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q139",
+        "question": "Ic komisyon politikasi dokumanina ulasabilir miyim?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q140",
+        "question": "Bayi komisyon oranlarini degistirdiniz mi?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q141",
+        "question": "Komisyon politikasi hangi kaynakta anlatiliyor?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q142",
+        "question": "Bayi komisyonu nasil hesaplaniyor?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q143",
+        "question": "Bayi komisyon politikaniz nedir?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q144",
+        "question": "Bayilere ozel komisyon oranlari hakkinda bilgi verir misiniz?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q145",
+        "question": "Bayi komisyon yuzdesi ne kadar?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q146",
+        "question": "Bayi olarak komisyon kosullarimi ogrenebilir miyim?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q147",
+        "question": "Ic komisyon politikasi dokumanina ulasabilir miyim?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q148",
+        "question": "Bayi komisyon oranlarini degistirdiniz mi?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q149",
+        "question": "Komisyon politikasi hangi kaynakta anlatiliyor?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q150",
+        "question": "Bayi komisyonu nasil hesaplaniyor?",
+        "expectedStatus": "permission_denied",
+        "actualStatus": "permission_denied",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q151",
+        "question": "Kargo takip numarami nereden bulabilirim?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q152",
+        "question": "Odemem neden onaylanmadi?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q153",
+        "question": "Siparisimi iptal etmek istiyorum, nasil yapabilirim?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q154",
+        "question": "Stokta hangi renkler mevcut?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q155",
+        "question": "Montaj hizmeti ucretli mi?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q156",
+        "question": "Magazanizin calisma saatleri nedir?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q157",
+        "question": "Sifremi unuttum, hesabima nasil girebilirim?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q158",
+        "question": "Kampanya kodum neden calismiyor?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q159",
+        "question": "Faturamda bir hata var, nasil duzeltebilirim?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q160",
+        "question": "Is basvurumun durumunu ogrenebilir miyim?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q161",
+        "question": "Yastigimin dikisi acildi, degistirebilir misiniz?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q162",
+        "question": "Urunun mevcut renk secenekleri nelerdir?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q163",
+        "question": "Mobilya odaya sigacak mi, nasil kontrol ederim?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q164",
+        "question": "Randevu talebi icin formu nereden doldurabilirim?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q165",
+        "question": "Faturami e-posta adresime gonderebilir misiniz?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q166",
+        "question": "Musteri hizmetleri telefon numaraniz nedir?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q167",
+        "question": "Web sitenizde odeme sayfasi acilmiyor.",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q168",
+        "question": "Uyelik hesabimi nasil kapatabilirim?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q169",
+        "question": "Kisisel verilerimin silinmesini talep ediyorum.",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q170",
+        "question": "Toptan siparis vermek icin kiminle gorusmeliyim?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q171",
+        "question": "Yeni koleksiyon ne zaman piyasaya sunulacak?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q172",
+        "question": "Urun kutusu hasarli geldi, ne yapmaliyim?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q173",
+        "question": "Siparis numaramla durumu sorgulayabilir miyim?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q174",
+        "question": "Kredi karti taksit secenekleri nelerdir?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q175",
+        "question": "Magaza icinde otopark var mi?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q176",
+        "question": "Ambalaj geri donusumlu mu?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q177",
+        "question": "Reklamlarla ilgili bir sikayetim var, kime iletebilirim?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q178",
+        "question": "Sosyal medya hesaplariniz hangileri?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q179",
+        "question": "Bulten aboneligimi iptal etmek istiyorum.",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q180",
+        "question": "Yurtdisina teslimat yapiyor musunuz?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q181",
+        "question": "Urun numunesi gonderebilir misiniz?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q182",
+        "question": "Odeme planimi degistirebilir miyim?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q183",
+        "question": "Kurumsal fatura kesebiliyor musunuz?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q184",
+        "question": "Hediye paketi secenegi var mi?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q185",
+        "question": "Mobilyanin montaj videosu var mi?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q186",
+        "question": "Urun agirligi ne kadar?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q187",
+        "question": "Kargo firmasini degistirebilir miyim?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q188",
+        "question": "Siparisimi baska adrese yonlendirebilir miyim?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q189",
+        "question": "Odeme sirasinda hata kodu aldim, ne yapmaliyim?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q190",
+        "question": "Yeni sube aciliyor mu?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q191",
+        "question": "Calisan performans degerlendirmesi nasil yapiliyor?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q192",
+        "question": "Kurye firmaniz hangisi?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q193",
+        "question": "Yeni tedarikci basvurusu icin iletisim bilgisi paylasabilir misiniz?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q194",
+        "question": "Sosyal sorumluluk projeleriniz var mi?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q195",
+        "question": "Urun katalogunu pdf formatinda gonderebilir misiniz?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q196",
+        "question": "Showroom ziyareti icin gun/saat ayarlayabilir miyiz?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q197",
+        "question": "Whatsapp destek hattiniz var mi?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q198",
+        "question": "Instagram uzerinden siparis verebilir miyim?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q199",
+        "question": "Fatura adresimi guncelleyebilir miyim?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      },
+      {
+        "caseId": "q200",
+        "question": "Indirim kuponu aktif etmek istiyorum, nasil yapabilirim?",
+        "expectedStatus": "not_found",
+        "actualStatus": "not_found",
+        "matchedExpectedStatus": true,
+        "matchedExpectedDocument": null
+      }
+    ]
+  },
+  "feedbackSummary": {
+    "total": 1,
+    "helpfulRate": 0
+  },
+  "agentCorrectionsRecent": [
+    {
+      "id": "correction_964a63c6-2ee9-4e32-93da-4ba6c019383f",
+      "conversationId": "conv-demo-feedback-1",
+      "question": "Halimdaki kahve lekesini nasil cikarabilirim?",
+      "originalAnswer": "Kahve lekesi icin ...",
+      "correctedAnswer": "Kahve lekesi icin once fazla sivi alinmali, sonra notr deterjanla nazikce ovulmelidir; agartici asla kullanilmamalidir.",
+      "correctedBy": "ayse.temsilci",
+      "suggestedDocumentId": "doc-bakim-001",
+      "correlationId": "corr_6936ac8d-52a3-48c5-a3ea-0c818cea0e23",
+      "createdAt": "2026-07-26T07:44:49.955Z"
+    }
+  ]
+}

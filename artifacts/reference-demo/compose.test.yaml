@@ -1,0 +1,27 @@
+services:
+  frontend:
+    profiles: [disabled]
+  api:
+    profiles: [disabled]
+  api-test:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+      target: runtime
+    command: sh -c "pip install -e 'backend[test]' && pytest backend/tests -q"
+    environment:
+      MERINOS_ENVIRONMENT: test
+      MERINOS_SESSION_BACKEND: redis
+      MERINOS_REDIS_URL: redis://:${REDIS_PASSWORD:-test-redis-password}@redis:6379/1
+      MERINOS_REDIS_KEY_SECRET: test-redis-key-secret-0000000000000000
+      MERINOS_DATABASE_URL: sqlite:////tmp/merinos-test.db
+      MERINOS_JWT_SECRET: test-jwt-secret-00000000000000000000
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks: [data]
+    tmpfs: [/tmp]
+  redis:
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-test-redis-password}
+    volumes: []

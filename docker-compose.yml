@@ -1,0 +1,71 @@
+# Bu dosya, HEDEF PRODUKSIYON TOPOLOJISININ dokumantasyon amacli bir referansidir.
+# Bu sandbox ortaminda calistirilmamistir/calistirilamaz (gercek Chatwoot, Frappe,
+# RAGFlow ve Langflow imajlari internet erisimi + ayri altyapi gerektirir).
+# support-core ve agent-orchestrator servisleri bu repodaki gercek koddur;
+# digerleri (chatwoot, frappe, ragflow, langflow) kendi resmi kurulum
+# rehberlerine gore ayrica devreye alinmalidir.
+
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: support_core
+      POSTGRES_USER: support_core
+      POSTGRES_PASSWORD: change-me
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  message_queue:
+    image: rabbitmq:3-management
+    ports:
+      - "15672:15672"
+
+  support-core:
+    build: ./support-core
+    environment:
+      PORT: 8787
+      DATABASE_URL: postgres://support_core:change-me@postgres:5432/support_core
+      QUEUE_URL: amqp://message_queue:5672
+      FRAPPE_BASE_URL: http://frappe:8000
+      RAGFLOW_BASE_URL: http://ragflow:9000
+    ports:
+      - "8787:8787"
+    depends_on:
+      - postgres
+      - message_queue
+
+  agent-orchestrator:
+    build: ./agent-orchestrator
+    environment:
+      SUPPORT_CORE_URL: http://support-core:8787
+      LANGFLOW_BASE_URL: http://langflow:7860
+    depends_on:
+      - support-core
+
+  admin-panel:
+    build: ./admin-panel
+    environment:
+      SUPPORT_CORE_URL: http://support-core:8787
+    ports:
+      - "8080:8080"
+    depends_on:
+      - support-core
+
+  # --- Asagidaki servisler bu depoda kodlanmaz; resmi imajlariyla kurulur ---
+  # chatwoot:
+  #   image: chatwoot/chatwoot:latest
+  #   ...
+  # frappe:
+  #   image: frappe/erpnext:latest
+  #   ...
+  # ragflow:
+  #   image: infiniflow/ragflow:latest
+  #   ...
+  # langflow:
+  #   image: langflowai/langflow:latest
+  #   ...
+
+volumes:
+  postgres_data:

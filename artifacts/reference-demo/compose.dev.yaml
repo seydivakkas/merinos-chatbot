@@ -1,0 +1,20 @@
+services:
+  frontend:
+    build:
+      target: deps
+    command: npm run dev:web
+    environment:
+      NEXT_PUBLIC_DATA_SOURCE: api
+      NEXT_PUBLIC_API_BASE_URL: http://127.0.0.1:${API_PORT:-8000}
+    volumes:
+      - .:/app
+      - frontend-node-modules:/app/node_modules
+    read_only: false
+  api:
+    command: uvicorn merinos_agent.api:app --app-dir backend/src --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - ./backend/src:/app/backend/src:ro
+      - ./shared:/app/shared:ro
+    read_only: false
+volumes:
+  frontend-node-modules: {}

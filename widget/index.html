@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Merinos Halı & Ev Tekstili — Resmi Mağaza</title>
+  <link rel="preconnect" href="https://fonts.googleapis me" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --burgundy: #7E1B33;
+      --burgundy-dark: #501020;
+      --gold: #D4AF37;
+      --gold-light: #F9F1D8;
+      --dark: #1E293B;
+      --cream: #FAF7F5;
+      --gray-100: #F1F5F9;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--cream);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* Top Announcement */
+    .announcement-bar {
+      background: var(--burgundy-dark);
+      color: var(--gold-light);
+      text-align: center;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    /* Navbar */
+    header {
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-badge {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--burgundy) 0%, var(--burgundy-dark) 100%);
+      color: var(--gold);
+      font-size: 24px;
+      font-weight: 800;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--gold);
+    }
+
+    .brand-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--burgundy);
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      font-size: 15px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--burgundy);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-admin {
+      background: var(--gold);
+      color: var(--burgundy-dark);
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 13px;
+      transition: transform 0.2s, background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-admin:hover {
+      transform: translateY(-2px);
+      background: #c59f2e;
+    }
+
+    /* Hero Banner */
+    .hero {
+      max-width: 1280px;
+      margin: 32px auto;
+      padding: 60px 40px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, var(--burgundy) 0%, var(--burgundy-dark) 100%);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 20px 50px rgba(126, 27, 51, 0.25);
+      border: 1px solid var(--gold);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      max-width: 600px;
+      z-index: 2;
+    }
+
+    .hero-tag {
+      background: rgba(212, 175, 55, 0.2);
+      color: var(--gold-light);
+      border: 1px solid var(--gold);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: 44px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: #f1f5f9;
+      margin-bottom: 32px;
+      opacity: 0.9;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+    }
+
+    .btn-hero-primary {
+      background: var(--gold);
+      color: var(--burgundy-dark);
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.4);
+      transition: all 0.2s;
+    }
+
+    .btn-hero-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+    }
+
+    .btn-hero-secondary {
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: all 0.2s;
+    }
+
+    .btn-hero-secondary:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Products Grid */
+    .section-container {
+      max-width: 1280px;
+      margin: 60px auto;
+      padding: 0 24px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--burgundy);
+      margin-bottom: 12px;
+    }
+
+    .section-desc {
+      color: #64748b;
+      margin-bottom: 32px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 28px;
+    }
+
+    .product-card {
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e2e8f0;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 28px rgba(126, 27, 51, 0.12);
+      border-color: var(--gold);
+    }
+
+    .product-img-box {
+      height: 220px;
+      background-color: #f8fafc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-img-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, var(--burgundy-dark), var(--burgundy));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 18px;
+      font-weight: 700;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--gold);
+      color: var(--burgundy-dark);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .product-info {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .product-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .product-desc {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+
+    .product-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .price {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--burgundy);
+    }
+
+    .btn-ask-ai {
+      background: #f8fafc;
+      border: 1px solid var(--burgundy);
+      color: var(--burgundy);
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-ask-ai:hover {
+      background: var(--burgundy);
+      color: #ffffff;
+    }
+
+    /* Features Bar */
+    .features-bar {
+      background: #ffffff;
+      border-y: 1px solid #e2e8f0;
+      padding: 40px 24px;
+      margin-top: 80px;
+    }
+
+    .features-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 32px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: var(--gold-light);
+      color: var(--burgundy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .feature-title {
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .feature-sub {
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--burgundy-dark);
+      color: #cbd5e1;
+      padding: 40px 24px;
+      text-align: center;
+      font-size: 14px;
+      border-top: 3px solid var(--gold);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    ✨ Merinos 2026 Akıllı & Leke Tutmaz Halı Koleksiyonu Satışta! 2.000 TL Üzeri Ücretsiz Kargo 🚚
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand-logo">
+        <div class="logo-badge">M</div>
+        <div class="brand-title">MERİNOS</div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#">Koleksiyonlar</a></li>
+        <li><a href="#">Halılar</a></li>
+        <li><a href="#">Ev Tekstili</a></li>
+        <li><a href="#">Bayilerimiz</a></li>
+        <li><a href="#">İletişim</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="http://localhost:8080" target="_blank" class="btn-admin">
+          📊 Admin Paneli Aç ↗
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-tag">🌟 Yeni Nesil Nano-Teknoloji</span>
+      <h1>Yaşam Alanlarınıza Zarafet Katın</h1>
+      <p>Leke tutmayan antibakteriyel Merinos halı modelleri ile evinizde konfor ve estetiği bir arada yaşayın.</p>
+      <div class="hero-buttons">
+        <button class="btn-hero-primary" data-merinos-chat="En çok satan Merinos halı modelleri nelerdir?">Koleksiyonu İncele</button>
+        <button class="btn-hero-secondary" data-merinos-chat="Halı temizliği ve leke çıkarma konusunda bilgi almak istiyorum">✨ Asistana Danış</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="section-container">
+    <h2 class="section-title">Öne Çıkan Merinos Koleksiyonu</h2>
+    <p class="section-desc">Evlerinize özel dokuma teknikleriyle hazırlanmış en popüler halı modellerimiz.</p>
+
+    <div class="products-grid">
+      <!-- Product 1 -->
+      <div class="product-card">
+        <div class="product-img-box">
+          <span class="product-badge">Çok Satan</span>
+          <div class="product-img-placeholder">MERİNOS THERAPY<br/>Saçaklı İpek Dokuma</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Merinos Therapy Halı</div>
+          <div class="product-desc">Antibakteriyel nano-kaplama, leke tutmaz özel akrilik doku.</div>
+          <div class="product-price-row">
+            <div class="price">2.499 TL</div>
+          </div>
+          <button class="btn-ask-ai" data-merinos-chat="Merinos Therapy halının leke temizliği ve bakımı nasıl yapılır?">
+            💬 Asistana Sor
+          </button>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="product-card">
+        <div class="product-img-box">
+          <span class="product-badge">%20 İndirim</span>
+          <div class="product-img-placeholder">MERİNOS ROYAL<br/>Klasik Salon Halısı</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Merinos Royal Serisi</div>
+          <div class="product-desc">Geleneksel motifler ile modern dokumanın buluşması.</div>
+          <div class="product-price-row">
+            <div class="price">3.199 TL</div>
+          </div>
+          <button class="btn-ask-ai" data-merinos-chat="Merinos Royal serisinin garanti süresi ve koşulları nedir?">
+            💬 Asistana Sor
+          </button>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="product-card">
+        <div class="product-img-box">
+          <span class="product-badge">Yeni Sezon</span>
+          <div class="product-img-placeholder">MERİNOS DIAMOND<br/>Minimalist Geometrik</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Merinos Diamond Halı</div>
+          <div class="product-desc">Modern yaşam alanları için yumuşak tuşeli bambu ve pamuk karışımı.</div>
+          <div class="product-price-row">
+            <div class="price">1.890 TL</div>
+          </div>
+          <button class="btn-ask-ai" data-merinos-chat="En yakın Merinos satış mağazasını ve bayisini öğrenmek istiyorum">
+            📍 Bayi Sor
+          </button>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="product-card">
+        <div class="product-img-box">
+          <span class="product-badge">Özel Üretim</span>
+          <div class="product-img-placeholder">MERİNOS BEBEK<br/>Antialerjik Çocuk Halısı</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Merinos Kids & Baby</div>
+          <div class="product-desc">Toz tutmayan, hassas ciltlere özel antialerjik bebek halısı.</div>
+          <div class="product-price-row">
+            <div class="price">1.450 TL</div>
+          </div>
+          <button class="btn-ask-ai" data-merinos-chat="Bebek ve çocuk halılarının yıkanması konusunda destek alabilir miyim?">
+            💬 Asistana Sor
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Bar -->
+  <div class="features-bar">
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-icon">🛡️</div>
+        <div>
+          <div class="feature-title">2 Yıl Merinos Garantisi</div>
+          <div class="feature-sub">Tüm halı ve ev tekstili ürünlerinde geçerli</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">✨</div>
+        <div>
+          <div class="feature-title">Nano Leke Koruması</div>
+          <div class="feature-sub">Sıvı dökülmelerine karşı dayanıklı yüzey</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">📍</div>
+        <div>
+          <div class="feature-title">Yaygın Bayi Ağı</div>
+          <div class="feature-sub">Türkiye genelinde 1000+ satış noktası</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">💬</div>
+        <div>
+          <div class="feature-title">7/24 AI Canlı Asistan</div>
+          <div class="feature-sub">Anında bilgi ve destek alın</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>ÖZEL LİSANS — TÜM HAKLAR SAKLIDIR | Telif Hakkı (c) 2026 Seydi Eryılmaz (@seydivakkas)</p>
+    <p style="margin-top: 8px; font-size: 12px; opacity: 0.7;">Merinos AI Destek Platformu Referans Uygulaması</p>
+  </footer>
+
+  <!-- Merinos Embeddable Chatbot Widget Script -->
+  <script src="merinos-widget.js"></script>
+</body>
+</html>
+<!-- ÖZEL LİSANS — TÜM HAKLAR SAKLIDIR -->

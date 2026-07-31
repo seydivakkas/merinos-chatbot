@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Merinos Chatbot Admin Panel</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<div class="container">
+		<header>
+			<div class="brand">
+				<div class="brand-logo">M</div>
+				<div class="brand-title">
+					<h1>Merinos Chatbot Admin Panel</h1>
+					<p>İdeal Yönetim, İzleme & Güvenlik Platformu</p>
+				</div>
+			</div>
+			<div class="header-actions">
+				<button id="themeToggleBtn" title="Aydınlık / Karanlık Tema">🌙</button>
+				<span class="role-badge">🔒 Admin • 2FA Aktif</span>
+				<span id="generatedAt">Veri yükleniyor...</span>
+				<button id="triggerEvalBtn" class="btn-primary" style="background: linear-gradient(135deg, #10b981, #059669);">
+					🧪 RAG Testi Koş
+				</button>
+				<button id="refreshBtn" class="btn-primary">
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+					Yenile
+				</button>
+			</div>
+		</header>
+
+		<!-- Sistem Uyarı Bannerları -->
+		<div id="systemAlertsBanner" class="alerts-banner"></div>
+
+		<!-- Navigasyon Sekmeleri -->
+		<nav class="tabs-nav">
+			<button class="tab-btn active" data-tab="summary">Özet & Raporlar</button>
+			<button class="tab-btn" data-tab="conversations">Konuşmalar</button>
+			<button class="tab-btn" data-tab="tickets">Biletler & Onaylar</button>
+			<button class="tab-btn" data-tab="sla">SLA & Hatalar</button>
+
+			<button class="tab-btn" data-tab="routing">Yönlendirme</button>
+			<button class="tab-btn" data-tab="ai-knowledge">AI & Bilgi Tabanı</button>
+			<button class="tab-btn" data-tab="learning">🧠 Sürekli Öğrenme</button>
+			<button class="tab-btn" data-tab="sandbox">🧪 Sandbox & Test</button>
+			<button class="tab-btn" data-tab="security">🔐 Güvenlik & Sistem</button>
+			<button class="tab-btn" data-tab="audit">Denetim Kaydı</button>
+		</nav>
+
+		<!-- 1. Özet Sekmesi -->
+		<div id="tab-summary" class="tab-panel active">
+			<div class="section-header">
+				<h2>Genel Performans & Metrik Özeti</h2>
+			</div>
+			<div id="summaryCards" class="cards-grid"></div>
+		</div>
+
+		<!-- 2. Konuşmalar Sekmesi -->
+		<div id="tab-conversations" class="tab-panel">
+			<div class="section-header">
+				<h2>Müşteri Konuşmaları</h2>
+			</div>
+			<div class="filter-bar">
+				<input type="text" id="convSearchInput" class="search-input" placeholder="🔍 Konuşmalarda, mesajlarda veya ID'lerde canlı ara..." />
+				<select id="convChannelFilter" class="select-input">
+					<option value="all">Tüm Kanallar</option>
+					<option value="web_chat">Web Chat</option>
+					<option value="whatsapp">WhatsApp</option>
+					<option value="email">E-Posta</option>
+				</select>
+				<select id="convStatusFilter" class="select-input">
+					<option value="all">Tüm Durumlar</option>
+					<option value="open">Açık</option>
+					<option value="pending">Onay Bekliyor</option>
+					<option value="resolved">Çözüldü</option>
+					<option value="transferred">Temsilciye Aktarıldı</option>
+				</select>
+			</div>
+			<div class="table-container">
+				<table id="conversationsTable"></table>
+			</div>
+		</div>
+
+		<!-- 3. Biletler & Onaylar Sekmesi -->
+		<div id="tab-tickets" class="tab-panel">
+			<div class="section-header">
+				<h2>Onay Bekleyen Bilet Taslakları</h2>
+			</div>
+			<div class="table-container">
+				<table id="draftsTable"></table>
+			</div>
+
+			<div class="section-header">
+				<h2>Bekleyen Onay Talepleri (Dört Göz İlkesi)</h2>
+			</div>
+			<div class="table-container">
+				<table id="approvalsTable"></table>
+			</div>
+		</div>
+
+		<!-- 4. SLA & Hatalar Sekmesi -->
+		<div id="tab-sla" class="tab-panel">
+			<div class="section-header">
+				<h2>Riskli veya İhlal Edilmiş SLA'lar</h2>
+			</div>
+			<div class="table-container">
+				<table id="slaTable"></table>
+			</div>
+
+			<div class="section-header">
+				<h2>Ölü Mektup Kuyruğu (Dead Letter Queue)</h2>
+			</div>
+			<div class="table-container">
+				<table id="deadLettersTable"></table>
+			</div>
+
+			<div class="section-header">
+				<h2>"Bulunamadı" / Çözülemeyen Talepler</h2>
+			</div>
+			<div class="table-container">
+				<table id="notFoundTable"></table>
+			</div>
+		</div>
+
+		<!-- 5. Yönlendirme Sekmesi -->
+		<div id="tab-routing" class="tab-panel">
+			<div class="section-header">
+				<h2>Temsilci Yönlendirme Kararları</h2>
+			</div>
+			<div class="table-container">
+				<table id="routingTable"></table>
+			</div>
+		</div>
+
+		<!-- 6. AI & Bilgi Tabanı Sekmesi -->
+		<div id="tab-ai-knowledge" class="tab-panel">
+			<div class="section-header">
+				<h2>RAG Kalite Kapısı Ölçümü</h2>
+			</div>
+			<div id="ragEvalCards" class="cards-grid"></div>
+
+			<div class="section-header">
+				<h2>RAG Kalite Kapısı Senaryo Detayları</h2>
+			</div>
+			<div class="table-container">
+				<table id="ragEvalDetailsTable"></table>
+			</div>
+
+			<div class="section-header">
+				<h2>Geri Bildirim & CSAT Özeti</h2>
+			</div>
+			<div id="feedbackCards" class="cards-grid"></div>
+
+			<div class="section-header">
+				<h2>Temsilci Düzeltmeleri</h2>
+			</div>
+			<div class="table-container">
+				<table id="correctionsTable"></table>
+			</div>
+
+			<div class="section-header">
+				<h2>Gözden Geçirme Süresi Gelen Belgeler</h2>
+			</div>
+			<div class="table-container">
+				<table id="reviewDueTable"></table>
+			</div>
+
+			<div class="section-header">
+				<h2>Belge Kabul Hattı Başvuruları</h2>
+			</div>
+			<div class="table-container">
+				<table id="intakeTable"></table>
+			</div>
+		</div>
+
+		<!-- 7. Sürekli Öğrenme Sekmesi -->
+		<div id="tab-learning" class="tab-panel">
+			<div class="section-header">
+				<h2>🧠 Meri Sürekli Öğrenme — Eğitim Verisi Yönetimi</h2>
+			</div>
+
+			<!-- İstatistik Kartları -->
+			<div id="learningStatsCards" class="cards-grid" style="margin-bottom:1.5rem;"></div>
+
+			<!-- Hızlı Eylemler -->
+			<div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-bottom:1.5rem;">
+				<button id="btnCollectData" class="btn-primary" style="background:linear-gradient(135deg,#6366f1,#4f46e5);">📥 Veri Topla (collect)</button>
+				<button id="btnMaskData" class="btn-primary" style="background:linear-gradient(135deg,#ec4899,#d946ef);">🔒 KVKK Maskele (masker)</button>
+				<button id="btnRetrainStatus" class="btn-primary" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);">📊 Durum Güncelle</button>
+				<button id="btnRetrainDry" class="btn-primary" style="background:linear-gradient(135deg,#f59e0b,#d97706);">🔁 Dry-Run Test (--dry-run)</button>
+				<button id="btnApproveAll" class="btn-primary" style="background:linear-gradient(135deg,#10b981,#059669);">✅ Tümünü Onayla</button>
+			</div>
+
+			<!-- Online Öğretmen AI Kontrol Paneli -->
+			<div style="margin-bottom:1.5rem; padding:1.25rem; border-radius:14px; border:1px solid var(--border-color); background:var(--bg-card);">
+				<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1rem;">
+					<div>
+						<h3 style="margin:0; font-size:1.05rem; color:var(--text-primary); display:flex; align-items:center; gap:8px;">
+							<span>🌐 Online Öğretmen AI &amp; Canlı Web Distilasyonu (Teacher-Student)</span>
+						</h3>
+						<p style="margin:4px 0 0; font-size:0.82rem; color:var(--text-secondary);">
+							İnternete bağlı dev modeller (Gemini Pro, GPT-4o, DeepSeek) ile Merinos canlı bilgilerinden DPO veri kümesi üretir.
+						</p>
+					</div>
+					<div style="display:flex; align-items:center; gap:10px;">
+						<label style="font-weight:600; font-size:0.88rem; color:var(--text-primary); cursor:pointer;">
+							<input type="checkbox" id="chkTeacherEnabled" checked style="accent-color:#10b981; transform:scale(1.3); margin-right:6px;" />
+							<span>Öğretmen Modu Aktif</span>
+						</label>
+					</div>
+				</div>
+				<div style="display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center;">
+					<select id="selTeacherProvider" class="select-input" style="min-width:180px;">
+						<option value="web_search">🌐 Canlı Web Araması (Otomatik - Ücretsiz)</option>
+						<option value="gemini">⚡ Google Gemini 1.5 Flash (Ücretsiz API Key)</option>
+						<option value="groq">⚡ Groq Llama 3.3 70B (Ücretsiz API Key)</option>
+						<option value="openai">OpenAI GPT-4o</option>
+						<option value="deepseek">DeepSeek AI</option>
+					</select>
+					<input type="password" id="txtTeacherApiKey" class="search-input" placeholder="🔑 API Key (Opsiyonel)" style="max-width:260px;" />
+					<button id="btnSaveTeacherConfig" class="btn-primary" style="background:linear-gradient(135deg,#6366f1,#4f46e5); font-size:0.82rem;">💾 Ayarları Kaydet</button>
+					<button id="btnRunOnlineDistill" class="btn-primary" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed); font-size:0.82rem;">🤖 Online Distilasyon Yap (+5 Kayıt)</button>
+				</div>
+			</div>
+
+			<!-- Inference Sunucu Durumu -->
+			<div id="inferenceStatusBar" style="margin-bottom:1.5rem; padding:0.875rem 1.25rem; border-radius:12px; border:1px solid var(--border-color); background:var(--bg-card); display:flex; gap:1.5rem; flex-wrap:wrap; font-size:0.85rem;"></div>
+
+			<!-- Bekleyen Kayıtlar -->
+			<div class="section-header" style="margin-top:1rem;">
+				<h2>⏳ Onay Bekleyen Eğitim Kayıtları</h2>
+			</div>
+			<div class="filter-bar">
+				<input type="text" id="learningSearchInput" class="search-input" placeholder="🔍 Soru veya yanıtta ara..." />
+				<select id="learningSourceFilter" class="select-input">
+					<option value="all">Tüm Kaynaklar</option>
+					<option value="correction">Temsilci Düzeltmesi</option>
+					<option value="feedback">Geri Bildirim</option>
+					<option value="interaction">Genel Etkileşim</option>
+					<option value="live_chat">Canlı Sohbet</option>
+				</select>
+				<select id="learningQualityFilter" class="select-input">
+					<option value="all">Tüm Kaliteler</option>
+					<option value="high">Yüksek (≥0.75)</option>
+					<option value="medium">Orta (0.5–0.75)</option>
+					<option value="low">Düşük (&lt;0.5)</option>
+				</select>
+			</div>
+			<div class="table-container">
+				<table id="pendingRecordsTable"></table>
+			</div>
+
+			<!-- Onaylanan Kayıtlar -->
+			<div class="section-header" style="margin-top:2rem;">
+				<h2>✅ Onaylanmış Eğitim Kayıtları (Eğitime Hazır)</h2>
+			</div>
+			<div class="table-container">
+				<table id="approvedRecordsTable"></table>
+			</div>
+
+			<!-- Eğitim Koşu Geçmişi -->
+			<div class="section-header" style="margin-top:2rem;">
+				<h2>🚀 Eğitim Koşu Geçmişi</h2>
+			</div>
+			<div class="table-container">
+				<table id="trainingRunsTable"></table>
+			</div>
+
+			<!-- Onay/Düzenleme Modalı -->
+			<div id="editModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.65); z-index:9999; align-items:center; justify-content:center;">
+				<div style="background:var(--bg-card); border-radius:16px; border:1px solid var(--border-color); padding:2rem; max-width:640px; width:95%; max-height:85vh; overflow-y:auto;">
+					<h3 style="margin:0 0 1rem; color:var(--text-primary);">✏️ Yanıtı Düzenle &amp; Onayla</h3>
+					<input type="hidden" id="editRecordId" />
+					<div style="margin-bottom:0.75rem;">
+						<label style="font-size:0.82rem; color:var(--text-secondary); display:block; margin-bottom:4px;">Kullanıcı Sorusu:</label>
+						<div id="editUserMsg" style="padding:0.75rem; background:var(--bg-body); border-radius:8px; border:1px solid var(--border-color); font-size:0.88rem; color:var(--text-primary);"></div>
+					</div>
+					<div style="margin-bottom:1rem;">
+						<label style="font-size:0.82rem; color:var(--text-secondary); display:block; margin-bottom:4px;">Meri'nin Yanıtı (düzenleyebilirsiniz):</label>
+						<textarea id="editAssistantMsg" rows="6" style="width:100%; padding:0.75rem; background:var(--bg-body); border:1px solid var(--border-color); border-radius:8px; font-size:0.88rem; color:var(--text-primary); resize:vertical; font-family:inherit;"></textarea>
+					</div>
+					<div style="display:flex; gap:0.75rem; justify-content:flex-end;">
+						<button id="editCancelBtn" class="btn-primary" style="background:var(--bg-body); color:var(--text-primary); border:1px solid var(--border-color);">İptal</button>
+						<button id="editApproveBtn" class="btn-primary" style="background:linear-gradient(135deg,#10b981,#059669);">✅ Düzenleyerek Onayla</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 8. Sandbox & A/B Test Sekmesi -->
+		<div id="tab-sandbox" class="tab-panel">
+			<div class="section-header">
+				<h2>🧪 Bot Yanıtı & RAG Sandbox Test Konsolu</h2>
+			</div>
+			<div class="sandbox-card">
+				<div class="sandbox-form">
+					<label style="font-weight:600; font-size:0.9rem;">Test Etmek İstediğiniz Soruyu Yazın:</label>
+					<input type="text" id="sandboxInput" class="search-input" placeholder="Örn: Halımdaki mürekkep lekesini nasıl çıkarırım?" value="Halıdaki leke nasıl temizlenir?" />
+					<div class="sandbox-controls">
+						<select id="sandboxSegment" class="select-input">
+							<option value="visitor">Ziyaretçi (Visitor)</option>
+							<option value="registered">Kayıtlı Müşteri (Registered)</option>
+							<option value="dealer">Bayi (Dealer)</option>
+							<option value="corporate">Kurumsal (Corporate)</option>
+						</select>
+						<button id="runSandboxBtn" class="btn-primary">▶ Test Et & Analiz Et</button>
+					</div>
+				</div>
+			</div>
+			<div class="section-header">
+				<h2>Analiz & Test Sonucu</h2>
+			</div>
+			<pre id="sandboxOutput" class="sandbox-output">Henüz test çalıştırılmadı. Yukarıdaki kutudan bir soru yazıp "Test Et" butonuna basabilirsiniz.</pre>
+		</div>
+
+		<!-- 8. Güvenlik & Sistem Sekmesi -->
+		<div id="tab-security" class="tab-panel">
+			<div class="section-header">
+				<h2>Yönetici Kullanıcıları & Rol Erişimi</h2>
+			</div>
+			<div class="table-container">
+				<table id="adminUsersTable"></table>
+			</div>
+
+			<div class="section-header">
+				<h2>Servis Hesapları (API Client Credentials)</h2>
+			</div>
+			<div class="table-container">
+				<table id="serviceAccountsTable"></table>
+			</div>
+
+			<div class="section-header">
+				<h2>Veri Yedekleme & Geri Yükleme</h2>
+			</div>
+			<div style="background:var(--bg-card); padding:1.5rem; border-radius:14px; border:1px solid var(--border-color); display:flex; gap:1rem;">
+				<button id="backupBtn" class="btn-primary">📥 Sistem Yedeğini İndir (JSON)</button>
+				<button id="restoreBtn" class="btn-primary" style="background:linear-gradient(135deg, #f59e0b, #d97706);">📤 Yedekten Geri Yükle</button>
+			</div>
+		</div>
+
+		<!-- 9. Denetim Kaydı Sekmesi -->
+		<div id="tab-audit" class="tab-panel">
+			<div class="section-header">
+				<h2>Sistem Denetim Kaydı (Audit Logs)</h2>
+			</div>
+			<div class="filter-bar">
+				<input type="text" id="auditSearchInput" class="search-input" placeholder="🔍 Aktör, eylem veya detaylarda canlı ara..." />
+			</div>
+			<div class="table-container">
+				<table id="auditTable"></table>
+			</div>
+		</div>
+	</div>
+
+	<!-- Toast Bildirim Kabı -->
+	<div id="toastContainer"></div>
+
+	<script src="app.js"></script>
+</body>
+</html>

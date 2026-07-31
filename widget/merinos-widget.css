@@ -1,0 +1,372 @@
+/* Merinos Chatbot Widget Stylesheet */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --merinos-burgundy: #7E1B33;
+  --merinos-burgundy-dark: #581022;
+  --merinos-gold: #D4AF37;
+  --merinos-gold-light: #F4E8C1;
+  --merinos-silk: #FAF7F5;
+  --merinos-dark: #1E293B;
+  --merinos-gray-bg: #F3ECE7;
+  --merinos-shadow: 0 12px 36px rgba(126, 27, 51, 0.22);
+  --merinos-font: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+#merinos-chat-widget-root {
+  font-family: var(--merinos-font);
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999999;
+}
+
+/* Floating Launcher Button */
+.merinos-widget-launcher {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--merinos-burgundy) 0%, var(--merinos-burgundy-dark) 100%);
+  border: 2px solid var(--merinos-gold);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--merinos-shadow);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+.merinos-widget-launcher:hover {
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 16px 42px rgba(126, 27, 51, 0.35);
+}
+
+.merinos-widget-launcher svg {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.merinos-widget-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 14px;
+  height: 14px;
+  background-color: var(--merinos-gold);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  animation: merinosPulse 2s infinite;
+}
+
+@keyframes merinosPulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+  70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+}
+
+/* Chat Window Modal */
+.merinos-widget-window {
+  position: fixed;
+  bottom: 100px;
+  right: 24px;
+  width: 400px;
+  max-width: calc(100vw - 32px);
+  height: 600px;
+  max-height: calc(100vh - 120px);
+  background: var(--merinos-silk);
+  border-radius: 20px;
+  box-shadow: var(--merinos-shadow);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.merinos-widget-window.open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: all;
+}
+
+/* Header */
+.merinos-widget-header {
+  background: linear-gradient(135deg, var(--merinos-burgundy) 0%, var(--merinos-burgundy-dark) 100%);
+  color: #fff;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--merinos-gold);
+}
+
+.merinos-header-branding {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.merinos-logo-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--merinos-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--merinos-gold);
+}
+
+.merinos-header-titles h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.merinos-header-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--merinos-gold-light);
+}
+
+.merinos-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #22c55e;
+}
+
+.merinos-header-actions button {
+  background: none;
+  border: none;
+  color: #fff;
+  opacity: 0.8;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition: opacity 0.2s;
+}
+
+.merinos-header-actions button:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Body / Chat Stream */
+.merinos-widget-body {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background-color: var(--merinos-silk);
+}
+
+/* Quick Prompts Container */
+.merinos-quick-prompts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.merinos-prompt-chip {
+  background: #fff;
+  border: 1px solid var(--merinos-gold);
+  color: var(--merinos-burgundy);
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.merinos-prompt-chip:hover {
+  background: var(--merinos-burgundy);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* Message Bubbles */
+.merinos-msg-row {
+  display: flex;
+  flex-direction: column;
+  max-width: 85%;
+}
+
+.merinos-msg-row.user {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.merinos-msg-row.assistant {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+.merinos-msg-bubble {
+  padding: 12px 16px;
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  word-break: break-word;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.merinos-msg-row.user .merinos-msg-bubble {
+  background: linear-gradient(135deg, var(--merinos-burgundy) 0%, var(--merinos-burgundy-dark) 100%);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.merinos-msg-row.assistant .merinos-msg-bubble {
+  background: #ffffff;
+  color: var(--merinos-dark);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-bottom-left-radius: 4px;
+}
+
+.merinos-msg-meta {
+  font-size: 10px;
+  color: #94a3b8;
+  margin-top: 4px;
+  padding: 0 4px;
+}
+
+/* Citation & Sources Badge */
+.merinos-msg-sources {
+  margin-top: 8px;
+  font-size: 11px;
+  background: var(--merinos-gray-bg);
+  padding: 6px 10px;
+  border-radius: 8px;
+  border-left: 3px solid var(--merinos-gold);
+
+}
+
+.merinos-msg-sources span {
+  font-weight: 600;
+  color: var(--merinos-burgundy);
+}
+
+/* Feedback Buttons */
+.merinos-msg-feedback {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.merinos-feedback-btn {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.merinos-feedback-btn:hover {
+  background: var(--merinos-gold-light);
+}
+
+/* Typing Indicator */
+.merinos-typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 14px;
+  background: #fff;
+  border-radius: 16px;
+  width: fit-content;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.merinos-typing-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--merinos-burgundy);
+  border-radius: 50%;
+  animation: merinosBounce 1.4s infinite ease-in-out both;
+}
+
+.merinos-typing-dot:nth-child(1) { animation-delay: -0.32s; }
+.merinos-typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes merinosBounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+/* Footer / Input Area */
+.merinos-widget-footer {
+  padding: 12px 16px;
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.merinos-widget-input {
+  flex: 1;
+  border: 1px solid #cbd5e1;
+  border-radius: 24px;
+  padding: 10px 16px;
+  font-size: 14px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.merinos-widget-input:focus {
+  border-color: var(--merinos-burgundy);
+}
+
+.merinos-widget-send {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--merinos-burgundy);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.merinos-widget-send:hover {
+  background: var(--merinos-burgundy-dark);
+  transform: scale(1.05);
+}
+
+.merinos-widget-branding-footer {
+  text-align: center;
+  font-size: 10px;
+  color: #94a3b8;
+  padding: 4px 0 2px 0;
+  background: #ffffff;
+}

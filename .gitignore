@@ -1,0 +1,52 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Environment and sensitive keys
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Project Data and Stores
+.store/
+data/collected/*.jsonl
+data/collected/stats.json
+data/collected/online_teacher_config.json
+data/collected/eval_reports/
+
+# Machine Learning Models & Adapters (Large weights)
+merinos_meri_model/
+lora_adapters/
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.onnx
+
+# Logs and Snapshots
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+snapshot.json
+
+# IDE & OS Files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

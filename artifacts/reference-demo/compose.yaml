@@ -1,0 +1,86 @@
+name: merinos-chatbot
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_DATA_SOURCE: api
+        NEXT_PUBLIC_API_BASE_URL: ${PUBLIC_API_URL:-http://127.0.0.1:8000}
+    ports:
+      - "127.0.0.1:${FRONTEND_PORT:-5173}:5173"
+    depends_on:
+      api:
+        condition: service_healthy
+    networks: [app]
+    read_only: true
+    tmpfs: [/tmp]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      MERINOS_ENVIRONMENT: local
+      MERINOS_SESSION_BACKEND: redis
+      MERINOS_REDIS_URL: redis://:${REDIS_PASSWORD:-local-redis-password}@redis:6379/0
+      MERINOS_REDIS_KEY_SECRET: ${REDIS_KEY_SECRET:-local-demo-redis-key-secret-change-me-32}
+      MERINOS_DATABASE_URL: postgresql+psycopg://merinos:${POSTGRES_PASSWORD:-local-postgres-password}@postgres:5432/merinos
+      MERINOS_JWT_SECRET: ${JWT_SECRET:-local-demo-jwt-secret-change-me-32chars}
+      MERINOS_ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@merinos.local}
+      MERINOS_ADMIN_PASSWORD: ${ADMIN_PASSWORD:-ChangeMe123!}
+      MERINOS_ALLOWED_ORIGINS: http://127.0.0.1:${FRONTEND_PORT:-5173},http://localhost:${FRONTEND_PORT:-5173}
+      MERINOS_DEMO_MODE: "true"
+    ports:
+      - "127.0.0.1:${API_PORT:-8000}:8000"
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    networks: [app, data]
+    read_only: true
+    tmpfs: [/tmp, /app/.runtime]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+
+  redis:
+    image: redis:7.4.2-alpine
+    command: ["sh", "-c", "exec redis-server --appendonly yes --requirepass '$${REDIS_PASSWORD}' --maxmemory 256mb --maxmemory-policy allkeys-lru"]
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-local-redis-password}
+    volumes: [redis-data:/data]
+    networks: [data]
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a '$${REDIS_PASSWORD}' ping | grep PONG"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:17.2-alpine
+    environment:
+      POSTGRES_DB: merinos
+      POSTGRES_USER: merinos
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-local-postgres-password}
+    volumes: [postgres-data:/var/lib/postgresql/data]
+    networks: [data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U merinos -d merinos"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+
+networks:
+  app: {}
+  data:
+    internal: true
+volumes:
+  redis-data: {}
+  postgres-data: {}

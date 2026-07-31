@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "merinos-chatbot-backend"
+version = "1.0.0"
+description = "Merinos chatbot FastAPI, LangGraph, Redis, PostgreSQL ve RBAC backend"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115,<1.0",
+  "uvicorn[standard]>=0.34,<1.0",
+  "langgraph>=1.0,<2.0",
+  "pydantic>=2.10,<3.0",
+  "pydantic-settings>=2.7,<3.0",
+  "redis>=5.2,<7.0",
+  "sqlalchemy>=2.0,<3.0",
+  "psycopg[binary]>=3.2,<4.0",
+  "PyJWT>=2.10,<3.0",
+  "python-multipart>=0.0.20,<1.0",
+]
+
+[project.optional-dependencies]
+checkpoint = ["langgraph-checkpoint-redis>=0.2,<1.0"]
+test = ["httpx>=0.28,<1.0", "pytest>=8.3,<9.0", "pytest-asyncio>=0.25,<1.0"]
+
+[project.scripts]
+merinos-chatbot = "merinos_agent.main:run"
+merinos-api = "merinos_agent.api:run"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
